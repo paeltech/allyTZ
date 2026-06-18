@@ -13,7 +13,7 @@ const FAQ: React.FC = () => {
     { q: "WHO IS AllyTZ Panel?", a: "A training tribe focused on discipline, patience, and survival in the markets." },
     { q: "What is forex trading?", a: "Trading currency pairs with strategies that reward skill, timing, and awareness." },
     { q: "Who is online forex trading for?", a: "Anyone willing to learn and apply a disciplined approach—predators, not gamblers." },
-    { q: "How does AllyTZ Panel help your journey?", a: "We teach mindset and mechanics, provide community, signals, and mentorship." },
+    { q: "How does AllyTZ Panel help your journey?", a: "We provide trading signals, market analysis, documents, events, and community support to help you stay informed." },
     { q: "Where do I start?", a: "Begin training, choose your pathway, join the tribe, and practice patient execution." },
     { q: "What does it take to join AllyTZ Panel?", a: "Register, choose a plan, and commit to disciplined, adaptive learning." },
   ];

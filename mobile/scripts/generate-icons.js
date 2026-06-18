@@ -17,7 +17,7 @@ const fs = require('fs');
 const SOURCE_LOGO = path.join(__dirname, '../../public/assets/logo.png');
 const OUTPUT_DIR = path.join(__dirname, '../assets');
 const BRAND_COLORS = {
-  gold: '#F4C464',
+  white: '#FFFFFF',
   black: '#000000',
 };
 
@@ -86,12 +86,15 @@ async function generateAllIcons() {
   }
   
   try {
-    // 1. Main app icon (1024x1024) - Full size, black background
+    fs.copyFileSync(SOURCE_LOGO, path.join(OUTPUT_DIR, 'logo.png'));
+    console.log('✅ Copied: logo.png (in-app branding)');
+
+    // 1. Main app icon (1024x1024)
     await generateIcon(
       SOURCE_LOGO,
       path.join(OUTPUT_DIR, 'icon.png'),
       1024,
-      { backgroundColor: BRAND_COLORS.black }
+      { backgroundColor: BRAND_COLORS.white }
     );
     
     // 2. Android adaptive icon (1024x1024) - With safe zone (80% of size)
@@ -100,25 +103,25 @@ async function generateAllIcons() {
       path.join(OUTPUT_DIR, 'adaptive-icon.png'),
       1024,
       { 
-        backgroundColor: BRAND_COLORS.black,
-        safeZone: true // 80% safe zone for Android adaptive icons
+        backgroundColor: BRAND_COLORS.white,
+        safeZone: true
       }
     );
     
-    // 3. Splash screen icon (1024x1024) - Similar to main icon
+    // 3. Splash screen icon (1024x1024)
     await generateIcon(
       SOURCE_LOGO,
       path.join(OUTPUT_DIR, 'splash-icon.png'),
       1024,
-      { backgroundColor: BRAND_COLORS.black }
+      { backgroundColor: BRAND_COLORS.white }
     );
     
-    // 4. Favicon (48x48) - Smaller size for web
+    // 4. Favicon (48x48)
     await generateIcon(
       SOURCE_LOGO,
       path.join(OUTPUT_DIR, 'favicon.png'),
       48,
-      { backgroundColor: BRAND_COLORS.black }
+      { backgroundColor: BRAND_COLORS.white }
     );
     
     console.log('\n✨ All icons generated successfully!');

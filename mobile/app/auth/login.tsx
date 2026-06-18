@@ -6,6 +6,7 @@ import { formatAuthErrorMessage } from '../../lib/auth-errors';
 import { supabase, canReachSupabase } from '../../lib/supabase';
 import { Colors } from '../../../shared/constants/colors';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react-native';
+import { AppLogo } from '../../components/AppLogo';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -62,12 +63,8 @@ export default function LoginScreen() {
           showsVerticalScrollIndicator={false}
         >
           {/* Logo */}
-          <View style={styles.logoContainer}>
-            <View style={styles.logoCircle}>
-              <Text style={styles.logoText}>S</Text>
-            </View>
-            <Text style={styles.appName}>AllyTZ Panel</Text>
-            <Text style={styles.tagline}>PIPS HUNTING</Text>
+          <View style={styles.logoWrap}>
+            <AppLogo />
           </View>
 
           {/* Welcome Text */}
@@ -168,35 +165,8 @@ const styles = StyleSheet.create({
     padding: 24,
     justifyContent: 'center',
   },
-  logoContainer: {
-    alignItems: 'center',
+  logoWrap: {
     marginBottom: 40,
-  },
-  logoCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: Colors.gold,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  logoText: {
-    fontSize: 48,
-    fontFamily: 'Axiforma-Bold',
-    color: '#000000',
-  },
-  appName: {
-    fontSize: 28,
-    fontFamily: 'Axiforma-Bold',
-    color: '#FFFFFF',
-    marginBottom: 4,
-  },
-  tagline: {
-    fontSize: 12,
-    fontFamily: 'Axiforma-Regular',
-    color: Colors.gold,
-    letterSpacing: 2,
   },
   welcomeContainer: {
     marginBottom: 32,

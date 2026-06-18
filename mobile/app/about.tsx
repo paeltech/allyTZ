@@ -2,8 +2,9 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../shared/constants/colors';
-import { ChevronLeft, TrendingUp, Target, Users, Award, Mail, Phone, MapPin, Globe } from 'lucide-react-native';
+import { ChevronLeft, TrendingUp, Target, FileText, Award, Mail, Phone, MapPin, Globe } from 'lucide-react-native';
 import { router } from 'expo-router';
+import { AppLogo } from '../components/AppLogo';
 
 export default function AboutScreen() {
   const handleContactPress = (type: 'email' | 'phone' | 'website') => {
@@ -36,9 +37,7 @@ export default function AboutScreen() {
       >
         {/* Logo Section */}
         <View style={styles.logoSection}>
-          <View style={styles.logoCircle}>
-            <TrendingUp size={64} color={Colors.gold} strokeWidth={2} />
-          </View>
+          <AppLogo size={140} showTitle={false} />
           <Text style={styles.appName}>AllyTZ Panel</Text>
           <Text style={styles.tagline}>PIPS HUNTING</Text>
         </View>
@@ -47,7 +46,7 @@ export default function AboutScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Our Mission</Text>
           <Text style={styles.paragraph}>
-            AllyTZ Panel is dedicated to empowering traders across Africa and beyond with world-class forex education, trading signals, and comprehensive market analysis. We believe that with the right knowledge and tools, anyone can master the art of trading.
+            AllyTZ Panel is dedicated to empowering traders across Africa and beyond with trading signals, market analysis, documents, and community support. We believe that with the right knowledge and tools, anyone can make informed trading decisions.
           </Text>
         </View>
 
@@ -81,12 +80,12 @@ export default function AboutScreen() {
 
           <View style={styles.featureCard}>
             <View style={styles.featureIcon}>
-              <Users size={24} color={Colors.gold} strokeWidth={2} />
+              <FileText size={24} color={Colors.gold} strokeWidth={2} />
             </View>
             <View style={styles.featureContent}>
-              <Text style={styles.featureTitle}>Education & Mentorship</Text>
+              <Text style={styles.featureTitle}>Documents & Events</Text>
               <Text style={styles.featureDescription}>
-                Comprehensive courses, webinars, and one-on-one mentorship to accelerate your trading journey.
+                Trading documents, event listings, and daily tips to keep you informed and engaged.
               </Text>
             </View>
           </View>
@@ -222,17 +221,6 @@ const styles = StyleSheet.create({
   logoSection: {
     alignItems: 'center',
     marginVertical: 30,
-  },
-  logoCircle: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: '#1A1A1A',
-    borderWidth: 3,
-    borderColor: Colors.gold,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
   },
   appName: {
     color: Colors.gold,

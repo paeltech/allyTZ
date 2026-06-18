@@ -22,13 +22,17 @@ import {
   getSignalEntryPriceShortLabel,
 } from '../../shared/constants/signals';
 import { useUnreadNotificationsCount } from '../hooks/use-unread-notifications';
+import {
+  formatDisplayName,
+  resolveUserDisplayName,
+} from '../../shared/utils/user-display-name';
 
 export default function HomeScreen() {
   const [latestSignal, setLatestSignal] = useState<Signal | null>(null);
   const [latestSignalUpdateCount, setLatestSignalUpdateCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [displayName, setDisplayName] = useState('');
   const { unreadCount: unreadNotificationsCount, refreshCount } = useUnreadNotificationsCount();
 
   useFocusEffect(
@@ -41,9 +45,21 @@ export default function HomeScreen() {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       router.replace('/auth/login');
-    } else {
-      setUser(session.user);
+      return;
     }
+
+    const { data: profileData } = await supabase
+      .from('user_profiles')
+      .select('full_name')
+      .eq('id', session.user.id)
+      .maybeSingle();
+
+    const name = resolveUserDisplayName({
+      profileFullName: profileData?.full_name,
+      userMetadata: session.user.user_metadata,
+      email: session.user.email,
+    });
+    setDisplayName(formatDisplayName(name));
   };
 
   const fetchLatestSignal = async (isRefreshing = false) => {
@@ -148,12 +164,7 @@ export default function HomeScreen() {
             </View>
             <View style={{ marginLeft: 12 }}>
               <Text style={styles.welcomeText}>Welcome back,</Text>
-              <Text style={styles.userName}>
-                {(() => {
-                  const name = user?.user_metadata?.full_name || 'Trader';
-                  return name.charAt(0).toUpperCase() + name.slice(1);
-                })()}
-              </Text>
+              <Text style={styles.userName}>{displayName || '…'}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity

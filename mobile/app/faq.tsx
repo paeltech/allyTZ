@@ -18,7 +18,7 @@ export default function FAQScreen() {
     {
       category: 'Getting Started',
       question: 'What is AllyTZ Panel?',
-      answer: 'AllyTZ Panel is a forex trading platform that provides trading signals, market analysis, educational resources, and mentorship information to help traders learn and stay informed. Content is for education only, not financial advice.',
+      answer: 'AllyTZ Panel is a forex trading platform that provides trading signals, market analysis, documents, events, and community support. Content is for education only, not financial advice.',
     },
     {
       category: 'Getting Started',
@@ -28,7 +28,7 @@ export default function FAQScreen() {
     {
       category: 'Getting Started',
       question: 'Is the app free to use?',
-      answer: 'Yes. The AllyTZ Panel mobile app and the education, signals, and analysis content we offer through it are provided at no charge. You can choose what to receive in Profile → Notification Preferences.',
+      answer: 'Yes. The AllyTZ Panel mobile app and the signals, analysis, and other content we offer through it are provided at no charge. You can choose what to receive in Profile → Notification Preferences.',
     },
     {
       category: 'Trading Signals',
@@ -48,12 +48,12 @@ export default function FAQScreen() {
     {
       category: 'Account & notifications',
       question: 'How do I choose what updates I get?',
-      answer: 'Open Profile → Notification Preferences. You can turn email and push notifications on or off for signals, analyses, events, courses, tips, and marketing messages.',
+      answer: 'Open Profile → Notification Preferences. You can turn email and push notifications on or off for signals, analyses, events, tips, and marketing messages.',
     },
     {
       category: 'Account & notifications',
       question: 'Do I need to pay for signals or analysis in the app?',
-      answer: 'No. The mobile app does not charge for access to our signals, trade analyses, academy content, or event listings. Use Notification Preferences to opt in to the types of updates you want.',
+      answer: 'No. The mobile app does not charge for access to our signals, trade analyses, documents, or event listings. Use Notification Preferences to opt in to the types of updates you want.',
     },
     {
       category: 'Account & notifications',
@@ -62,13 +62,8 @@ export default function FAQScreen() {
     },
     {
       category: 'Education & Support',
-      question: 'Do you offer educational resources?',
-      answer: 'Yes! We offer a comprehensive academy with courses on forex basics, technical analysis, risk management, and advanced trading strategies. We also host regular webinars and workshops.',
-    },
-    {
-      category: 'Education & Support',
-      question: 'Can I get one-on-one mentorship?',
-      answer: 'You can express interest from the Mentorship and One-on-One screens in the app. Our team will follow up when coaching spots are available. There is no payment step in the mobile app.',
+      question: 'What other resources are available?',
+      answer: 'Browse Documents for trading guides and reference materials, check Events for webinars and workshops, and read daily tips from the Tips screen.',
     },
     {
       category: 'Education & Support',

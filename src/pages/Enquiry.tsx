@@ -40,8 +40,6 @@ const enquiryTypes = [
   { value: "general", label: "General Inquiry" },
   { value: "trading", label: "Trading Support" },
   { value: "signals", label: "Signal Subscription" },
-  { value: "course", label: "Course Information" },
-  { value: "mentorship", label: "Mentorship Program" },
   { value: "technical", label: "Technical Support" },
   { value: "billing", label: "Billing & Payments" },
   { value: "partnership", label: "Partnership Opportunities" },

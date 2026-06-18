@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { showError, showSuccess } from "@/utils/toast";
 
 type Props = {
-  page: "courses" | "events";
+  page: "events";
   values: Record<string, any>;
 };
 

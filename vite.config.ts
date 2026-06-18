@@ -10,9 +10,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'assets/logo.png', 'robots.txt'],
       manifest: {
-        name: 'AllyTZ Panel - Trading Signals & Education',
+        name: 'AllyTZ Panel - Trading Signals & Analysis',
         short_name: 'AllyTZ Panel',
-        description: 'Professional forex trading signals, analysis, courses and mentorship platform',
+        description: 'Professional forex trading signals, analysis, and trader resources',
         theme_color: '#F4C464',
         background_color: '#000000',
         display: 'standalone',

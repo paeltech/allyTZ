@@ -52,7 +52,5 @@ All project documentation lives in this folder.
 
 ## Features & Migrations
 
-- [README_SENTIMENT.md](./README_SENTIMENT.md) — Sentiment voting feature
-- [SETUP_SENTIMENT.md](./SETUP_SENTIMENT.md) — Sentiment table setup
 - [MIGRATION_SUMMARY.md](./MIGRATION_SUMMARY.md) — Migration overview
 - [SHARED_CODE_SYNC.md](./SHARED_CODE_SYNC.md) — Shared code between web and mobile

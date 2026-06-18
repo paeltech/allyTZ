@@ -61,7 +61,7 @@ export default function TermsScreen() {
 
         <Text style={styles.sectionTitle}>5. Free mobile service and preferences</Text>
         <Text style={styles.paragraph}>
-          This mobile application is offered without charging you fees for signals, analyses, academy content, or event listings shown in the app. You choose what notifications and emails you receive through your in-app notification preferences. Separate websites, future products, or other channels may have different terms; those do not change that this app is provided at no charge unless we notify you otherwise.
+          This mobile application is offered without charging you fees for signals, analyses, documents, or event listings shown in the app. You choose what notifications and emails you receive through your in-app notification preferences. Separate websites, future products, or other channels may have different terms; those do not change that this app is provided at no charge unless we notify you otherwise.
         </Text>
 
         <Text style={styles.sectionTitle}>6. Intellectual Property</Text>

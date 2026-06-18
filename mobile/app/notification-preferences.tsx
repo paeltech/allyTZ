@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Switch, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../shared/constants/colors';
-import { ChevronLeft, Bell, TrendingUp, Calendar, GraduationCap, Users, Lightbulb } from 'lucide-react-native';
+import { ChevronLeft, Bell, TrendingUp, Calendar, Users, Lightbulb } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { supabase } from '../lib/supabase';
 
@@ -11,11 +11,9 @@ export default function NotificationPreferencesScreen() {
     email_signals: true,
     email_analyses: true,
     email_events: true,
-    email_courses: true,
     push_signals: true,
     push_analyses: true,
     push_events: true,
-    push_courses: true,
     push_tips: true,
     marketing_emails: false,
   });
@@ -41,11 +39,9 @@ export default function NotificationPreferencesScreen() {
           email_signals: data.email_signals ?? true,
           email_analyses: data.email_analyses ?? true,
           email_events: data.email_events ?? true,
-          email_courses: data.email_courses ?? true,
           push_signals: data.push_signals ?? true,
           push_analyses: data.push_analyses ?? true,
           push_events: data.push_events ?? true,
-          push_courses: data.push_courses ?? true,
           push_tips: data.push_tips ?? true,
           marketing_emails: data.marketing_emails ?? false,
         });
@@ -102,13 +98,6 @@ export default function NotificationPreferencesScreen() {
           key: 'email_events',
           value: preferences.email_events,
         },
-        {
-          icon: GraduationCap,
-          label: 'Courses',
-          description: 'New courses and learning materials',
-          key: 'email_courses',
-          value: preferences.email_courses,
-        },
       ],
     },
     {
@@ -135,13 +124,6 @@ export default function NotificationPreferencesScreen() {
           description: 'Event reminders',
           key: 'push_events',
           value: preferences.push_events,
-        },
-        {
-          icon: GraduationCap,
-          label: 'Courses',
-          description: 'Course updates',
-          key: 'push_courses',
-          value: preferences.push_courses,
         },
         {
           icon: Lightbulb,

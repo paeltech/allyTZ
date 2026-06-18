@@ -11,17 +11,15 @@ const BATCH_SIZE = 100;
 
 type NotificationType = "signal" | "event" | "announcement" | "system" | "tip";
 
-const TYPE_TO_PREF: Record<NotificationType, keyof {
+const TYPE_TO_PREF: Partial<Record<NotificationType, keyof {
   push_signals: boolean;
   push_events: boolean;
   push_analyses: boolean;
-  push_courses: boolean;
   push_tips: boolean;
-}> = {
+}>> = {
   signal: "push_signals",
   event: "push_events",
   announcement: "push_analyses",
-  system: "push_courses",
   tip: "push_tips",
 };
 
