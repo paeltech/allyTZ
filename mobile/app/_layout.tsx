@@ -9,6 +9,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { PushNotificationProvider } from '../components/PushNotificationProvider';
+import { UserEngagementProvider } from '../components/UserEngagementProvider';
 import { recoverFromInvalidRefreshToken } from '../lib/supabase';
 
 // Keep splash screen visible while loading fonts
@@ -81,6 +82,7 @@ export default function RootLayout() {
         <StatusBar style="light" />
         <QueryClientProvider client={queryClient}>
           <PushNotificationProvider>
+          <UserEngagementProvider>
           <View style={{ flex: 1, backgroundColor: '#000000' }}>
             <Stack screenOptions={screenOptions}>
               <Stack.Screen name="index" />
@@ -109,6 +111,7 @@ export default function RootLayout() {
               <Stack.Screen name="tips" />
             </Stack>
           </View>
+          </UserEngagementProvider>
           </PushNotificationProvider>
         </QueryClientProvider>
       </SafeAreaProvider>

@@ -8,7 +8,6 @@ import {
   User, 
   Mail, 
   Phone, 
-  Edit, 
   ChevronRight,
   LogOut,
   Trash2,
@@ -17,10 +16,16 @@ import {
   HelpCircle,
   Info,
   Settings,
-  Lightbulb
+  Lightbulb,
+  ClipboardCheck,
 } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { supabase } from '../lib/supabase';
+import { DailyCheckInForm } from '../components/DailyCheckInForm';
+import { PhoneContactSetupModal } from '../components/PhoneContactSetupModal';
+import { MENTAL_STATE_OPTIONS, TRADING_SESSION_OPTIONS } from '../../shared/constants/check-in';
+import type { DailyCheckIn } from '../../shared/types/check-in';
+import { getEatDateString } from '../../shared/utils/eat-time';
 
 export default function ProfileScreen() {
   const [user, setUser] = useState<any>(null);
@@ -29,6 +34,16 @@ export default function ProfileScreen() {
   const [isEditing, setIsEditing] = useState(false);
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [todayCheckIn, setTodayCheckIn] = useState<DailyCheckIn | null>(null);
+  const [showCheckInForm, setShowCheckInForm] = useState(false);
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
+  const [phonePrefs, setPhonePrefs] = useState({
+    phone_used_for_calls: true,
+    phone_used_for_whatsapp: true,
+    secondary_phone_number: '',
+    secondary_phone_used_for_calls: false,
+    secondary_phone_used_for_whatsapp: false,
+  });
 
   useEffect(() => {
     fetchUserProfile();
@@ -52,11 +67,28 @@ export default function ProfileScreen() {
         setProfile(profileData);
         setFullName(profileData.full_name || '');
         setPhoneNumber(profileData.phone_number || '');
+        setPhonePrefs({
+          phone_used_for_calls: profileData.phone_used_for_calls ?? true,
+          phone_used_for_whatsapp: profileData.phone_used_for_whatsapp ?? true,
+          secondary_phone_number: profileData.secondary_phone_number || '',
+          secondary_phone_used_for_calls: profileData.secondary_phone_used_for_calls ?? false,
+          secondary_phone_used_for_whatsapp: profileData.secondary_phone_used_for_whatsapp ?? false,
+        });
       } else {
         // Use user metadata if profile doesn't exist
         setFullName(session.user.user_metadata?.full_name || '');
         setPhoneNumber(session.user.user_metadata?.phone_number || '');
       }
+
+      const today = getEatDateString();
+      const { data: checkInData } = await supabase
+        .from('daily_check_ins')
+        .select('*')
+        .eq('user_id', session.user.id)
+        .eq('check_in_date', today)
+        .maybeSingle();
+      setTodayCheckIn((checkInData as DailyCheckIn) ?? null);
+      setShowCheckInForm(!checkInData);
     }
     setIsLoading(false);
   };
@@ -70,6 +102,11 @@ export default function ProfileScreen() {
         id: user.id,
         full_name: fullName,
         phone_number: phoneNumber,
+        phone_used_for_calls: phonePrefs.phone_used_for_calls,
+        phone_used_for_whatsapp: phonePrefs.phone_used_for_whatsapp,
+        secondary_phone_number: phonePrefs.secondary_phone_number.trim() || null,
+        secondary_phone_used_for_calls: phonePrefs.secondary_phone_used_for_calls,
+        secondary_phone_used_for_whatsapp: phonePrefs.secondary_phone_used_for_whatsapp,
         updated_at: new Date().toISOString(),
       });
 
@@ -170,6 +207,28 @@ export default function ProfileScreen() {
     },
   ];
 
+  const mentalLabel = (value: string) =>
+    MENTAL_STATE_OPTIONS.find((o) => o.value === value)?.label ?? value;
+
+  const sessionLabels = (values: string[]) =>
+    values
+      .map((v) => TRADING_SESSION_OPTIONS.find((o) => o.value === v)?.label ?? v)
+      .join(', ');
+
+  const formatPhoneUsage = () => {
+    const parts: string[] = [];
+    if (phonePrefs.phone_used_for_calls) parts.push('Calls');
+    if (phonePrefs.phone_used_for_whatsapp) parts.push('WhatsApp');
+    const primary = parts.length ? parts.join(' & ') : 'Not set';
+    if (phonePrefs.secondary_phone_number) {
+      const sec: string[] = [];
+      if (phonePrefs.secondary_phone_used_for_calls) sec.push('Calls');
+      if (phonePrefs.secondary_phone_used_for_whatsapp) sec.push('WhatsApp');
+      return `${primary} (primary) · ${phonePrefs.secondary_phone_number} (${sec.join(' & ') || 'other'})`;
+    }
+    return primary;
+  };
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       {/* Header */}
@@ -244,6 +303,9 @@ export default function ProfileScreen() {
                   keyboardType="phone-pad"
                   selectionColor={Colors.gold}
                 />
+                <TouchableOpacity style={styles.linkButton} onPress={() => setShowPhoneModal(true)}>
+                  <Text style={styles.linkButtonText}>Set up calls & WhatsApp numbers</Text>
+                </TouchableOpacity>
               </View>
             </>
           ) : (
@@ -260,9 +322,17 @@ export default function ProfileScreen() {
               {phoneNumber && (
                 <View style={styles.profileDetail}>
                   <Phone size={16} color="#A0A0A0" strokeWidth={2} />
-                  <Text style={styles.profileDetailText}>{phoneNumber}</Text>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.profileDetailText}>{phoneNumber}</Text>
+                    <Text style={styles.profileDetailSubtext}>{formatPhoneUsage()}</Text>
+                  </View>
                 </View>
               )}
+
+              <TouchableOpacity style={styles.contactUpdateBtn} onPress={() => setShowPhoneModal(true)}>
+                <Phone size={16} color={Colors.gold} strokeWidth={2} />
+                <Text style={styles.contactUpdateText}>Update calls & WhatsApp numbers</Text>
+              </TouchableOpacity>
 
               <View style={styles.accountStatusBadge}>
                 <Text style={styles.accountStatusTitle}>AllyTZ Panel member</Text>
@@ -270,6 +340,58 @@ export default function ProfileScreen() {
                   Free access. Adjust updates in Notification Preferences.
                 </Text>
               </View>
+            </>
+          )}
+        </View>
+
+        {/* Daily Check-in */}
+        <View style={styles.checkInCard}>
+          <View style={styles.checkInHeader}>
+            <View style={styles.checkInTitleRow}>
+              <ClipboardCheck size={22} color={Colors.gold} strokeWidth={2} />
+              <Text style={styles.checkInTitle}>Daily check-in</Text>
+            </View>
+            {todayCheckIn && !showCheckInForm ? (
+              <TouchableOpacity onPress={() => setShowCheckInForm(true)}>
+                <Text style={styles.checkInEdit}>Update</Text>
+              </TouchableOpacity>
+            ) : null}
+          </View>
+
+          {todayCheckIn && !showCheckInForm ? (
+            <View style={styles.checkInSummary}>
+              <Text style={styles.checkInSummaryLine}>
+                {todayCheckIn.is_active ? 'Active today' : 'Not trading today'}
+              </Text>
+              {todayCheckIn.is_active && todayCheckIn.trading_sessions.length > 0 ? (
+                <Text style={styles.checkInSummarySub}>
+                  Sessions: {sessionLabels(todayCheckIn.trading_sessions)}
+                </Text>
+              ) : null}
+              <Text style={styles.checkInSummarySub}>
+                Mental state: {mentalLabel(todayCheckIn.mental_state)}
+              </Text>
+              {todayCheckIn.needs_assistance ? (
+                <Text style={styles.checkInAssist}>Requested mentor assistance</Text>
+              ) : null}
+            </View>
+          ) : (
+            <>
+              <Text style={styles.checkInHint}>
+                Share your availability and how you're feeling today (EAT).
+              </Text>
+              {user ? (
+                <DailyCheckInForm
+                  userId={user.id}
+                  existingCheckIn={todayCheckIn}
+                  compact
+                  onSuccess={(checkIn) => {
+                    setTodayCheckIn(checkIn);
+                    setShowCheckInForm(false);
+                    Alert.alert('Saved', 'Your daily check-in has been recorded.');
+                  }}
+                />
+              ) : null}
             </>
           )}
         </View>
@@ -303,6 +425,26 @@ export default function ProfileScreen() {
 
         <Text style={styles.versionText}>Version 1.0.0</Text>
       </ScrollView>
+
+      {user ? (
+        <PhoneContactSetupModal
+          visible={showPhoneModal}
+          userId={user.id}
+          initialPhone={phoneNumber}
+          initialValues={{
+            phone_number: phoneNumber,
+            ...phonePrefs,
+          }}
+          title="Contact numbers"
+          subtitle="Confirm which numbers you use for calls and WhatsApp."
+          onClose={() => setShowPhoneModal(false)}
+          onSuccess={() => {
+            setShowPhoneModal(false);
+            fetchUserProfile();
+            Alert.alert('Saved', 'Contact preferences updated.');
+          }}
+        />
+      ) : null}
     </SafeAreaView>
   );
 }
@@ -379,6 +521,92 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Axiforma-Regular',
     marginLeft: 8,
+  },
+  profileDetailSubtext: {
+    color: '#707070',
+    fontSize: 12,
+    fontFamily: 'Axiforma-Regular',
+    marginLeft: 8,
+    marginTop: 2,
+  },
+  contactUpdateBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 10,
+    backgroundColor: 'rgba(244, 196, 100, 0.08)',
+    alignSelf: 'stretch',
+  },
+  contactUpdateText: {
+    color: Colors.gold,
+    fontSize: 13,
+    fontFamily: 'Axiforma-SemiBold',
+    marginLeft: 8,
+  },
+  linkButton: {
+    marginTop: 10,
+  },
+  linkButtonText: {
+    color: Colors.gold,
+    fontSize: 13,
+    fontFamily: 'Axiforma-SemiBold',
+  },
+  checkInCard: {
+    backgroundColor: '#1A1A1A',
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: 'rgba(244, 196, 100, 0.2)',
+  },
+  checkInHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  checkInTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  checkInTitle: {
+    color: '#FFFFFF',
+    fontSize: 17,
+    fontFamily: 'Axiforma-Bold',
+  },
+  checkInEdit: {
+    color: Colors.gold,
+    fontSize: 14,
+    fontFamily: 'Axiforma-SemiBold',
+  },
+  checkInHint: {
+    color: '#9A9A9A',
+    fontSize: 13,
+    fontFamily: 'Axiforma-Regular',
+    marginBottom: 4,
+    lineHeight: 18,
+  },
+  checkInSummary: {
+    gap: 6,
+  },
+  checkInSummaryLine: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontFamily: 'Axiforma-SemiBold',
+  },
+  checkInSummarySub: {
+    color: '#A0A0A0',
+    fontSize: 13,
+    fontFamily: 'Axiforma-Regular',
+  },
+  checkInAssist: {
+    color: '#F4A4A4',
+    fontSize: 13,
+    fontFamily: 'Axiforma-Medium',
+    marginTop: 4,
   },
   accountStatusBadge: {
     marginTop: 16,
