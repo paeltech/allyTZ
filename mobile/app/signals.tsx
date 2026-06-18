@@ -2,15 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../shared/constants/colors';
-import { ChevronLeft, Bell, Edit3 } from 'lucide-react-native';
+import { ChevronLeft, Bell } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { supabase } from '../lib/supabase';
 import type { Signal } from '../../shared/types/signal';
-import {
-  formatSignalOrderType,
-  getSignalEntryPriceShortLabel,
-} from '../../shared/constants/signals';
 import { useUnreadNotificationsCount } from '../hooks/use-unread-notifications';
+import { SignalListCard } from '../components/SignalListCard';
 
 export default function SignalsScreen() {
   const [signals, setSignals] = useState<Signal[]>([]);
@@ -135,108 +132,14 @@ export default function SignalsScreen() {
 
   const updateCount = (signal: Signal) => updateCountBySignalId[signal.id] ?? 0;
 
-  const renderSignalCard = (signal: Signal) => {
-    const hasUpdates = updateCount(signal) > 0;
-    const orderType = signal.order_type ?? 'market';
-    const entryLabel = getSignalEntryPriceShortLabel(orderType);
-    return (
-      <TouchableOpacity
-        key={signal.id}
-        style={styles.signalCard}
-        onPress={() => router.push(`/signals/${signal.id}`)}
-        activeOpacity={0.85}
-      >
-        <View style={styles.signalHeader}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', flex: 1 }}>
-            <Text style={styles.signalPair}>{signal.trading_pair}</Text>
-            <Text style={styles.signalOrderType}>{formatSignalOrderType(orderType)}</Text>
-            {signal.entry_price != null && (
-              <Text style={styles.signalEntry}>
-                {entryLabel}: {String(signal.entry_price)}
-              </Text>
-            )}
-          </View>
-          <View style={[
-            styles.signalButton,
-            signal.signal_type === 'buy' ? styles.buyButton : styles.sellButton
-          ]}>
-            <Text style={styles.signalButtonText}>
-              {signal.signal_type.toUpperCase()}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.signalInfo}>
-          <View style={styles.signalInfoItem}>
-            <Text style={styles.signalInfoLabel}>SL:</Text>
-            <Text style={styles.signalInfoValue}>{String(signal.stop_loss)}</Text>
-          </View>
-          {signal.take_profit_1 != null && (
-            <View style={styles.signalInfoItem}>
-              <Text style={styles.signalInfoLabel}>TP1:</Text>
-              <Text style={styles.signalInfoValue}>{String(signal.take_profit_1)}</Text>
-            </View>
-          )}
-          {signal.take_profit_2 != null && (
-            <View style={styles.signalInfoItem}>
-              <Text style={styles.signalInfoLabel}>TP2:</Text>
-              <Text style={styles.signalInfoValue}>{String(signal.take_profit_2)}</Text>
-            </View>
-          )}
-        </View>
-        <View style={styles.signalTextBlock}>
-          <Text style={styles.signalTextLabel}>Reason for decision</Text>
-          <Text style={styles.signalTextValue}>{signal.title}</Text>
-        </View>
-        {signal.analysis ? (
-          <View style={styles.signalTextBlock}>
-            <Text style={styles.signalTextLabel}>Notes</Text>
-            <Text style={styles.signalTextValue} numberOfLines={3}>{signal.analysis}</Text>
-          </View>
-        ) : null}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-          <Text style={styles.signalTimestamp}>
-            {(() => {
-              const now = new Date();
-              const createdAt = new Date(signal.created_at);
-              const diffMs = now.getTime() - createdAt.getTime();
-              const diffSec = Math.floor(diffMs / 1000);
-              if (diffSec < 60) return `${diffSec} sec${diffSec === 1 ? '' : 's'} ago`;
-              const diffMin = Math.floor(diffSec / 60);
-              if (diffMin < 60) return `${diffMin} min${diffMin === 1 ? '' : 's'} ago`;
-              const diffHr = Math.floor(diffMin / 60);
-              if (diffHr < 24) return `${diffHr} hour${diffHr === 1 ? '' : 's'} ago`;
-              const diffDay = Math.floor(diffHr / 24);
-              return `${diffDay} day${diffDay === 1 ? '' : 's'} ago`;
-            })()}
-          </Text>
-          {signal.confidence_level && (
-            <View style={{ 
-              backgroundColor: '#222A2A', 
-              borderRadius: 8, 
-              paddingVertical: 4, 
-              paddingHorizontal: 10,
-              marginLeft: 8
-            }}>
-              <Text style={{ 
-                color: '#9d9d9d', 
-                fontFamily: 'Axiforma-Bold', 
-                fontSize: 12, 
-                letterSpacing: 0.5
-              }}>
-                Confidence: {signal.confidence_level.toUpperCase()}
-              </Text>
-            </View>
-          )}
-        </View>
-        {hasUpdates && (
-          <View style={styles.updateBadge}>
-            <Edit3 size={12} color="#FFF" strokeWidth={2.5} />
-            <Text style={styles.updateBadgeText}>{updateCount(signal)} update{updateCount(signal) === 1 ? '' : 's'}</Text>
-          </View>
-        )}
-      </TouchableOpacity>
-    );
-  };
+  const renderSignalCard = (signal: Signal) => (
+    <SignalListCard
+      key={signal.id}
+      signal={signal}
+      updateCount={updateCount(signal)}
+      onPress={() => router.push(`/signals/${signal.id}`)}
+    />
+  );
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -396,116 +299,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
     textTransform: 'uppercase',
     marginBottom: 16,
-  },
-  signalCard: {
-    backgroundColor: '#3A3A3A',
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 16,
-    position: 'relative',
-  },
-  updateBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-    backgroundColor: '#EF4444',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 12,
-    marginTop: 12,
-    alignSelf: 'flex-end',
-  },
-  updateBadgeText: {
-    color: '#FFF',
-    fontSize: 11,
-    fontFamily: 'Axiforma-Bold',
-  },
-  signalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  signalPair: {
-    color: '#FFFFFF',
-    fontSize: 22,
-    fontFamily: 'Axiforma-Bold',
-    letterSpacing: 0.5,
-    marginRight: 8,
-  },
-  signalOrderType: {
-    color: Colors.gold,
-    fontSize: 12,
-    fontFamily: 'Axiforma-Medium',
-    marginRight: 8,
-    textTransform: 'uppercase',
-  },
-  signalEntry: {
-    color: '#A0A0A0',
-    fontSize: 14,
-    fontFamily: 'Axiforma-Regular',
-  },
-  signalTextBlock: {
-    marginBottom: 10,
-  },
-  signalTextLabel: {
-    color: '#9A9A9A',
-    fontSize: 11,
-    fontFamily: 'Axiforma-Regular',
-    textTransform: 'uppercase',
-    letterSpacing: 0.6,
-    marginBottom: 4,
-  },
-  signalTextValue: {
-    color: '#E5E5E5',
-    fontSize: 14,
-    fontFamily: 'Axiforma-Regular',
-    lineHeight: 20,
-  },
-  signalButton: {
-    paddingHorizontal: 20,
-    paddingVertical: 8,
-    borderRadius: 30,
-  },
-  buyButton: {
-    backgroundColor: '#22C55E',
-  },
-  sellButton: {
-    backgroundColor: '#FF4444',
-  },
-  signalButtonText: {
-    color: '#FFFFFF',
-    fontSize: 12,
-    fontFamily: 'Axiforma-Bold',
-    letterSpacing: 1,
-  },
-  signalInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 12,
-    paddingRight: 8,
-  },
-  signalInfoItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  signalInfoLabel: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Axiforma-Regular',
-    marginRight: 4,
-  },
-  signalInfoValue: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Axiforma-Bold',
-  },
-  signalTimestamp: {
-    color: '#9A9A9A',
-    fontSize: 14,
-    fontFamily: 'Axiforma-Regular',
-    marginTop: 0,
   },
   loadingContainer: {
     paddingVertical: 60,
