@@ -6,6 +6,10 @@ import { ChevronLeft, Bell, Edit3 } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { supabase } from '../lib/supabase';
 import type { Signal } from '../../shared/types/signal';
+import {
+  formatSignalOrderType,
+  getSignalEntryPriceShortLabel,
+} from '../../shared/constants/signals';
 import { useUnreadNotificationsCount } from '../hooks/use-unread-notifications';
 
 export default function SignalsScreen() {
@@ -133,6 +137,8 @@ export default function SignalsScreen() {
 
   const renderSignalCard = (signal: Signal) => {
     const hasUpdates = updateCount(signal) > 0;
+    const orderType = signal.order_type ?? 'market';
+    const entryLabel = getSignalEntryPriceShortLabel(orderType);
     return (
       <TouchableOpacity
         key={signal.id}
@@ -141,16 +147,12 @@ export default function SignalsScreen() {
         activeOpacity={0.85}
       >
         <View style={styles.signalHeader}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', flex: 1 }}>
             <Text style={styles.signalPair}>{signal.trading_pair}</Text>
+            <Text style={styles.signalOrderType}>{formatSignalOrderType(orderType)}</Text>
             {signal.entry_price != null && (
-              <Text style={{ 
-                marginLeft: 8,
-                color: '#A0A0A0',
-                fontSize: 14,
-                fontFamily: 'Axiforma-Regular'
-              }}>
-                Entry: {String(signal.entry_price)}
+              <Text style={styles.signalEntry}>
+                {entryLabel}: {String(signal.entry_price)}
               </Text>
             )}
           </View>
@@ -181,6 +183,16 @@ export default function SignalsScreen() {
             </View>
           )}
         </View>
+        <View style={styles.signalTextBlock}>
+          <Text style={styles.signalTextLabel}>Reason for decision</Text>
+          <Text style={styles.signalTextValue}>{signal.title}</Text>
+        </View>
+        {signal.analysis ? (
+          <View style={styles.signalTextBlock}>
+            <Text style={styles.signalTextLabel}>Notes</Text>
+            <Text style={styles.signalTextValue} numberOfLines={3}>{signal.analysis}</Text>
+          </View>
+        ) : null}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
           <Text style={styles.signalTimestamp}>
             {(() => {
@@ -420,6 +432,36 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: 'Axiforma-Bold',
     letterSpacing: 0.5,
+    marginRight: 8,
+  },
+  signalOrderType: {
+    color: Colors.gold,
+    fontSize: 12,
+    fontFamily: 'Axiforma-Medium',
+    marginRight: 8,
+    textTransform: 'uppercase',
+  },
+  signalEntry: {
+    color: '#A0A0A0',
+    fontSize: 14,
+    fontFamily: 'Axiforma-Regular',
+  },
+  signalTextBlock: {
+    marginBottom: 10,
+  },
+  signalTextLabel: {
+    color: '#9A9A9A',
+    fontSize: 11,
+    fontFamily: 'Axiforma-Regular',
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
+    marginBottom: 4,
+  },
+  signalTextValue: {
+    color: '#E5E5E5',
+    fontSize: 14,
+    fontFamily: 'Axiforma-Regular',
+    lineHeight: 20,
   },
   signalButton: {
     paddingHorizontal: 20,

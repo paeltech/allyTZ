@@ -11,7 +11,6 @@ import {
   FileText,
   MessageSquare,
   Handshake,
-  BarChart3,
   ShoppingCart,
   Users,
   TrendingUp,
@@ -44,10 +43,6 @@ interface DashboardStats {
     total: number;
     completed: number;
     pending: number;
-  };
-  sentimentVotes: {
-    total: number;
-    today: number;
   };
   signalSubscriptions: {
     total: number;
@@ -114,19 +109,6 @@ const AdminDashboard: React.FC = () => {
         pending: purchasesData?.filter((p) => p.payment_status === "pending").length || 0,
       };
 
-      // Fetch sentiment votes stats
-      const { data: votesData } = await supabase
-        .from("sentiment_votes")
-        .select("created_at");
-
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      const sentimentVotes = {
-        total: votesData?.length || 0,
-        today: votesData?.filter((v) => new Date(v.created_at) >= today).length || 0,
-      };
-
       // Fetch signal subscriptions stats
       const { data: subscriptionsData } = await supabase
         .from("signal_subscriptions")
@@ -144,7 +126,6 @@ const AdminDashboard: React.FC = () => {
         collaborations,
         tradeAnalyses,
         purchases,
-        sentimentVotes,
         signalSubscriptions,
       };
     },
@@ -276,13 +257,6 @@ const AdminDashboard: React.FC = () => {
             description="View and manage purchases"
             Icon={ShoppingCart}
             iconBg="bg-green-700"
-          />
-          <DashboardTile
-            to="/admin/sentiment"
-            title="Sentiment Analytics"
-            description="View sentiment voting data"
-            Icon={BarChart3}
-            iconBg="bg-teal-700"
           />
           <DashboardTile
             to="/admin/users"

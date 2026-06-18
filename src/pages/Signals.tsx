@@ -33,11 +33,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import {
+  formatSignalOrderType,
+} from "@shared/constants/signals";
 
 interface Signal {
   id: string;
   trading_pair: string;
   signal_type: "buy" | "sell";
+  order_type?: "market" | "limit" | "stop";
   entry_price: number;
   stop_loss: number;
   take_profit_1: number | null;
@@ -180,10 +184,11 @@ const Signals: React.FC = () => {
                               </div>
                             </TableHead>
                             <TableHead className="text-white font-semibold py-4 px-4 whitespace-nowrap">Type</TableHead>
+                            <TableHead className="text-white font-semibold py-4 px-4 whitespace-nowrap">Order</TableHead>
                             <TableHead className="text-white font-semibold py-4 px-4 whitespace-nowrap">
                               <div className="flex items-center gap-2">
                                 <ArrowUp className="h-4 w-4 text-green-500" />
-                                <span>Entry</span>
+                                <span>Entry / Limit / Stop</span>
                               </div>
                             </TableHead>
                             <TableHead className="text-white font-semibold py-4 px-4 whitespace-nowrap">
@@ -198,7 +203,7 @@ const Signals: React.FC = () => {
                                 <span>Take Profit</span>
                               </div>
                             </TableHead>
-                            <TableHead className="text-white font-semibold py-4 px-4 min-w-[200px]">Title & Analysis</TableHead>
+                            <TableHead className="text-white font-semibold py-4 px-4 min-w-[200px]">Reason & Notes</TableHead>
                             <TableHead className="text-white font-semibold py-4 px-4 whitespace-nowrap">Confidence</TableHead>
                             <TableHead className="text-white font-semibold py-4 px-4 whitespace-nowrap">Status</TableHead>
                             <TableHead className="text-white font-semibold py-4 px-4 whitespace-nowrap">
@@ -243,14 +248,19 @@ const Signals: React.FC = () => {
                                   {signal.signal_type.toUpperCase()}
                                 </Badge>
                               </TableCell>
+                              <TableCell className="py-4 px-4">
+                                <Badge variant="outline" className="border-gold text-gold text-xs">
+                                  {formatSignalOrderType(signal.order_type)}
+                                </Badge>
+                              </TableCell>
                               <TableCell className="text-white py-4 px-4">
                                 <div className="font-mono text-sm bg-green-500/10 px-2 py-1 rounded border border-green-500/20 inline-block">
-                                  {signal.entry_price.toFixed(5)}
+                                  {signal.entry_price.toFixed(2)}
                                 </div>
                               </TableCell>
                               <TableCell className="text-white py-4 px-4">
                                 <div className="font-mono text-sm bg-red-500/10 px-2 py-1 rounded border border-red-500/20 inline-block">
-                                  {signal.stop_loss.toFixed(5)}
+                                  {signal.stop_loss.toFixed(2)}
                                 </div>
                               </TableCell>
                               <TableCell className="text-white py-4 px-4">
@@ -259,14 +269,14 @@ const Signals: React.FC = () => {
                                     <div className="flex items-center gap-2">
                                       <span className="text-xs font-semibold text-gold bg-gold/10 px-2 py-0.5 rounded">TP1</span>
                                       <span className="font-mono text-sm bg-blue-500/10 px-2 py-1 rounded border border-blue-500/20">
-                                        {signal.take_profit_1.toFixed(5)}
+                                        {signal.take_profit_1.toFixed(2)}
                                       </span>
                                     </div>
                                     {signal.take_profit_2 && (
                                       <div className="flex items-center gap-2">
                                         <span className="text-xs font-semibold text-gold bg-gold/10 px-2 py-0.5 rounded">TP2</span>
                                         <span className="font-mono text-sm bg-blue-500/10 px-2 py-1 rounded border border-blue-500/20">
-                                          {signal.take_profit_2.toFixed(5)}
+                                          {signal.take_profit_2.toFixed(2)}
                                         </span>
                                       </div>
                                     )}
@@ -274,7 +284,7 @@ const Signals: React.FC = () => {
                                       <div className="flex items-center gap-2">
                                         <span className="text-xs font-semibold text-gold bg-gold/10 px-2 py-0.5 rounded">TP3</span>
                                         <span className="font-mono text-sm bg-blue-500/10 px-2 py-1 rounded border border-blue-500/20">
-                                          {signal.take_profit_3.toFixed(5)}
+                                          {signal.take_profit_3.toFixed(2)}
                                         </span>
                                       </div>
                                     )}
@@ -285,14 +295,16 @@ const Signals: React.FC = () => {
                               </TableCell>
                               <TableCell className="text-white py-4 px-4 max-w-xs">
                                 <div className="space-y-1">
-                                  <div className="font-medium text-sm truncate" title={signal.title}>
+                                  <div className="font-medium text-sm" title={signal.title}>
+                                    <span className="text-rainy-grey text-xs uppercase tracking-wide">Reason: </span>
                                     {signal.title}
                                   </div>
                                   {signal.analysis && (
                                     <div 
-                                      className="text-xs text-rainy-grey line-clamp-2 leading-relaxed" 
+                                      className="text-xs text-rainy-grey line-clamp-2 leading-relaxed mt-1" 
                                       title={signal.analysis}
                                     >
+                                      <span className="uppercase tracking-wide">Notes: </span>
                                       {signal.analysis}
                                     </div>
                                   )}

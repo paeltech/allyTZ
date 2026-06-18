@@ -58,18 +58,11 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ onOpenMenu, onOpenSignup, onOpe
             Analysis
           </a>
           <a
-            href="/dashboard/course"
-            onClick={(e) => handleProtectedNav("/dashboard/course", e)}
+            href="/dashboard/documents"
+            onClick={(e) => handleProtectedNav("/dashboard/documents", e)}
             className="hover:text-gold transition-colors duration-200 cursor-pointer py-2"
           >
-            Course
-          </a>
-          <a
-            href="/dashboard/one-on-one"
-            onClick={(e) => handleProtectedNav("/dashboard/one-on-one", e)}
-            className="hover:text-gold transition-colors duration-200 cursor-pointer py-2"
-          >
-            Mentorship
+            Documents
           </a>
           {session && (
             <Link to="/dashboard" className="hover:text-gold transition-colors duration-200 py-2">

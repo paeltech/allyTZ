@@ -39,6 +39,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createNotificationForUsers, formatSignalNotification } from "@/utils/notifications";
 import type { SignalUpdate } from "@shared/types/signal";
+import SignalPostsDialog from "@/components/admin/SignalPostsDialog";
+import {
+  DEFAULT_SIGNAL_TRADING_PAIR,
+  SIGNAL_FIELD_LABELS,
+  SIGNAL_ORDER_TYPES,
+  SIGNAL_TRADING_PAIRS,
+  getSignalEntryPriceLabel,
+} from "@shared/constants/signals";
 
 interface SignalPricing {
   id: string;
@@ -74,6 +82,7 @@ interface Signal {
   id: string;
   trading_pair: string;
   signal_type: "buy" | "sell";
+  order_type: "market" | "limit" | "stop";
   entry_price: number;
   stop_loss: number;
   take_profit_1: number | null;
@@ -109,33 +118,38 @@ const pricingSchema = z.object({
 type PricingFormValues = z.infer<typeof pricingSchema>;
 
 const signalSchema = z.object({
-  trading_pair: z.string().min(1, "Trading pair is required"),
+  trading_pair: z.enum(SIGNAL_TRADING_PAIRS),
   signal_type: z.enum(["buy", "sell"]),
+  order_type: z.enum(["market", "limit", "stop"]),
   entry_price: z.number().min(0, "Entry price must be positive"),
   stop_loss: z.number().min(0, "Stop loss must be positive"),
   take_profit_1: z.number().min(0).optional(),
   take_profit_2: z.number().min(0).optional(),
   take_profit_3: z.number().min(0).optional(),
-  title: z.string().min(1, "Title is required"),
+  title: z.string().min(1, "Reason for decision is required"),
   analysis: z.string().optional(),
   confidence_level: z.enum(["low", "medium", "high"]).optional(),
 });
 
 type SignalFormValues = z.infer<typeof signalSchema>;
 
-const SIGNAL_UPDATE_FIELD_LABELS: Record<string, string> = {
-  trading_pair: "Trading pair",
-  signal_type: "Type",
-  entry_price: "Entry",
-  stop_loss: "Stop loss",
-  take_profit_1: "TP1",
-  take_profit_2: "TP2",
-  take_profit_3: "TP3",
-  title: "Title",
-  analysis: "Analysis",
-  confidence_level: "Confidence",
-  status: "Status",
-};
+const SIGNAL_UPDATE_FIELD_LABELS = SIGNAL_FIELD_LABELS;
+
+function getDefaultSignalFormValues(): SignalFormValues {
+  return {
+    trading_pair: DEFAULT_SIGNAL_TRADING_PAIR,
+    signal_type: "buy",
+    order_type: "market",
+    entry_price: 0,
+    stop_loss: 0,
+    take_profit_1: undefined,
+    take_profit_2: undefined,
+    take_profit_3: undefined,
+    title: "",
+    analysis: "",
+    confidence_level: "medium",
+  };
+}
 
 const subscriptionSchema = z.object({
   status: z.enum(["active", "cancelled", "expired", "pending"]),
@@ -163,6 +177,8 @@ const AdminSignals: React.FC = () => {
   const [signalUpdates, setSignalUpdates] = useState<SignalUpdate[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyError, setHistoryError] = useState<string | null>(null);
+  const [isPostsDialogOpen, setIsPostsDialogOpen] = useState(false);
+  const [signalForPosts, setSignalForPosts] = useState<Signal | null>(null);
   const queryClient = useQueryClient();
 
   const form = useForm<PricingFormValues>({
@@ -176,19 +192,10 @@ const AdminSignals: React.FC = () => {
 
   const signalForm = useForm<SignalFormValues>({
     resolver: zodResolver(signalSchema),
-    defaultValues: {
-      trading_pair: "",
-      signal_type: "buy",
-      entry_price: 0,
-      stop_loss: 0,
-      take_profit_1: undefined,
-      take_profit_2: undefined,
-      take_profit_3: undefined,
-      title: "",
-      analysis: "",
-      confidence_level: "medium",
-    },
+    defaultValues: getDefaultSignalFormValues(),
   });
+
+  const watchedOrderType = signalForm.watch("order_type");
 
   const subscriptionForm = useForm<SubscriptionFormValues>({
     resolver: zodResolver(subscriptionSchema),
@@ -410,6 +417,7 @@ const AdminSignals: React.FC = () => {
         .insert({
           trading_pair: values.trading_pair,
           signal_type: values.signal_type,
+          order_type: values.order_type,
           entry_price: values.entry_price,
           stop_loss: values.stop_loss,
           take_profit_1: values.take_profit_1 || null,
@@ -459,7 +467,7 @@ const AdminSignals: React.FC = () => {
         if (!responseText) {
           showError('Signal created but Edge Function returned empty response. Check if function is deployed.');
           setIsSignalDialogOpen(false);
-          signalForm.reset();
+          signalForm.reset(getDefaultSignalFormValues());
           return;
         }
 
@@ -470,7 +478,7 @@ const AdminSignals: React.FC = () => {
           console.error('Failed to parse response:', parseError);
           showError(`Signal created but Edge Function returned invalid response: ${responseText.substring(0, 100)}`);
           setIsSignalDialogOpen(false);
-          signalForm.reset();
+          signalForm.reset(getDefaultSignalFormValues());
           return;
         }
 
@@ -541,7 +549,7 @@ const AdminSignals: React.FC = () => {
       }
 
       setIsSignalDialogOpen(false);
-      signalForm.reset();
+      signalForm.reset(getDefaultSignalFormValues());
     },
     onError: (error: any) => {
       showError(error.message || "Failed to create signal");
@@ -581,6 +589,7 @@ const AdminSignals: React.FC = () => {
       const payload = {
         trading_pair: values.trading_pair,
         signal_type: values.signal_type,
+        order_type: values.order_type,
         entry_price: Number(values.entry_price),
         stop_loss: Number(values.stop_loss),
         take_profit_1: values.take_profit_1 != null && values.take_profit_1 !== "" ? Number(values.take_profit_1) : null,
@@ -603,7 +612,7 @@ const AdminSignals: React.FC = () => {
       showSuccess("Signal updated successfully. Changes are stored and notifications sent.");
       setIsSignalDialogOpen(false);
       setSelectedSignal(null);
-      signalForm.reset();
+      signalForm.reset(getDefaultSignalFormValues());
     },
     onError: (error: any) => {
       showError(error.message || "Failed to update signal");
@@ -647,11 +656,22 @@ const AdminSignals: React.FC = () => {
     setIsHistoryDialogOpen(open);
   };
 
+  const openPostsDialog = (signal: Signal) => {
+    setSignalForPosts(signal);
+    setIsPostsDialogOpen(true);
+  };
+
+  const closePostsDialog = (open: boolean) => {
+    if (!open) setSignalForPosts(null);
+    setIsPostsDialogOpen(open);
+  };
+
   const handleEditSignal = (signal: Signal) => {
     setSelectedSignal(signal);
     signalForm.reset({
       trading_pair: signal.trading_pair,
       signal_type: signal.signal_type,
+      order_type: signal.order_type ?? "market",
       entry_price: signal.entry_price,
       stop_loss: signal.stop_loss,
       take_profit_1: signal.take_profit_1 || undefined,
@@ -870,7 +890,7 @@ const AdminSignals: React.FC = () => {
               <Button
                 onClick={() => {
                   setSelectedSignal(null);
-                  signalForm.reset();
+                  signalForm.reset(getDefaultSignalFormValues());
                   setIsSignalDialogOpen(true);
                 }}
                 className="bg-gold text-cursed-black hover:bg-gold-dark"
@@ -943,6 +963,15 @@ const AdminSignals: React.FC = () => {
                               </TableCell>
                               <TableCell className="text-right">
                                 <div className="flex gap-2 justify-end">
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => openPostsDialog(signal)}
+                                    className="border-steel-wool text-gold hover:bg-steel-wool"
+                                    title="Discussion & feedback"
+                                  >
+                                    <MessageSquare className="h-4 w-4" />
+                                  </Button>
                                   <Button
                                     variant="outline"
                                     size="sm"
@@ -1428,13 +1457,20 @@ const AdminSignals: React.FC = () => {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel className="text-white">Trading Pair</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="e.g., EUR/USD"
-                                className="bg-nero border-steel-wool text-white"
-                                {...field}
-                              />
-                            </FormControl>
+                            <Select value={field.value} onValueChange={field.onChange}>
+                              <FormControl>
+                                <SelectTrigger className="bg-nero border-steel-wool text-white">
+                                  <SelectValue />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent className="bg-nero border-steel-wool">
+                                {SIGNAL_TRADING_PAIRS.map((pair) => (
+                                  <SelectItem key={pair} value={pair} className="text-white">
+                                    {pair}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -1464,13 +1500,38 @@ const AdminSignals: React.FC = () => {
 
                     <FormField
                       control={signalForm.control}
+                      name="order_type"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Order Type</FormLabel>
+                          <Select value={field.value} onValueChange={field.onChange}>
+                            <FormControl>
+                              <SelectTrigger className="bg-nero border-steel-wool text-white">
+                                <SelectValue />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent className="bg-nero border-steel-wool">
+                              {SIGNAL_ORDER_TYPES.map((opt) => (
+                                <SelectItem key={opt.value} value={opt.value} className="text-white">
+                                  {opt.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={signalForm.control}
                       name="title"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">Title</FormLabel>
+                          <FormLabel className="text-white">Reason for decision</FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="e.g., EUR/USD Bullish Breakout"
+                              placeholder="e.g., Breakout above key resistance"
                               className="bg-nero border-steel-wool text-white"
                               {...field}
                             />
@@ -1486,12 +1547,14 @@ const AdminSignals: React.FC = () => {
                         name="entry_price"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white">Entry Price</FormLabel>
+                            <FormLabel className="text-white">
+                              {getSignalEntryPriceLabel(watchedOrderType)}
+                            </FormLabel>
                             <FormControl>
                               <Input
                                 type="number"
-                                step="0.00001"
-                                placeholder="1.08500"
+                                step="0.01"
+                                placeholder={watchedOrderType === "limit" ? "2650.50" : "2650.50"}
                                 className="bg-nero border-steel-wool text-white"
                                 {...field}
                                 onChange={(e) => field.onChange(parseFloat(e.target.value))}
@@ -1510,8 +1573,8 @@ const AdminSignals: React.FC = () => {
                             <FormControl>
                               <Input
                                 type="number"
-                                step="0.00001"
-                                placeholder="1.08200"
+                                step="0.01"
+                                placeholder="2640.00"
                                 className="bg-nero border-steel-wool text-white"
                                 {...field}
                                 onChange={(e) => field.onChange(parseFloat(e.target.value))}
@@ -1617,10 +1680,10 @@ const AdminSignals: React.FC = () => {
                       name="analysis"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">Analysis (Optional)</FormLabel>
+                          <FormLabel className="text-white">Notes (Optional)</FormLabel>
                           <FormControl>
                             <Textarea
-                              placeholder="Provide detailed analysis of the signal..."
+                              placeholder="Additional notes for traders..."
                               className="bg-nero border-steel-wool text-white placeholder:text-rainy-grey min-h-[100px]"
                               {...field}
                             />
@@ -1637,7 +1700,7 @@ const AdminSignals: React.FC = () => {
                         onClick={() => {
                           setSelectedSignal(null);
                           setIsSignalDialogOpen(false);
-                          signalForm.reset();
+                          signalForm.reset(getDefaultSignalFormValues());
                         }}
                         className="border-steel-wool text-rainy-grey"
                       >
@@ -1751,6 +1814,13 @@ const AdminSignals: React.FC = () => {
                 </DialogFooter>
               </DialogContent>
             </Dialog>
+
+            <SignalPostsDialog
+              open={isPostsDialogOpen}
+              onOpenChange={closePostsDialog}
+              signalId={signalForPosts?.id ?? null}
+              tradingPair={signalForPosts?.trading_pair}
+            />
           </TabsContent>
 
           {/* WhatsApp Groups Tab */}

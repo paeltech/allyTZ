@@ -10,45 +10,55 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../../shared/constants/colors';
-import { ChevronLeft, Bell, History, Edit3 } from 'lucide-react-native';
+import { ChevronLeft, Bell, History, Edit3, MessageSquare } from 'lucide-react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { supabase } from '../../lib/supabase';
-import type { Signal, SignalUpdate } from '../../../shared/types/signal';
+import type { Signal, SignalPost, SignalUpdate } from '../../../shared/types/signal';
+import {
+  SIGNAL_FIELD_LABELS,
+  formatSignalOrderType,
+  getSignalEntryPriceShortLabel,
+} from '../../../shared/constants/signals';
 import { useUnreadNotificationsCount } from '../../hooks/use-unread-notifications';
+import { useIsAdmin } from '../../hooks/use-is-admin';
+import { SignalPostForm } from '../../components/SignalPostForm';
+import { SignalPostsList } from '../../components/SignalPostsList';
 
 const FIELD_LABELS: Record<string, string> = {
-  trading_pair: 'Trading pair',
-  signal_type: 'Type',
-  entry_price: 'Entry',
-  stop_loss: 'Stop loss',
-  take_profit_1: 'TP1',
-  take_profit_2: 'TP2',
-  take_profit_3: 'TP3',
-  title: 'Title',
-  analysis: 'Analysis',
-  confidence_level: 'Confidence',
-  status: 'Status',
+  ...SIGNAL_FIELD_LABELS,
+  entry_price: 'Entry price',
 };
 
 export default function SignalDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [signal, setSignal] = useState<Signal | null>(null);
   const [updates, setUpdates] = useState<SignalUpdate[]>([]);
+  const [posts, setPosts] = useState<SignalPost[]>([]);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const { unreadCount } = useUnreadNotificationsCount();
+  const { isAdmin } = useIsAdmin();
 
   const fetchSignalAndUpdates = useCallback(async (isRefreshing = false) => {
     if (!id) return;
     try {
       if (!isRefreshing) setIsLoading(true);
-      const [signalRes, updatesRes] = await Promise.all([
+      const { data: { session } } = await supabase.auth.getSession();
+      setCurrentUserId(session?.user?.id ?? null);
+
+      const [signalRes, updatesRes, postsRes] = await Promise.all([
         supabase.from('signals').select('*').eq('id', id).single(),
         supabase
           .from('signal_updates')
           .select('*')
           .eq('signal_id', id)
           .order('created_at', { ascending: true }),
+        supabase
+          .from('signal_posts')
+          .select('*')
+          .eq('signal_id', id)
+          .order('created_at', { ascending: false }),
       ]);
       if (signalRes.error) {
         console.error('Error fetching signal:', signalRes.error);
@@ -62,6 +72,12 @@ export default function SignalDetailScreen() {
       } else {
         setUpdates(updatesRes.data || []);
       }
+      if (postsRes.error) {
+        console.error('Error fetching signal posts:', postsRes.error);
+        setPosts([]);
+      } else {
+        setPosts(postsRes.data || []);
+      }
     } catch (e) {
       console.error(e);
     } finally {
@@ -71,6 +87,23 @@ export default function SignalDetailScreen() {
 
   useEffect(() => {
     if (id) fetchSignalAndUpdates();
+  }, [id, fetchSignalAndUpdates]);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const channel = supabase
+      .channel(`signal-posts-${id}`)
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'signal_posts', filter: `signal_id=eq.${id}` },
+        () => { fetchSignalAndUpdates(true); }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [id, fetchSignalAndUpdates]);
 
   const onRefresh = async () => {
@@ -88,9 +121,9 @@ export default function SignalDetailScreen() {
     if (!signal || !base || typeof base !== 'object') return new Set<string>();
     const changed = new Set<string>();
     const keys: (keyof Signal)[] = [
-      'trading_pair', 'signal_type', 'entry_price', 'stop_loss',
+      'trading_pair', 'signal_type', 'order_type', 'entry_price', 'stop_loss',
       'take_profit_1', 'take_profit_2', 'take_profit_3',
-      'confidence_level', 'status',
+      'title', 'analysis', 'confidence_level', 'status',
     ];
     for (const key of keys) {
       const a = signal[key];
@@ -162,6 +195,9 @@ export default function SignalDetailScreen() {
     );
   }
 
+  const orderType = signal.order_type ?? 'market';
+  const entryLabel = getSignalEntryPriceShortLabel(orderType);
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
@@ -218,7 +254,16 @@ export default function SignalDetailScreen() {
               </View>
             </View>
             <View style={styles.row}>
-              <Text style={styles.label}>Entry</Text>
+              <Text style={styles.label}>Order type</Text>
+              <Text style={[
+                styles.value,
+                currentChangedFields.has('order_type') && styles.valueChanged,
+              ]}>
+                {formatSignalOrderType(orderType)}
+              </Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>{entryLabel}</Text>
               <Text style={[
                 styles.value,
                 currentChangedFields.has('entry_price') && styles.valueChanged,
@@ -279,6 +324,16 @@ export default function SignalDetailScreen() {
                 </Text>
               </View>
             )}
+            <View style={[styles.textBlock, currentChangedFields.has('title') && styles.textBlockChanged]}>
+              <Text style={styles.textBlockLabel}>Reason for decision</Text>
+              <Text style={styles.textBlockValue}>{signal.title}</Text>
+            </View>
+            {signal.analysis ? (
+              <View style={[styles.textBlock, currentChangedFields.has('analysis') && styles.textBlockChanged]}>
+                <Text style={styles.textBlockLabel}>Notes</Text>
+                <Text style={styles.textBlockValue}>{signal.analysis}</Text>
+              </View>
+            ) : null}
             <View style={styles.row}>
               <Text style={styles.label}>Status</Text>
               <Text style={[
@@ -341,9 +396,21 @@ export default function SignalDetailScreen() {
           </View>
         )}
 
-        {updates.length === 0 && (
-          <Text style={styles.noUpdates}>No updates for this signal</Text>
-        )}
+        <View style={styles.section}>
+          <View style={styles.sectionTitleRow}>
+            <MessageSquare size={18} color={Colors.gold} strokeWidth={2} />
+            <Text style={styles.sectionTitle}>Discussion ({posts.length})</Text>
+          </View>
+          <Text style={styles.sectionHint}>
+            Post feedback for everyone or send a question privately to admin.
+          </Text>
+          <SignalPostForm
+            signalId={signal.id}
+            isAdmin={isAdmin}
+            onPosted={() => fetchSignalAndUpdates(true)}
+          />
+          <SignalPostsList posts={posts} currentUserId={currentUserId} />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -422,6 +489,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
     marginBottom: 12,
+  },
+  sectionHint: {
+    color: '#6A6A6A',
+    fontFamily: 'Axiforma-Regular',
+    fontSize: 12,
+    marginBottom: 12,
+    lineHeight: 18,
   },
   card: {
     backgroundColor: '#2A2A2A',
@@ -508,17 +582,34 @@ const styles = StyleSheet.create({
     fontFamily: 'Axiforma-Regular',
     marginLeft: 4,
   },
+  textBlock: {
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#333',
+  },
+  textBlockChanged: {
+    borderLeftWidth: 2,
+    borderLeftColor: Colors.gold,
+    paddingLeft: 8,
+  },
+  textBlockLabel: {
+    color: '#A0A0A0',
+    fontSize: 12,
+    fontFamily: 'Axiforma-Regular',
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
+    marginBottom: 6,
+  },
+  textBlockValue: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontFamily: 'Axiforma-Regular',
+    lineHeight: 20,
+  },
   meta: {
     color: '#6A6A6A',
     fontSize: 11,
     fontFamily: 'Axiforma-Regular',
     marginTop: 12,
-  },
-  noUpdates: {
-    color: '#6A6A6A',
-    fontSize: 14,
-    fontFamily: 'Axiforma-Regular',
-    textAlign: 'center',
-    marginTop: 16,
   },
 });

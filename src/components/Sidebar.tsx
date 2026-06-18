@@ -6,14 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   House,
   TrendingUp,
-  GraduationCap,
-  Users,
   Handshake,
   Megaphone,
-  Building,
-  Calendar,
-  ChartColumn,
   FileText,
+  FolderOpen,
   X,
 } from "lucide-react";
 import { useSupabaseSession } from "@/components/auth/SupabaseSessionProvider";
@@ -30,13 +26,10 @@ const navItems = [
   { label: "Home", icon: House, to: "/", protected: false },
   { label: "Signals", icon: TrendingUp, to: "/dashboard/signals", protected: true },
   { label: "Analysis", icon: FileText, to: "/dashboard/trade-analysis", protected: true },
-  { label: "Course", icon: GraduationCap, to: "/dashboard/course", protected: true },
-  { label: "Mentorship", icon: Users, to: "/dashboard/one-on-one", protected: true },
+  { label: "Documents", icon: FolderOpen, to: "/dashboard/documents", protected: true },
   { label: "Trade With AllyTZ", icon: Handshake, to: "/dashboard/trade-with-allytz", protected: true },
   { label: "Collaborations", icon: Megaphone, to: "/dashboard/collaborations", protected: true },
-  { label: "Academy", icon: Building, to: "/dashboard/academy", protected: true },
-  { label: "Booking", icon: Calendar, to: "/dashboard/booking", protected: true },
-  { label: "Dashboard", icon: ChartColumn, to: "/dashboard", protected: true },
+  { label: "Dashboard", icon: House, to: "/dashboard", protected: true },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose, onOpenLogin, onOpenSignup }) => {

@@ -6,6 +6,7 @@ export interface Signal {
   id: string;
   trading_pair: string;
   signal_type: "buy" | "sell";
+  order_type: "market" | "limit" | "stop";
   entry_price: number;
   stop_loss: number;
   take_profit_1: number | null;
@@ -45,4 +46,24 @@ export interface SignalUpdate {
   /** Set for revision_type 'update': { "stop_loss": { "old": x, "new": y }, ... } */
   changes?: Record<string, SignalFieldChange> | null;
   created_at: string;
+}
+
+export type SignalPostType = "feedback" | "update" | "question" | "query";
+export type SignalPostAudience = "all_users" | "admin_only";
+
+/** User or admin post on a signal thread */
+export interface SignalPost {
+  id: string;
+  signal_id: string;
+  author_id: string;
+  post_type: SignalPostType;
+  audience: SignalPostAudience;
+  summary: string;
+  attachment_path: string | null;
+  author_display_name: string | null;
+  created_at: string;
+  author?: {
+    full_name: string | null;
+    email: string | null;
+  } | null;
 }

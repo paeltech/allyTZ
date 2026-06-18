@@ -21,12 +21,11 @@ const PageFooter: React.FC = () => {
           <div>
             <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Quick Links</h4>
             <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-rainy-grey leading-relaxed">
-              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Home</li>
-              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Course</li>
-              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Mentorship</li>
-              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Academy</li>
-              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Booking</li>
-              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Dashboard</li>
+              <li><Link to="/" className="hover:text-gold transition-colors duration-200 min-h-[32px] flex items-center">Home</Link></li>
+              <li><Link to="/dashboard/signals" className="hover:text-gold transition-colors duration-200 min-h-[32px] flex items-center">Signals</Link></li>
+              <li><Link to="/dashboard/trade-analysis" className="hover:text-gold transition-colors duration-200 min-h-[32px] flex items-center">Analysis</Link></li>
+              <li><Link to="/dashboard/documents" className="hover:text-gold transition-colors duration-200 min-h-[32px] flex items-center">Documents</Link></li>
+              <li><Link to="/dashboard" className="hover:text-gold transition-colors duration-200 min-h-[32px] flex items-center">Dashboard</Link></li>
             </ul>
           </div>
 
@@ -34,9 +33,9 @@ const PageFooter: React.FC = () => {
             <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Services</h4>
             <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-rainy-grey leading-relaxed">
               <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Signals</li>
+              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Trade Analysis</li>
+              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Documents</li>
               <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Collaborations</li>
-              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Community</li>
-              <li className="hover:text-gold transition-colors duration-200 cursor-pointer min-h-[32px] flex items-center">Strategy Course</li>
             </ul>
           </div>
 

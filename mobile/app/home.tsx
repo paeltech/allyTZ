@@ -3,24 +3,24 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import { Colors } from '../../shared/constants/colors';
-import { 
-  User, 
-  Bell, 
-  TrendingUp, 
-  BarChart3, 
-  GraduationCap, 
-  Users, 
-  UserRound,
-  Calendar as CalendarIcon,
-  Calculator,
-  TrendingDown,
+import {
+  User,
+  Bell,
+  TrendingUp,
+  BarChart3,
   FolderOpen,
   Edit3,
-  Lightbulb
+  Lightbulb,
+  Calendar as CalendarIcon,
+  HelpCircle,
 } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { supabase } from '../lib/supabase';
 import type { Signal } from '../../shared/types/signal';
+import {
+  formatSignalOrderType,
+  getSignalEntryPriceShortLabel,
+} from '../../shared/constants/signals';
 import { useUnreadNotificationsCount } from '../hooks/use-unread-notifications';
 
 export default function HomeScreen() {
@@ -31,7 +31,6 @@ export default function HomeScreen() {
   const [user, setUser] = useState<any>(null);
   const { unreadCount: unreadNotificationsCount, refreshCount } = useUnreadNotificationsCount();
 
-  // Refresh unread count when screen gains focus (e.g. after marking as read on notifications screen)
   useFocusEffect(
     useCallback(() => {
       refreshCount();
@@ -96,7 +95,6 @@ export default function HomeScreen() {
     checkAuth();
     fetchLatestSignal();
 
-    // Subscribe to real-time updates for signals and signal_updates
     const signalsChannel = supabase
       .channel('signals-changes')
       .on(
@@ -120,14 +118,14 @@ export default function HomeScreen() {
     setRefreshing(true);
     await Promise.all([
       fetchLatestSignal(true),
-      refreshCount()
+      refreshCount(),
     ]);
     setRefreshing(false);
   };
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <ScrollView 
+      <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false as boolean}
@@ -140,9 +138,8 @@ export default function HomeScreen() {
           />
         }
       >
-        {/* Header Section */}
         <View style={styles.header}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.headerLeft}
             onPress={() => router.push('/profile')}
           >
@@ -159,29 +156,21 @@ export default function HomeScreen() {
               </Text>
             </View>
           </TouchableOpacity>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <TouchableOpacity 
-              style={styles.notificationIcon}
-              onPress={() => router.push('/notifications')}
-            >
-              <Bell size={20} color={Colors.gold} strokeWidth={2} />
-              {unreadNotificationsCount > 0 && (
-                <View style={styles.notificationBadge}>
-                  <Text style={{ 
-                    color: 'white', 
-                    fontSize: 11, 
-                    fontFamily: 'Axiforma-Bold',
-                    lineHeight: 13
-                  }}>
-                    {unreadNotificationsCount > 99 ? '99+' : unreadNotificationsCount}
-                  </Text>
-                </View>
-              )}
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={styles.notificationIcon}
+            onPress={() => router.push('/notifications')}
+          >
+            <Bell size={20} color={Colors.gold} strokeWidth={2} />
+            {unreadNotificationsCount > 0 && (
+              <View style={styles.notificationBadge}>
+                <Text style={styles.notificationBadgeText}>
+                  {unreadNotificationsCount > 99 ? '99+' : unreadNotificationsCount}
+                </Text>
+              </View>
+            )}
+          </TouchableOpacity>
         </View>
 
-        {/* Trading Signal Card */}
         {isLoading ? (
           <View style={styles.signalCard}>
             <ActivityIndicator size="large" color={Colors.gold} />
@@ -193,24 +182,22 @@ export default function HomeScreen() {
             activeOpacity={0.85}
           >
             <View style={styles.signalHeader}>
-               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                 <Text style={styles.signalPair}>{latestSignal.trading_pair}</Text>
-                 {latestSignal.entry_price != null && (
-                   <Text style={{ 
-                     marginLeft: 8,
-                     color: '#A0A0A0',
-                     fontSize: 14,
-                     fontFamily: 'Axiforma-Regular'
-                   }}>
-                     Entry: {String(latestSignal.entry_price)}
-                   </Text>
-                 )}
-               </View>
+              <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', flex: 1 }}>
+                <Text style={styles.signalPair}>{latestSignal.trading_pair}</Text>
+                <Text style={styles.signalOrderType}>
+                  {formatSignalOrderType(latestSignal.order_type ?? 'market')}
+                </Text>
+                {latestSignal.entry_price != null && (
+                  <Text style={styles.signalEntry}>
+                    {getSignalEntryPriceShortLabel(latestSignal.order_type ?? 'market')}: {String(latestSignal.entry_price)}
+                  </Text>
+                )}
+              </View>
               <View style={[
-                styles.sellButton,
-                latestSignal.signal_type === 'buy' && styles.buyButton
+                styles.signalTypeButton,
+                latestSignal.signal_type === 'buy' && styles.buyButton,
               ]}>
-                <Text style={styles.sellButtonText}>
+                <Text style={styles.signalTypeText}>
                   {latestSignal.signal_type.toUpperCase()}
                 </Text>
               </View>
@@ -233,47 +220,48 @@ export default function HomeScreen() {
                 </View>
               )}
             </View>
-             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
-               <Text style={styles.signalTimestamp}>
-                 {(() => {
-                   const now = new Date();
-                   const createdAt = new Date(latestSignal.created_at);
-                   const diffMs = now.getTime() - createdAt.getTime();
-                   const diffSec = Math.floor(diffMs / 1000);
-                   if (diffSec < 60) return `${diffSec} sec${diffSec === 1 ? '' : 's'} ago`;
-                   const diffMin = Math.floor(diffSec / 60);
-                   if (diffMin < 60) return `${diffMin} min${diffMin === 1 ? '' : 's'} ago`;
-                   const diffHr = Math.floor(diffMin / 60);
-                   if (diffHr < 24) return `${diffHr} hour${diffHr === 1 ? '' : 's'} ago`;
-                   const diffDay = Math.floor(diffHr / 24);
-                   return `${diffDay} day${diffDay === 1 ? '' : 's'} ago`;
-                 })()}
-               </Text>
-               {latestSignal.confidence_level && (
-                 <View style={{ 
-                   backgroundColor: '#222A2A', 
-                   borderRadius: 8, 
-                   paddingVertical: 4, 
-                   paddingHorizontal: 10,
-                   marginLeft: 8
-                 }}>
-                   <Text style={{ 
-                     color: '#9d9d9d', 
-                     fontFamily: 'Axiforma-Bold', 
-                     fontSize: 12, 
-                     letterSpacing: 0.5
-                   }}>
-                     Confidence: {latestSignal.confidence_level.toUpperCase()}
-                   </Text>
-                 </View>
-               )}
-             </View>
-             {latestSignalUpdateCount > 0 && (
-               <View style={styles.signalUpdateBadge}>
-                 <Edit3 size={12} color="#FFF" strokeWidth={2.5} />
-                 <Text style={styles.signalUpdateBadgeText}>{latestSignalUpdateCount} update{latestSignalUpdateCount === 1 ? '' : 's'}</Text>
-               </View>
-             )}
+            <View style={styles.signalTextBlock}>
+              <Text style={styles.signalTextLabel}>Reason for decision</Text>
+              <Text style={styles.signalTextValue}>{latestSignal.title}</Text>
+            </View>
+            {latestSignal.analysis ? (
+              <View style={styles.signalTextBlock}>
+                <Text style={styles.signalTextLabel}>Notes</Text>
+                <Text style={styles.signalTextValue} numberOfLines={2}>{latestSignal.analysis}</Text>
+              </View>
+            ) : null}
+            <View style={styles.signalFooter}>
+              <Text style={styles.signalTimestamp}>
+                {(() => {
+                  const now = new Date();
+                  const createdAt = new Date(latestSignal.created_at);
+                  const diffMs = now.getTime() - createdAt.getTime();
+                  const diffSec = Math.floor(diffMs / 1000);
+                  if (diffSec < 60) return `${diffSec} sec${diffSec === 1 ? '' : 's'} ago`;
+                  const diffMin = Math.floor(diffSec / 60);
+                  if (diffMin < 60) return `${diffMin} min${diffMin === 1 ? '' : 's'} ago`;
+                  const diffHr = Math.floor(diffMin / 60);
+                  if (diffHr < 24) return `${diffHr} hour${diffHr === 1 ? '' : 's'} ago`;
+                  const diffDay = Math.floor(diffHr / 24);
+                  return `${diffDay} day${diffDay === 1 ? '' : 's'} ago`;
+                })()}
+              </Text>
+              {latestSignal.confidence_level && (
+                <View style={styles.confidenceBadge}>
+                  <Text style={styles.confidenceText}>
+                    Confidence: {latestSignal.confidence_level.toUpperCase()}
+                  </Text>
+                </View>
+              )}
+            </View>
+            {latestSignalUpdateCount > 0 && (
+              <View style={styles.signalUpdateBadge}>
+                <Edit3 size={12} color="#FFF" strokeWidth={2.5} />
+                <Text style={styles.signalUpdateBadgeText}>
+                  {latestSignalUpdateCount} update{latestSignalUpdateCount === 1 ? '' : 's'}
+                </Text>
+              </View>
+            )}
           </TouchableOpacity>
         ) : (
           <View style={styles.signalCard}>
@@ -281,126 +269,87 @@ export default function HomeScreen() {
           </View>
         )}
 
-        {/* Trade with AllyTZ Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Trade with AllyTZ</Text>
-          <Text style={styles.sectionSubtitle}>PIPS HUNTING</Text>
+          <Text style={styles.sectionTitle}>Trading Hub</Text>
+          <Text style={styles.sectionSubtitle}>CORE MODULES</Text>
           <View style={styles.cardRow}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={[styles.featureCard, { marginRight: 6 }]}
               onPress={() => router.push('/signals')}
             >
               <View style={styles.featureIcon}>
-                <TrendingUp size={16} color={Colors.gold} strokeWidth={2.5} />
+                <TrendingUp size={18} color={Colors.gold} strokeWidth={2.5} />
               </View>
               <Text style={styles.featureTitle}>Signals</Text>
-              <Text style={styles.featureDescription}>Real-time trade signals</Text>
+              <Text style={styles.featureDescription}>Live trade signals</Text>
             </TouchableOpacity>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={[styles.featureCard, { marginLeft: 6 }]}
               onPress={() => router.push('/analysis')}
             >
               <View style={styles.featureIcon}>
-                <BarChart3 size={16} color={Colors.gold} strokeWidth={2.5} />
+                <BarChart3 size={18} color={Colors.gold} strokeWidth={2.5} />
               </View>
               <Text style={styles.featureTitle}>Analysis</Text>
-              <Text style={styles.featureDescription}>Daily trade pair analysis</Text>
+              <Text style={styles.featureDescription}>Daily pair breakdowns</Text>
             </TouchableOpacity>
           </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionSubtitle}>RESOURCES</Text>
           <TouchableOpacity
-            style={styles.tipsWideCard}
+            style={styles.wideCard}
             onPress={() => router.push('/tips')}
             activeOpacity={0.85}
           >
-            <View style={[styles.featureIcon, styles.tipsWideIcon]}>
-              <Lightbulb size={16} color={Colors.gold} strokeWidth={2.5} />
+            <View style={[styles.featureIcon, styles.wideCardIcon]}>
+              <Lightbulb size={18} color={Colors.gold} strokeWidth={2.5} />
             </View>
-            <View style={{ flex: 1, marginLeft: 4 }}>
-              <Text style={[styles.featureTitle, { textAlign: 'left' }]}>Tips & Quotes</Text>
-              <Text style={[styles.featureDescription, { textAlign: 'left' }]}>Daily trading wisdom and inspiration</Text>
+            <View style={styles.wideCardText}>
+              <Text style={[styles.featureTitle, styles.wideCardTitle]}>Tips & Quotes</Text>
+              <Text style={[styles.featureDescription, styles.wideCardDescription]}>
+                Daily trading wisdom
+              </Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.tipsWideCard, { marginTop: 10 }]}
+            style={[styles.wideCard, { marginTop: 10 }]}
             onPress={() => router.push('/documents')}
             activeOpacity={0.85}
           >
-            <View style={[styles.featureIcon, styles.tipsWideIcon]}>
-              <FolderOpen size={16} color={Colors.gold} strokeWidth={2.5} />
+            <View style={[styles.featureIcon, styles.wideCardIcon]}>
+              <FolderOpen size={18} color={Colors.gold} strokeWidth={2.5} />
             </View>
-            <View style={{ flex: 1, marginLeft: 4 }}>
-              <Text style={[styles.featureTitle, { textAlign: 'left' }]}>Documents</Text>
-              <Text style={[styles.featureDescription, { textAlign: 'left' }]}>Guides and resources (view only)</Text>
+            <View style={styles.wideCardText}>
+              <Text style={[styles.featureTitle, styles.wideCardTitle]}>Documents</Text>
+              <Text style={[styles.featureDescription, styles.wideCardDescription]}>
+                Guides and resources (view only)
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
 
-        {/* Learn the Craft Section */}
-        <View style={styles.section}>
-          <Text style={styles.sectionSubtitle}>LEARN THE CRAFT</Text>
-          <View style={styles.iconRow}>
-            <TouchableOpacity style={styles.learnIcon} onPress={() => router.push('/academy')}>
-              <View style={{ alignItems: 'center' }}>
-                <View style={styles.learnIconCircle}>
-                  <GraduationCap size={30} color="#1A1A1A" strokeWidth={2} />
-                </View>
-                <Text style={styles.learnIconLabel}>Academy</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.learnIcon, { marginLeft: 8 }]} onPress={() => router.push('/mentorship')}>
-              <View style={{ alignItems: 'center' }}>
-                <View style={styles.learnIconCircle}>
-                  <Users size={30} color="#1A1A1A" strokeWidth={2} />
-                </View>
-                <Text style={styles.learnIconLabel}>Mentorship</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.learnIcon, { marginLeft: 8 }]} onPress={() => router.push('/events')}>
-              <View style={{ alignItems: 'center' }}>
-                <View style={styles.learnIconCircle}>
-                  <CalendarIcon size={30} color="#1A1A1A" strokeWidth={2} />
-                </View>
-                <Text style={styles.learnIconLabel}>Events</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.learnIcon, { marginLeft: 8 }]} onPress={() => router.push('/one-on-one')}>
-              <View style={{ alignItems: 'center' }}>
-                <View style={styles.learnIconCircle}>
-                  <UserRound size={30} color="#1A1A1A" strokeWidth={2} />
-                </View>
-                <Text style={styles.learnIconLabel}>1 on 1</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Tools of the game Section */}
-        <View style={styles.toolsSection}>
-          <Text style={styles.toolsTitle}>Tools of the game</Text>
-          <View style={styles.iconRow}>
-            <TouchableOpacity style={styles.toolIcon} onPress={() => router.push('/calculator')}>
-              <View style={styles.toolIconCircle}>
-                <Calculator size={22} color={Colors.gold} strokeWidth={2} />
-              </View>
-              <Text style={styles.toolIconLabel}>Calculator</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.toolIcon, { marginLeft: 8 }]} onPress={() => router.push('/calendar')}>
-              <View style={styles.toolIconCircle}>
+        <View style={styles.supportSection}>
+          <Text style={styles.supportTitle}>More</Text>
+          <View style={styles.cardRow}>
+            <TouchableOpacity
+              style={[styles.supportCard, { marginRight: 6 }]}
+              onPress={() => router.push('/events')}
+            >
+              <View style={styles.supportIcon}>
                 <CalendarIcon size={22} color={Colors.gold} strokeWidth={2} />
               </View>
-              <Text style={styles.toolIconLabel}>Calendar</Text>
+              <Text style={styles.supportLabel}>Events</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.toolIcon, { marginLeft: 8 }]} onPress={() => router.push('/sentiment')}>
-              <View style={styles.toolIconCircle}>
-                <TrendingDown size={22} color={Colors.gold} strokeWidth={2} />
+            <TouchableOpacity
+              style={[styles.supportCard, { marginLeft: 6 }]}
+              onPress={() => router.push('/help')}
+            >
+              <View style={styles.supportIcon}>
+                <HelpCircle size={22} color={Colors.gold} strokeWidth={2} />
               </View>
-              <Text style={styles.toolIconLabel}>Sentiment</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.toolIcon, { marginLeft: 8 }]} onPress={() => router.push('/help')}>
-              <View style={styles.toolIconCircle}>
-                <FolderOpen size={22} color={Colors.gold} strokeWidth={2} />
-              </View>
-              <Text style={styles.toolIconLabel}>Help</Text>
+              <Text style={styles.supportLabel}>Help</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -475,12 +424,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 5,
   },
+  notificationBadgeText: {
+    color: 'white',
+    fontSize: 11,
+    fontFamily: 'Axiforma-Bold',
+    lineHeight: 13,
+  },
   signalCard: {
     backgroundColor: '#3A3A3A',
     borderRadius: 20,
     padding: 24,
-    marginBottom: 48,
-    marginTop: 24,
+    marginBottom: 32,
+    marginTop: 8,
     position: 'relative',
   },
   signalUpdateBadge: {
@@ -511,8 +466,38 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'Axiforma-Bold',
     letterSpacing: 0.5,
+    marginRight: 8,
   },
-  sellButton: {
+  signalOrderType: {
+    color: Colors.gold,
+    fontSize: 12,
+    fontFamily: 'Axiforma-Medium',
+    marginRight: 8,
+    textTransform: 'uppercase',
+  },
+  signalEntry: {
+    color: '#A0A0A0',
+    fontSize: 14,
+    fontFamily: 'Axiforma-Regular',
+  },
+  signalTextBlock: {
+    marginBottom: 12,
+  },
+  signalTextLabel: {
+    color: '#9A9A9A',
+    fontSize: 11,
+    fontFamily: 'Axiforma-Regular',
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
+    marginBottom: 4,
+  },
+  signalTextValue: {
+    color: '#E5E5E5',
+    fontSize: 14,
+    fontFamily: 'Axiforma-Regular',
+    lineHeight: 20,
+  },
+  signalTypeButton: {
     backgroundColor: '#FF4444',
     paddingHorizontal: 20,
     paddingVertical: 8,
@@ -521,7 +506,7 @@ const styles = StyleSheet.create({
   buyButton: {
     backgroundColor: '#22C55E',
   },
-  sellButtonText: {
+  signalTypeText: {
     color: '#FFFFFF',
     fontSize: 12,
     fontFamily: 'Axiforma-Bold',
@@ -555,14 +540,32 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Axiforma-Bold',
   },
+  signalFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 8,
+  },
   signalTimestamp: {
     color: '#9A9A9A',
     fontSize: 14,
     fontFamily: 'Axiforma-Regular',
-    marginTop: 0,
+  },
+  confidenceBadge: {
+    backgroundColor: '#222A2A',
+    borderRadius: 8,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    marginLeft: 8,
+  },
+  confidenceText: {
+    color: '#9d9d9d',
+    fontFamily: 'Axiforma-Bold',
+    fontSize: 12,
+    letterSpacing: 0.5,
   },
   section: {
-    marginBottom: 28,
+    marginBottom: 24,
   },
   sectionTitle: {
     color: '#FFFFFF',
@@ -588,21 +591,31 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 18,
     alignItems: 'flex-start',
+    minHeight: 132,
   },
-  tipsWideCard: {
+  wideCard: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#2A2A2A',
     borderRadius: 16,
     padding: 18,
-    marginTop: 12,
   },
-  tipsWideIcon: {
+  wideCardIcon: {
     marginBottom: 0,
   },
+  wideCardText: {
+    flex: 1,
+    marginLeft: 4,
+  },
+  wideCardTitle: {
+    textAlign: 'left',
+  },
+  wideCardDescription: {
+    textAlign: 'left',
+  },
   featureIcon: {
-    width: 32,
-    height: 32,
+    width: 36,
+    height: 36,
     borderRadius: 18,
     borderWidth: 2,
     borderColor: Colors.gold,
@@ -619,68 +632,41 @@ const styles = StyleSheet.create({
   },
   featureDescription: {
     color: '#A0A0A0',
-    fontSize: 10,
+    fontSize: 11,
     fontFamily: 'Axiforma-Regular',
-    textAlign: 'center',
     lineHeight: 15,
   },
-  iconRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 4,
-    paddingHorizontal: 0,
-  },
-  learnIcon: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  learnIconCircle: {
-    width: 56,
-    height: 56,
-    borderRadius: 16,
-    backgroundColor: '#EBEBEB',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  learnIconLabel: {
-    color: '#FFFFFF',
-    fontSize: 12,
-    fontFamily: 'Axiforma-Medium',
-    textAlign: 'center',
-  },
-  toolsSection: {
+  supportSection: {
     backgroundColor: '#EBEBEB',
     borderRadius: 16,
     padding: 20,
     marginTop: 4,
   },
-  toolsTitle: {
+  supportTitle: {
     color: '#1A1A1A',
     fontSize: 18,
     fontFamily: 'Axiforma-Bold',
-    marginBottom: 8,
+    marginBottom: 12,
   },
-  toolIcon: {
-    alignItems: 'center',
+  supportCard: {
     flex: 1,
-  },
-  toolIconCircle: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
     backgroundColor: '#2A2A2A',
-    borderWidth: 0,
-    borderColor: Colors.gold,
+    borderRadius: 14,
+    paddingVertical: 18,
+    alignItems: 'center',
+  },
+  supportIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#1A1A1A',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8,
   },
-  toolIconLabel: {
-    color: '#1A1A1A',
-    fontSize: 12,
+  supportLabel: {
+    color: '#FFFFFF',
+    fontSize: 13,
     fontFamily: 'Axiforma-Medium',
-    textAlign: 'center',
   },
 });

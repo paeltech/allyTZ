@@ -95,14 +95,10 @@ export default function RootLayout() {
               <Stack.Screen name="signals/[id]" options={{ animation: 'slide_from_right' }} />
               <Stack.Screen name="analysis/index" />
               <Stack.Screen name="analysis/[id]" />
-              <Stack.Screen name="academy" />
-              <Stack.Screen name="mentorship" />
+              <Stack.Screen name="documents/index" />
+              <Stack.Screen name="documents/[id]" options={{ animation: 'slide_from_right' }} />
               <Stack.Screen name="events/index" />
               <Stack.Screen name="events/[id]" options={{ animation: 'slide_from_right' }} />
-              <Stack.Screen name="one-on-one" />
-              <Stack.Screen name="calculator" />
-              <Stack.Screen name="calendar" />
-              <Stack.Screen name="sentiment" />
               <Stack.Screen name="help" />
               <Stack.Screen name="notifications" />
               <Stack.Screen name="notification-preferences" />
