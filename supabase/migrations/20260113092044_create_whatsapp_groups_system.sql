@@ -1,7 +1,7 @@
 -- Create whatsapp_groups table for tracking WhatsApp groups
 CREATE TABLE IF NOT EXISTS whatsapp_groups (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  group_name TEXT NOT NULL DEFAULT 'SavannaFX - Monthly Subscribers',
+  group_name TEXT NOT NULL DEFAULT 'AllyTZ Panel - Monthly Subscribers',
   group_jid TEXT NOT NULL UNIQUE, -- WhatsApp group JID from WaSender API
   group_number INTEGER NOT NULL DEFAULT 1, -- For overflow groups (1, 2, 3, etc.)
   member_count INTEGER NOT NULL DEFAULT 0,

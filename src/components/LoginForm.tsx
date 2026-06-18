@@ -96,7 +96,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
               Sign in
             </DialogTitle>
             <DialogDescription className="text-xs sm:text-sm text-rainy-grey">
-              Sign in to your SavannaFX account
+              Sign in to your AllyTZ Panel account
             </DialogDescription>
           </DialogHeader>
 

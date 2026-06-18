@@ -1,4 +1,4 @@
-# SavannaFX Mobile App - Internal Testing Release Notes
+# AllyTZ Panel Mobile App - Internal Testing Release Notes
 
 ## Version 1.0.0 (Initial Release)
 **Release Date:** January 2026  
@@ -9,7 +9,7 @@
 
 ## 🎯 What's New
 
-Welcome to the first internal testing release of SavannaFX Mobile! This release includes the core features needed for trading signal delivery, market analysis, and educational content.
+Welcome to the first internal testing release of AllyTZ Panel Mobile! This release includes the core features needed for trading signal delivery, market analysis, and educational content.
 
 ---
 
@@ -101,7 +101,7 @@ Welcome to the first internal testing release of SavannaFX Mobile! This release 
 - **Legal & Privacy**
   - Privacy Policy
   - Terms & Conditions
-  - About SavannaFX
+  - About AllyTZ Panel
 
 ---
 
@@ -233,7 +233,7 @@ Please report any bugs, crashes, or issues you encounter:
    - App version (1.0.0)
 
 2. **Feedback Channels:**
-   - Email: info@savannafx.co
+   - Email: info@allytz.co
    - Include "Internal Testing" in subject line
 
 ### What We're Looking For
@@ -305,7 +305,7 @@ Please report any bugs, crashes, or issues you encounter:
 
 ## 🙏 Thank You!
 
-Thank you for participating in the internal testing of SavannaFX Mobile! Your feedback is invaluable in helping us create the best possible trading experience.
+Thank you for participating in the internal testing of AllyTZ Panel Mobile! Your feedback is invaluable in helping us create the best possible trading experience.
 
 **Happy Testing! 📱📈**
 
@@ -314,4 +314,4 @@ Thank you for participating in the internal testing of SavannaFX Mobile! Your fe
 **Version:** 1.0.0  
 **Build Date:** January 2026  
 **Testing Period:** Internal Testing Phase  
-**Contact:** info@savannafx.co
+**Contact:** info@allytz.co

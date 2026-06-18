@@ -3,7 +3,7 @@
 import React from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -96,7 +96,7 @@ const Enquiry: React.FC = () => {
         <div className="space-y-6">
           {/* Header */}
           <ScrollReveal>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <motion.div
                   initial="hidden"
@@ -115,12 +115,12 @@ const Enquiry: React.FC = () => {
                   </div>
                 </motion.div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
 
           {/* Contact Info Cards */}
           <div className="grid md:grid-cols-3 gap-4">
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-nero flex items-center justify-center">
@@ -128,12 +128,12 @@ const Enquiry: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-white font-medium text-sm">Email</div>
-                    <div className="text-rainy-grey text-xs">info@savannafx.co</div>
+                    <div className="text-rainy-grey text-xs">info@allytz.co</div>
                   </div>
                 </div>
               </CardContent>
-            </SavannaCard>
-            <SavannaCard>
+            </PanelCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-nero flex items-center justify-center">
@@ -145,8 +145,8 @@ const Enquiry: React.FC = () => {
                   </div>
                 </div>
               </CardContent>
-            </SavannaCard>
-            <SavannaCard>
+            </PanelCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-nero flex items-center justify-center">
@@ -158,12 +158,12 @@ const Enquiry: React.FC = () => {
                   </div>
                 </div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </div>
 
           {/* Enquiry Form */}
           <ScrollReveal>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -310,7 +310,7 @@ const Enquiry: React.FC = () => {
                   </form>
                 </Form>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
         </div>
       </DashboardLayout>

@@ -32,7 +32,7 @@ export default function PrivacyScreen() {
         <Text style={styles.lastUpdated}>Last updated: January 15, 2026</Text>
 
         <Text style={styles.introText}>
-          At SavannaFX, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application and services.
+          At AllyTZ Panel, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application and services.
         </Text>
 
         <Text style={styles.sectionTitle}>1. Information We Collect</Text>
@@ -124,14 +124,14 @@ export default function PrivacyScreen() {
         <Text style={styles.paragraph}>
           If you have any questions about this Privacy Policy or our data practices, please contact us:
         </Text>
-        <Text style={styles.contactInfo}>Email: info@savannafx.co</Text>
+        <Text style={styles.contactInfo}>Email: info@allytz.co</Text>
         <Text style={styles.contactInfo}>Phone: +255716885996</Text>
         <Text style={styles.contactInfo}>Location: Dar es salaam, Tanzania</Text>
-        <Text style={styles.contactInfo}>Website: www.savannafx.co</Text>
+        <Text style={styles.contactInfo}>Website: www.allytz.co</Text>
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            By using SavannaFX, you consent to the collection and use of your information as described in this Privacy Policy.
+            By using AllyTZ Panel, you consent to the collection and use of your information as described in this Privacy Policy.
           </Text>
         </View>
       </ScrollView>

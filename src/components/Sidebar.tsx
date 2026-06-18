@@ -32,7 +32,7 @@ const navItems = [
   { label: "Analysis", icon: FileText, to: "/dashboard/trade-analysis", protected: true },
   { label: "Course", icon: GraduationCap, to: "/dashboard/course", protected: true },
   { label: "Mentorship", icon: Users, to: "/dashboard/one-on-one", protected: true },
-  { label: "Trade With Savanna", icon: Handshake, to: "/dashboard/trade-with-savanna", protected: true },
+  { label: "Trade With AllyTZ", icon: Handshake, to: "/dashboard/trade-with-allytz", protected: true },
   { label: "Collaborations", icon: Megaphone, to: "/dashboard/collaborations", protected: true },
   { label: "Academy", icon: Building, to: "/dashboard/academy", protected: true },
   { label: "Booking", icon: Calendar, to: "/dashboard/booking", protected: true },
@@ -77,7 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, onOpenLogin, onOpenSig
       >
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-steel-wool flex-shrink-0">
           <Link className="flex items-center space-x-2 sm:space-x-3 group" to="/">
-            <img src="/assets/logo.png" alt="SavannaFX logo" className="h-6 sm:h-8" />
+            <img src="/assets/logo.png" alt="AllyTZ Panel logo" className="h-6 sm:h-8" />
           </Link>
           <button
             aria-label="Close sidebar"

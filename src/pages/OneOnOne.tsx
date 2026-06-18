@@ -3,7 +3,7 @@
 import React from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import {
   Target,
@@ -108,7 +108,7 @@ const OneOnOne: React.FC = () => {
     <DashboardLayout>
       {/* Header banner */}
         <ScrollReveal>
-      <SavannaCard className="mb-6">
+      <PanelCard className="mb-6">
         <CardContent className="p-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">
@@ -136,11 +136,11 @@ const OneOnOne: React.FC = () => {
             </Button>
           </div>
         </CardContent>
-      </SavannaCard>
+      </PanelCard>
         </ScrollReveal>
 
       {/* Who this is for */}
-      <SavannaCard className="mb-6">
+      <PanelCard className="mb-6">
         <CardContent className="p-6">
           <h2 className="text-white font-medium mb-3">Who this is for:</h2>
           <p className="text-rainy-grey">
@@ -148,11 +148,11 @@ const OneOnOne: React.FC = () => {
             rebuild their psychology, and get a custom trading system that actually works for them.
           </p>
         </CardContent>
-      </SavannaCard>
+      </PanelCard>
 
       {/* What You Get */}
         <ScrollReveal>
-      <SavannaCard className="mb-6">
+      <PanelCard className="mb-6">
         <CardContent className="p-6">
           <h2 className="text-white font-medium mb-4">What You Get:</h2>
               <StaggerChildren className="grid md:grid-cols-2 gap-4">
@@ -189,15 +189,15 @@ const OneOnOne: React.FC = () => {
             <FeatureItem
               icon={ScrollText}
               title="Certificate of Completion"
-              desc="Mentored by SavannaFX — adds credibility to your status"
+              desc="Mentored by AllyTZ Panel — adds credibility to your status"
             />
               </StaggerChildren>
         </CardContent>
-      </SavannaCard>
+      </PanelCard>
         </ScrollReveal>
 
       {/* Additional Perks */}
-      <SavannaCard className="mb-6">
+      <PanelCard className="mb-6">
         <CardContent className="p-6">
           <h2 className="text-white font-medium mb-4">Additional Perks:</h2>
           <div className="grid md:grid-cols-3 gap-4">
@@ -218,11 +218,11 @@ const OneOnOne: React.FC = () => {
             />
           </div>
         </CardContent>
-      </SavannaCard>
+      </PanelCard>
 
       {/* Two-column: investment highlights + pricing panel */}
       <div className="grid md:grid-cols-3 gap-6 mb-6">
-        <SavannaCard className="md:col-span-2 bg-nero border-0">
+        <PanelCard className="md:col-span-2 bg-nero border-0">
           <CardContent className="p-6 space-y-4">
             <h3 className="text-white text-lg font-semibold">
               Why This Investment Changes Everything
@@ -251,9 +251,9 @@ const OneOnOne: React.FC = () => {
               </div>
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
-        <SavannaCard>
+        <PanelCard>
           <CardContent className="p-6">
             <div className="text-center">
               <div className="text-gold text-3xl font-bold">$1,500</div>
@@ -282,7 +282,7 @@ const OneOnOne: React.FC = () => {
               </div>
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
       </div>
 
       {/* Testimonials */}
@@ -300,7 +300,7 @@ const OneOnOne: React.FC = () => {
         </ScrollReveal>
 
       {/* Success stories */}
-      <SavannaCard className="mb-6">
+      <PanelCard className="mb-6">
         <CardContent className="p-6">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg bg-nero flex items-center justify-center">
@@ -312,10 +312,10 @@ const OneOnOne: React.FC = () => {
             </div>
           </div>
         </CardContent>
-      </SavannaCard>
+      </PanelCard>
 
       {/* Confidence builder */}
-      <SavannaCard>
+      <PanelCard>
         <CardContent className="p-6">
           <h3 className="text-white text-lg font-semibold">
             Build your confidence to find answers to your questions!
@@ -343,7 +343,7 @@ const OneOnOne: React.FC = () => {
             />
           </div>
         </CardContent>
-      </SavannaCard>
+      </PanelCard>
     </DashboardLayout>
     </PageTransition>
   );

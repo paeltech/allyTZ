@@ -3,7 +3,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SavannaCard from "./SavannaCard";
+import PanelCard from "./PanelCard";
 import { ArrowRight } from "lucide-react";
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 const DashboardTile: React.FC<Props> = ({ to, title, description, Icon, iconBg = "bg-gold" }) => {
   return (
     <Link to={to} className="block group">
-      <SavannaCard 
+      <PanelCard 
         className="cursor-pointer h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-gold/10 active:scale-[0.98]"
         hoverable={true}
       >
@@ -40,7 +40,7 @@ const DashboardTile: React.FC<Props> = ({ to, title, description, Icon, iconBg =
         <CardContent className="text-rainy-grey text-xs sm:text-sm leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6">
           {description}
         </CardContent>
-      </SavannaCard>
+      </PanelCard>
     </Link>
   );
 };

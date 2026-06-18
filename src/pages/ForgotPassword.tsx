@@ -73,7 +73,7 @@ const ForgotPassword: React.FC = () => {
         <div className="mb-8 text-center">
           <img
             src="/assets/logo.png"
-            alt="SavannaFX logo"
+            alt="AllyTZ Panel logo"
             className="w-32 mx-auto rounded-lg mb-6"
           />
           <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 font-heading">

@@ -2,8 +2,8 @@
 GOOGLE PLAY STORE APP SUMMARY
 ========================================
 
-APP NAME: SavannaFX
-PACKAGE: com.savannafx.mobile
+APP NAME: AllyTZ Panel
+PACKAGE: com.allytz.panel
 VERSION: 1.0.0
 
 ========================================
@@ -18,9 +18,9 @@ Premium forex trading signals with real-time alerts, market analysis, and expert
 FULL DESCRIPTION (4000 characters max)
 ========================================
 
-Welcome to SavannaFX – Your Complete Forex Trading Companion
+Welcome to AllyTZ Panel – Your Complete Forex Trading Companion
 
-Transform your forex trading journey with SavannaFX, the all-in-one mobile platform designed for traders who demand precision, education, and real-time market intelligence. Whether you're a beginner learning the fundamentals or an experienced trader seeking premium signals, SavannaFX provides the tools and insights you need to make informed trading decisions.
+Transform your forex trading journey with AllyTZ Panel, the all-in-one mobile platform designed for traders who demand precision, education, and real-time market intelligence. Whether you're a beginner learning the fundamentals or an experienced trader seeking premium signals, AllyTZ Panel provides the tools and insights you need to make informed trading decisions.
 
 🎯 REAL-TIME TRADING SIGNALS
 Get instant access to professional trading signals delivered directly to your device. Each signal includes:
@@ -126,7 +126,7 @@ Intuitive design that makes complex trading information easy to understand and a
 
 💰 PRICING & SUBSCRIPTIONS
 
-SavannaFX is FREE to download and use. New users receive complimentary access to get started.
+AllyTZ Panel is FREE to download and use. New users receive complimentary access to get started.
 
 Premium features are available through flexible subscription options:
 • Monthly subscription plans
@@ -138,7 +138,7 @@ All subscriptions are managed securely through Google Play Billing.
 
 ⚠️ IMPORTANT DISCLAIMERS
 
-This app provides educational information and trading signals for informational purposes only. SavannaFX is not a financial advisor, and the information provided should not be considered as financial advice.
+This app provides educational information and trading signals for informational purposes only. AllyTZ Panel is not a financial advisor, and the information provided should not be considered as financial advice.
 
 • Trading forex involves substantial risk of loss
 • Past performance does not guarantee future results
@@ -160,20 +160,20 @@ Your privacy and security are our top priorities:
 📞 SUPPORT
 
 Need help? Our support team is here for you:
-• Email: info@savannafx.co
+• Email: info@allytz.co
 • In-app help center
 • FAQ section
 • Community resources
 
 🚀 GET STARTED TODAY
 
-Download SavannaFX now and join thousands of traders who trust our platform for their forex trading needs. Start with free access and upgrade to premium features when you're ready to take your trading to the next level.
+Download AllyTZ Panel now and join thousands of traders who trust our platform for their forex trading needs. Start with free access and upgrade to premium features when you're ready to take your trading to the next level.
 
-Whether you're hunting for pips or building your trading knowledge, SavannaFX is your trusted partner in the forex market.
+Whether you're hunting for pips or building your trading knowledge, AllyTZ Panel is your trusted partner in the forex market.
 
 ---
 
-Download now and start your trading journey with SavannaFX!
+Download now and start your trading journey with AllyTZ Panel!
 
 [Character count: 3,847]
 

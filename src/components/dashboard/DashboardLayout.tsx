@@ -55,14 +55,14 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { label: "Dashboard", shortLabel: "Home", icon: LayoutDashboard, to: "/dashboard", showInBottomNav: true },
-  { label: "Trade With Savanna", icon: Handshake, to: "/dashboard/trade-with-savanna" },
+  { label: "Trade With AllyTZ", icon: Handshake, to: "/dashboard/trade-with-allytz" },
   { label: "Signals", icon: SignalHigh, to: "/dashboard/signals", showInBottomNav: true },
   { label: "Trade Analysis", shortLabel: "Analysis", icon: FileText, to: "/dashboard/trade-analysis", showInBottomNav: true },
   { label: "Market Analysis", icon: LineChart, to: "/dashboard/market-analysis" },
   { label: "Online Course", shortLabel: "Course", icon: GraduationCap, to: "/dashboard/course", showInBottomNav: true },
   { label: "One on One", icon: UserSquare2, to: "/dashboard/one-on-one" },
   { label: "Academy", icon: School, to: "/dashboard/academy" },
-  { label: "Resources", icon: BookMarked, to: "/dashboard/resources", badge: "NEW" },
+  { label: "Resources", icon: BookMarked, to: "/dashboard/documents", badge: "NEW" },
   { label: "Sentiment Voting", icon: BarChart3, to: "/dashboard/sentiment" },
   { label: "Affiliate Programs", icon: UsersRound, to: "/dashboard/affiliates" },
   { label: "Events", icon: CalendarDays, to: "/dashboard/events" },
@@ -90,7 +90,7 @@ const Topbar: React.FC<{ onMenuClick?: () => void }> = ({ onMenuClick }) => {
           </Button>
         )}
         <Link to="/" className="flex items-center gap-2">
-          <img src="/assets/logo.png" alt="SavannaFX logo" className="h-7 sm:h-8" />
+          <img src="/assets/logo.png" alt="AllyTZ Panel logo" className="h-7 sm:h-8" />
         </Link>
         <span className="text-rainy-grey text-xs sm:text-base hidden md:inline">
           {isMobile ? "Dashboard" : `Welcome, ${firstName}`}

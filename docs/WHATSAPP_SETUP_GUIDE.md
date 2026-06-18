@@ -1,6 +1,6 @@
 # WhatsApp Broadcast Setup Guide
 
-This guide will help you set up the WhatsApp broadcast system for SavannaFX.
+This guide will help you set up the WhatsApp broadcast system for AllyTZ Panel.
 
 ## Prerequisites
 

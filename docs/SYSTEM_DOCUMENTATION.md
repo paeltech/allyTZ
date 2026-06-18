@@ -1,4 +1,4 @@
-# SavannaFX System Documentation
+# AllyTZ Panel System Documentation
 
 ## Table of Contents
 1. [Overview](#overview)
@@ -17,7 +17,7 @@
 
 ## Overview
 
-**SavannaFX** is a comprehensive forex trading platform that provides traders with tools, education, and community features. The platform offers trading signals, market analysis, educational courses, sentiment polling, event management, and various trading calculators.
+**AllyTZ Panel** is a comprehensive forex trading platform that provides traders with tools, education, and community features. The platform offers trading signals, market analysis, educational courses, sentiment polling, event management, and various trading calculators.
 
 ### Key Capabilities
 - **Trading Tools**: Signals, trade analysis, lot size calculator, currency heatmap
@@ -105,7 +105,7 @@ graph TB
 ### Project Structure
 
 ```
-SavannaFX/
+allyTZ_panel/
 ├── public/                    # Static assets
 │   ├── assets/               # Images, logos
 │   ├── fonts/                # Custom fonts
@@ -127,10 +127,12 @@ SavannaFX/
 │   ├── App.tsx              # Main app component with routing
 │   ├── main.tsx             # Application entry point
 │   └── globals.css          # Global styles
+├── docs/                    # Project documentation
+│   ├── mobile/              # Mobile app release notes and testing
+│   └── supabase/            # Supabase setup guides
 ├── supabase/
 │   ├── migrations/          # Database migrations (11 files)
-│   ├── email-templates/     # Email templates
-│   └── *.md                 # Setup documentation
+│   └── email-templates/     # Email templates
 ├── package.json
 ├── vite.config.ts
 ├── tailwind.config.ts
@@ -637,12 +639,12 @@ All tables have RLS enabled with policies that:
 
 ### 6. Broker Integration
 
-#### **Trade With Savanna** (`/dashboard/trade-with-savanna`)
+#### **Trade With AllyTZ** (`/dashboard/trade-with-allytz`)
 - Broker partnership information
 - Account opening process
 - Trading platform integration
 
-**Key Components**: `TradeWithSavanna.tsx`
+**Key Components**: `TradeWithAllyTZ.tsx`
 
 ---
 
@@ -770,7 +772,7 @@ All `/dashboard/*` routes require authentication:
 | Route | Component | Description |
 |-------|-----------|-------------|
 | `/dashboard` | Dashboard.tsx | Main dashboard hub |
-| `/dashboard/trade-with-savanna` | TradeWithSavanna.tsx | Broker partnership |
+| `/dashboard/trade-with-allytz` | TradeWithAllyTZ.tsx | Broker partnership |
 | `/dashboard/signals` | Signals.tsx | Trading signals |
 | `/dashboard/course` | CoursePage.tsx | Trading course |
 | `/dashboard/one-on-one` | OneOnOne.tsx | Personal coaching |
@@ -826,7 +828,7 @@ All `/admin/*` routes require admin role:
 #### 3. **Dashboard Components** (`src/components/dashboard/`)
 - `DashboardLayout.tsx`: Main dashboard layout wrapper
 - `DashboardTile.tsx`: Dashboard navigation tiles
-- `SavannaCard.tsx`: Custom card component
+- `PanelCard.tsx`: Custom card component
 
 #### 4. **Landing Page Components**
 - `Hero.tsx`: Hero section with 3D galaxy animation
@@ -926,11 +928,11 @@ Create storage buckets:
 - `event-covers`: Event cover images
   - Public access for reading
   - Authenticated users can upload
-  - See `supabase/event_storage_setup.md`
+  - See `docs/supabase/event_storage_setup.md`
 
 #### 3. Email Templates
 Configure email templates in Supabase dashboard:
-- See `supabase/EMAIL_SETUP.md` for templates
+- See `docs/supabase/EMAIL_SETUP.md` for templates
 - Configure SMTP settings for production
 
 #### 4. Authentication Settings
@@ -969,7 +971,7 @@ Any platform supporting static site hosting can be used (AWS S3, Cloudflare Page
 1. **Clone Repository**
 ```bash
 git clone <repository-url>
-cd SavannaFX
+cd allyTZ_panel
 ```
 
 2. **Install Dependencies**
@@ -1039,12 +1041,13 @@ Currently, the project does not have automated tests configured. Consider adding
 ## Additional Resources
 
 ### Documentation Files
-- `README_SENTIMENT.md`: Sentiment voting feature documentation
-- `SETUP_SENTIMENT.md`: Sentiment table setup guide
-- `supabase/EMAIL_SETUP.md`: Email configuration guide
-- `supabase/event_storage_setup.md`: Event storage setup
-- `supabase/storage_setup.md`: General storage setup
-- `AI_RULES.md`: AI assistant development guidelines
+See `docs/README.md` for the full index. Key guides:
+- `docs/README_SENTIMENT.md`: Sentiment voting feature documentation
+- `docs/SETUP_SENTIMENT.md`: Sentiment table setup guide
+- `docs/supabase/EMAIL_SETUP.md`: Email configuration guide
+- `docs/supabase/event_storage_setup.md`: Event storage setup
+- `docs/supabase/storage_setup.md`: General storage setup
+- `docs/AI_RULES.md`: AI assistant development guidelines
 
 ### External Documentation
 - [React Documentation](https://react.dev/)

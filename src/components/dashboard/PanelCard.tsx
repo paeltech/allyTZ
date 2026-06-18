@@ -9,12 +9,12 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
   rounded?: "lg" | "xl";
 };
 
-const SavannaCard: React.FC<Props> = ({ className, hoverable = true, rounded = "xl", ...props }) => {
+const PanelCard: React.FC<Props> = ({ className, hoverable = true, rounded = "xl", ...props }) => {
   const roundedClass = rounded === "xl" ? "rounded-xl" : "rounded-lg";
   return (
     <Card
       className={cn(
-        // SavannaFX dark card style with enhanced mobile-friendly design
+        // AllyTZ Panel dark card style with enhanced mobile-friendly design
         "bg-nero/95 border-steel-wool/50 backdrop-blur-sm",
         roundedClass,
         hoverable && "transition-all duration-300 hover:border-gold/40 hover:bg-nero hover:shadow-lg hover:shadow-gold/5",
@@ -25,4 +25,4 @@ const SavannaCard: React.FC<Props> = ({ className, hoverable = true, rounded = "
   );
 };
 
-export default SavannaCard;
+export default PanelCard;

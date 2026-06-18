@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -114,7 +114,7 @@ const LotSize: React.FC = () => {
         <div className="space-y-6">
           {/* Header */}
           <ScrollReveal>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <motion.div
                   initial="hidden"
@@ -133,13 +133,13 @@ const LotSize: React.FC = () => {
                   </div>
                 </motion.div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
 
           <div className="grid lg:grid-cols-2 gap-6">
             {/* Input Form */}
             <ScrollReveal>
-              <SavannaCard>
+              <PanelCard>
                 <CardContent className="p-6 space-y-5">
                   <motion.h2
                     initial="hidden"
@@ -257,12 +257,12 @@ const LotSize: React.FC = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </ScrollReveal>
 
             {/* Results */}
             <ScrollReveal>
-              <SavannaCard>
+              <PanelCard>
                 <CardContent className="p-6">
                   <motion.h2
                     initial="hidden"
@@ -333,13 +333,13 @@ const LotSize: React.FC = () => {
                     </div>
                   )}
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </ScrollReveal>
           </div>
 
           {/* Info Card */}
           <ScrollReveal>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <motion.div
                   initial="hidden"
@@ -365,7 +365,7 @@ const LotSize: React.FC = () => {
                   </div>
                 </motion.div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
         </div>
       </DashboardLayout>

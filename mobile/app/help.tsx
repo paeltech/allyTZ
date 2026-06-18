@@ -143,7 +143,7 @@ export default function HelpScreen() {
           <View style={styles.contactCard}>
             <View style={styles.contactRow}>
               <Mail size={18} color={Colors.gold} strokeWidth={2} />
-              <Text style={styles.contactText}>info@savannafx.co</Text>
+              <Text style={styles.contactText}>info@allytz.co</Text>
             </View>
             <View style={styles.contactRow}>
               <Phone size={18} color={Colors.gold} strokeWidth={2} />
@@ -153,7 +153,7 @@ export default function HelpScreen() {
               <Text style={styles.contactText}>Dar es salaam, Tanzania</Text>
             </View>
             <View style={styles.contactRow}>
-              <Text style={styles.contactText}>www.savannafx.co</Text>
+              <Text style={styles.contactText}>www.allytz.co</Text>
             </View>
           </View>
         </View>

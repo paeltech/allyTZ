@@ -1,6 +1,6 @@
-SavannaFX Mobile v1.0.0 - Internal Testing
+AllyTZ Panel Mobile v1.0.0 - Internal Testing
 
-First release of SavannaFX Mobile app for Android.
+First release of AllyTZ Panel Mobile app for Android.
 
 Features:
 • Real-time trading signals
@@ -12,4 +12,4 @@ Features:
 
 Testing focus: Authentication, signals, notifications, navigation.
 
-Report issues to: info@savannafx.co
+Report issues to: info@allytz.co

@@ -1,4 +1,4 @@
-# Google Play Store Submission Guide for SavannaFX
+# Google Play Store Submission Guide for AllyTZ Panel
 
 ## App Monetization Classification
 
@@ -29,7 +29,7 @@
 ### 2. **App Information & Assets**
 
 #### Required Information:
-- [ ] **App Name**: SavannaFX (max 50 characters)
+- [ ] **App Name**: AllyTZ Panel (max 50 characters)
 - [ ] **Short Description**: 80 characters max
   - Example: "Premium forex trading signals with real-time alerts and market analysis"
 - [ ] **Full Description**: 4000 characters max
@@ -101,7 +101,7 @@ Declare these in Play Console and explain usage.
 ### 6. **Technical Requirements**
 
 #### Build Configuration:
-- [ ] Ensure `package: "com.savannafx.mobile"` matches Play Console
+- [ ] Ensure `package: "com.allytz.panel"` matches Play Console
 - [ ] Version code must be unique and incrementing
 - [ ] Version name: `1.0.0` (from app.json)
 - [ ] Signing key configured (EAS handles this)
@@ -139,7 +139,7 @@ eas build --platform android --profile production
 1. Go to [Google Play Console](https://play.google.com/console)
 2. Click **"Create app"**
 3. Fill in:
-   - **App name**: SavannaFX
+   - **App name**: AllyTZ Panel
    - **Default language**: English
    - **App or game**: App
    - **Free or paid**: **FREE**
@@ -414,8 +414,8 @@ If your app sends WhatsApp messages:
 ## Quick Reference: App Details
 
 ```
-Package Name: com.savannafx.mobile
-App Name: SavannaFX
+Package Name: com.allytz.panel
+App Name: AllyTZ Panel
 Version: 1.0.0
 Category: FREE with In-App Purchases
 Primary Category: Finance/Business

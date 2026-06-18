@@ -54,7 +54,7 @@ const Hero: React.FC<{ onOpenMenu: () => void; onOpenSignup?: () => void }> = ({
                 >
                   <Sparkles className="w-4 h-4 text-gold" />
                 </motion.div>
-                <span className="text-gold/80 text-xs font-medium tracking-wider uppercase">Welcome to the Savanna</span>
+                <span className="text-gold/80 text-xs font-medium tracking-wider uppercase">Welcome to AllyTZ Panel</span>
               </motion.div>
 
               <motion.h1
@@ -87,7 +87,7 @@ const Hero: React.FC<{ onOpenMenu: () => void; onOpenSignup?: () => void }> = ({
                 transition={{ ...defaultTransition, delay: 0.4 }}
                 className="text-lg lg:text-xl font-semibold text-white/60 max-w-2xl leading-relaxed mt-3"
               >
-                The savanna is vast, harsh, and unforgiving — only the disciplined, adaptive, and patient thrive. SavannaFX empowers you to survive and thrive in the savanna we call market.
+                Markets are vast, harsh, and unforgiving — only the disciplined, adaptive, and patient thrive. AllyTZ Panel empowers you to survive and thrive in the markets.
               </motion.p>
 
               <motion.div
@@ -107,7 +107,7 @@ const Hero: React.FC<{ onOpenMenu: () => void; onOpenSignup?: () => void }> = ({
                     whileTap={{ scale: 0.96 }}
                   >
                     <span className="relative z-10 flex items-center gap-3">
-                      Get started with SavannaFX
+                      Get started with AllyTZ Panel
                       <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
                     </span>
                     <motion.div
@@ -138,7 +138,7 @@ const Hero: React.FC<{ onOpenMenu: () => void; onOpenSignup?: () => void }> = ({
             >
               <img 
                 src="/assets/heroimage.jpeg" 
-                alt="savanna visual" 
+                alt="AllyTZ Panel visual" 
                 className="w-full h-auto object-contain rounded-2xl"
                 style={{ maxHeight: '75vh', display: 'block', borderRadius: '1rem' }}
               />
@@ -152,7 +152,7 @@ const Hero: React.FC<{ onOpenMenu: () => void; onOpenSignup?: () => void }> = ({
       {/* Mobile layout - Centered */}
       <div className="lg:hidden relative z-10 w-full min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-20">
         <div className="absolute inset-0 w-full h-full opacity-10">
-          <img src="/assets/pexels-anna-nekrashevich-6801633.jpg" alt="savanna visual" className="w-full h-full object-cover" />
+          <img src="/assets/pexels-anna-nekrashevich-6801633.jpg" alt="AllyTZ Panel visual" className="w-full h-full object-cover" />
         </div>
         <motion.div
           initial="hidden"
@@ -181,7 +181,7 @@ const Hero: React.FC<{ onOpenMenu: () => void; onOpenSignup?: () => void }> = ({
             >
               <Sparkles className="w-4 h-4 text-gold" />
             </motion.div>
-            <span className="text-gold/80 text-xs font-medium tracking-wider uppercase">Welcome to the Savanna</span>
+            <span className="text-gold/80 text-xs font-medium tracking-wider uppercase">Welcome to AllyTZ Panel</span>
           </motion.div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight tracking-tight font-heading px-2">
@@ -206,7 +206,7 @@ const Hero: React.FC<{ onOpenMenu: () => void; onOpenSignup?: () => void }> = ({
             transition={{ delay: 0.3, duration: 0.5 }}
             className="text-base sm:text-lg md:text-xl font-semibold text-gold/90 leading-relaxed px-4"
           >
-            SavannaFX helps you build discipline, timing, and awareness to survive and thrive in the markets.
+            AllyTZ Panel helps you build discipline, timing, and awareness to survive and thrive in the markets.
           </motion.p>
           
           <div className="flex justify-center pt-3 sm:pt-4">
@@ -220,7 +220,7 @@ const Hero: React.FC<{ onOpenMenu: () => void; onOpenSignup?: () => void }> = ({
                 whileTap={{ scale: 0.96 }}
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  <span>Get started with SavannaFX</span>
+                  <span>Get started with AllyTZ Panel</span>
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
                 </span>
                 <motion.div

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Icon Generation Script for SavannaFX Mobile App
+ * Icon Generation Script for AllyTZ Panel Mobile App
  * 
  * Generates all required app icons from a source logo:
  * - icon.png (1024x1024) - Main app icon
@@ -76,7 +76,7 @@ async function generateIcon(inputPath, outputPath, size, options = {}) {
 }
 
 async function generateAllIcons() {
-  console.log('🎨 Generating app icons for SavannaFX...\n');
+  console.log('🎨 Generating app icons for AllyTZ Panel...\n');
   
   // Check if source logo exists
   if (!fs.existsSync(SOURCE_LOGO)) {

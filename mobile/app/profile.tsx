@@ -152,7 +152,7 @@ export default function ProfileScreen() {
     },
     {
       icon: Info,
-      title: 'About SavannaFX',
+      title: 'About AllyTZ Panel',
       subtitle: 'Learn more about us',
       route: '/about',
     },
@@ -265,7 +265,7 @@ export default function ProfileScreen() {
               )}
 
               <View style={styles.accountStatusBadge}>
-                <Text style={styles.accountStatusTitle}>SavannaFX member</Text>
+                <Text style={styles.accountStatusTitle}>AllyTZ Panel member</Text>
                 <Text style={styles.accountStatusHint}>
                   Free access. Adjust updates in Notification Preferences.
                 </Text>

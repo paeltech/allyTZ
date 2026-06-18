@@ -1,5 +1,5 @@
 /**
- * Shared color constants for SavannaFX
+ * Shared color constants for AllyTZ Panel
  * Used by both web and mobile apps
  */
 export const Colors = {

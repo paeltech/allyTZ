@@ -187,7 +187,7 @@ export default function NotificationPreferencesScreen() {
         showsVerticalScrollIndicator={false}
       >
         <Text style={styles.pageDescription}>
-          Customize how and when you want to receive notifications from SavannaFX.
+          Customize how and when you want to receive notifications from AllyTZ Panel.
         </Text>
 
         {preferenceGroups.map((group, groupIndex) => (

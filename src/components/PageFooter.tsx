@@ -11,10 +11,10 @@ const PageFooter: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-4 sm:mb-6">
-              <img src="/assets/logo.png" alt="SavannaFX logo" className="w-24 sm:w-28 md:w-32 rounded-lg" />
+              <img src="/assets/logo.png" alt="AllyTZ Panel logo" className="w-24 sm:w-28 md:w-32 rounded-lg" />
             </div>
             <p className="text-xs sm:text-sm text-rainy-grey leading-relaxed">
-              SavannaFX teaches and empowers traders to survive and thrive in the markets with discipline, timing, and awareness.
+              AllyTZ Panel teaches and empowers traders to survive and thrive in the markets with discipline, timing, and awareness.
             </p>
           </div>
 
@@ -43,10 +43,10 @@ const PageFooter: React.FC = () => {
           <div>
             <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Contact</h4>
             <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-rainy-grey leading-relaxed mb-4 sm:mb-6">
-              <li>Email: info@savannafx.co</li>
+              <li>Email: info@allytz.co</li>
               <li>Phone: +255716885996</li>
               <li>Location: Dar es salaam, Tanzania</li>
-              <li>Website: www.savannafx.co</li>
+              <li>Website: www.allytz.co</li>
             </ul>
             <Button className="bg-gradient-to-r from-gold-dark to-gold text-cursed-black hover:shadow-lg hover:shadow-gold/20 transition-all duration-300 min-h-[44px] text-xs sm:text-sm w-full sm:w-auto">Subscribe Now</Button>
           </div>
@@ -56,13 +56,13 @@ const PageFooter: React.FC = () => {
           {/* Disclaimer Section */}
           <div className="mb-6 pb-6 border-b border-nero/50">
             <p className="text-xs text-rainy-grey leading-relaxed text-center max-w-4xl mx-auto">
-              <strong className="text-white">Risk Disclaimer:</strong> Trading in financial markets involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results. The information provided on this website is for educational purposes only and should not be considered as financial advice. Always conduct your own research and consult with a qualified financial advisor before making any trading decisions. SavannaFX does not guarantee any specific results or profits from trading activities.
+              <strong className="text-white">Risk Disclaimer:</strong> Trading in financial markets involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results. The information provided on this website is for educational purposes only and should not be considered as financial advice. Always conduct your own research and consult with a qualified financial advisor before making any trading decisions. AllyTZ Panel does not guarantee any specific results or profits from trading activities.
             </p>
           </div>
           
           {/* Copyright Section */}
           <div className="text-xs sm:text-sm text-rainy-grey leading-relaxed">
-            <p>© {new Date().getFullYear()} SavannaFX — All rights reserved.</p>
+            <p>© {new Date().getFullYear()} AllyTZ Panel — All rights reserved.</p>
             <div className="mt-3 flex flex-wrap gap-3 sm:gap-4">
               <Link 
                 to="/privacy" 

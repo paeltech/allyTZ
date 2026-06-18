@@ -4,7 +4,7 @@ import React from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import CourseCard, { Course } from "../components/course/CourseCard";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
@@ -20,7 +20,7 @@ const initialCourses: Course[] = [
   {
     id: "beginner-masterclass",
     title: "Comprehensive Beginner",
-    author: "SavannaFX",
+    author: "AllyTZ Panel",
     description:
       "This is a comprehensive beginner course about everything you need to become a Trader.",
     level: "Beginner",
@@ -34,7 +34,7 @@ const initialCourses: Course[] = [
   {
     id: "goat-strategy",
     title: "The GOAT Strategy",
-    author: "SavannaFX",
+    author: "AllyTZ Panel",
     description:
       "The GOAT Strategy is a high-level, confluence-driven trading approach designed for traders who prioritize accuracy over noise.",
     level: "Advanced",
@@ -91,7 +91,7 @@ const CoursePage: React.FC = () => {
       <DashboardLayout>
         {/* Header */}
         <ScrollReveal>
-          <SavannaCard className="mb-6">
+          <PanelCard className="mb-6">
             <CardContent className="p-6">
               <div className="flex items-center justify-between flex-wrap gap-3">
                 <div>
@@ -100,7 +100,7 @@ const CoursePage: React.FC = () => {
                 </div>
               </div>
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         </ScrollReveal>
 
         {/* Tabs */}
@@ -178,7 +178,7 @@ const CoursePage: React.FC = () => {
             />
           ))}
           {filtered.length === 0 && (
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6 text-center text-slate-400">
                 No courses match your filters.
                 <div className="mt-3">
@@ -196,7 +196,7 @@ const CoursePage: React.FC = () => {
                   </Button>
                 </div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           )}
         </StaggerChildren>
       </DashboardLayout>

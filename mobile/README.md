@@ -1,6 +1,6 @@
-# SavannaFX Mobile App
+# AllyTZ Panel Mobile App
 
-Native mobile application for SavannaFX built with Expo and React Native.
+Native mobile application for AllyTZ Panel built with Expo and React Native.
 
 ## Setup
 

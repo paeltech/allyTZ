@@ -10,8 +10,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'assets/logo.png', 'robots.txt'],
       manifest: {
-        name: 'SavannaFX - Trading Signals & Education',
-        short_name: 'SavannaFX',
+        name: 'AllyTZ Panel - Trading Signals & Education',
+        short_name: 'AllyTZ Panel',
         description: 'Professional forex trading signals, analysis, courses and mentorship platform',
         theme_color: '#F4C464',
         background_color: '#000000',
@@ -51,14 +51,14 @@ export default defineConfig({
         //     sizes: '1280x720',
         //     type: 'image/png',
         //     form_factor: 'wide',
-        //     label: 'SavannaFX Dashboard'
+        //     label: 'AllyTZ Panel Dashboard'
         //   },
         //   {
         //     src: '/screenshot-mobile.png',
         //     sizes: '750x1334',
         //     type: 'image/png',
         //     form_factor: 'narrow',
-        //     label: 'SavannaFX Mobile'
+        //     label: 'AllyTZ Panel Mobile'
         //   }
         // ],
         categories: ['finance', 'education'],

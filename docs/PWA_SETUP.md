@@ -1,4 +1,4 @@
-# PWA Setup Guide for SavannaFX
+# PWA Setup Guide for AllyTZ Panel
 
 ## ✅ Completed Steps
 
@@ -116,7 +116,7 @@ Use Chrome DevTools to verify your PWA:
 ## 🎯 PWA Features Configured
 
 ### ✅ Installable
-- Users can add SavannaFX to home screen
+- Users can add AllyTZ Panel to home screen
 - Works like a native app
 - Full-screen experience (no browser chrome)
 

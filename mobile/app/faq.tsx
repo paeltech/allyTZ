@@ -17,18 +17,18 @@ export default function FAQScreen() {
   const faqs: FAQItem[] = [
     {
       category: 'Getting Started',
-      question: 'What is SavannaFX?',
-      answer: 'SavannaFX is a forex trading platform that provides trading signals, market analysis, educational resources, and mentorship information to help traders learn and stay informed. Content is for education only, not financial advice.',
+      question: 'What is AllyTZ Panel?',
+      answer: 'AllyTZ Panel is a forex trading platform that provides trading signals, market analysis, educational resources, and mentorship information to help traders learn and stay informed. Content is for education only, not financial advice.',
     },
     {
       category: 'Getting Started',
       question: 'How do I sign up?',
-      answer: 'Download the SavannaFX app, tap "Sign Up" on the login screen, and fill in your details including full name, email, password, and optionally a phone number for WhatsApp updates. You\'ll receive a confirmation email to verify your account.',
+      answer: 'Download the AllyTZ Panel app, tap "Sign Up" on the login screen, and fill in your details including full name, email, password, and optionally a phone number for WhatsApp updates. You\'ll receive a confirmation email to verify your account.',
     },
     {
       category: 'Getting Started',
       question: 'Is the app free to use?',
-      answer: 'Yes. The SavannaFX mobile app and the education, signals, and analysis content we offer through it are provided at no charge. You can choose what to receive in Profile → Notification Preferences.',
+      answer: 'Yes. The AllyTZ Panel mobile app and the education, signals, and analysis content we offer through it are provided at no charge. You can choose what to receive in Profile → Notification Preferences.',
     },
     {
       category: 'Trading Signals',
@@ -58,7 +58,7 @@ export default function FAQScreen() {
     {
       category: 'Account & notifications',
       question: 'How do I get help with my account?',
-      answer: 'Use the Help & Enquiry screen in the app, or email info@savannafx.co. We typically respond within 24 hours.',
+      answer: 'Use the Help & Enquiry screen in the app, or email info@allytz.co. We typically respond within 24 hours.',
     },
     {
       category: 'Education & Support',
@@ -73,7 +73,7 @@ export default function FAQScreen() {
     {
       category: 'Education & Support',
       question: 'How do I contact customer support?',
-      answer: 'You can reach us via the Help & Enquiry page in the app, email us at info@savannafx.co, or call us at +255716885996. We are based in Dar es salaam, Tanzania. Website: www.savannafx.co. We typically respond within 24 hours.',
+      answer: 'You can reach us via the Help & Enquiry page in the app, email us at info@allytz.co, or call us at +255716885996. We are based in Dar es salaam, Tanzania. Website: www.allytz.co. We typically respond within 24 hours.',
     },
     {
       category: 'Technical',
@@ -82,7 +82,7 @@ export default function FAQScreen() {
     },
     {
       category: 'Technical',
-      question: 'Can I use SavannaFX on multiple devices?',
+      question: 'Can I use AllyTZ Panel on multiple devices?',
       answer: 'Yes, you can access your account from multiple devices. Your data syncs automatically across all devices.',
     },
     {
@@ -132,7 +132,7 @@ export default function FAQScreen() {
           <HelpCircle size={48} color={Colors.gold} strokeWidth={1.5} />
           <Text style={styles.introTitle}>Frequently Asked Questions</Text>
           <Text style={styles.introText}>
-            Find answers to common questions about SavannaFX. Can't find what you're looking for? Contact our support team.
+            Find answers to common questions about AllyTZ Panel. Can't find what you're looking for? Contact our support team.
           </Text>
         </View>
 

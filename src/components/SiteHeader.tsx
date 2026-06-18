@@ -40,7 +40,7 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({ onOpenMenu, onOpenSignup, onOpe
     <header className="fixed top-0 left-0 right-0 z-30 bg-black/90 backdrop-blur-md supports-[backdrop-filter]:bg-black/80 pt-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2 sm:gap-3">
-          <img src="/assets/logo.png" alt="SavannaFX logo" className="w-24 sm:w-28 md:w-32 rounded-lg" />
+          <img src="/assets/logo.png" alt="AllyTZ Panel logo" className="w-24 sm:w-28 md:w-32 rounded-lg" />
         </a>
         <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm text-rainy-grey font-medium">
           <a

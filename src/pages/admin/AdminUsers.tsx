@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -223,7 +223,7 @@ const AdminUsers: React.FC = () => {
   return (
     <PageTransition>
       <DashboardLayout>
-        <SavannaCard className="mb-6">
+        <PanelCard className="mb-6">
           <CardContent className="p-6">
             <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
               <div className="flex items-center gap-3">
@@ -302,9 +302,9 @@ const AdminUsers: React.FC = () => {
               </Select>
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
-        <SavannaCard>
+        <PanelCard>
           <CardContent className="p-0">
             {isLoading ? (
               <div className="p-8 text-center text-rainy-grey">Loading users...</div>
@@ -441,7 +441,7 @@ const AdminUsers: React.FC = () => {
               </div>
             )}
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
       </DashboardLayout>
     </PageTransition>
   );

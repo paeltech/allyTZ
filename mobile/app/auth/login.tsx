@@ -26,7 +26,7 @@ export default function LoginScreen() {
       if (!reachable) {
         Alert.alert(
           'Connection problem',
-          'SavannaFX could not reach the server. Check Wi‑Fi or cellular data, turn off VPN if you use one, then try again.'
+          'AllyTZ Panel could not reach the server. Check Wi‑Fi or cellular data, turn off VPN if you use one, then try again.'
         );
         return;
       }
@@ -66,7 +66,7 @@ export default function LoginScreen() {
             <View style={styles.logoCircle}>
               <Text style={styles.logoText}>S</Text>
             </View>
-            <Text style={styles.appName}>SavannaFX</Text>
+            <Text style={styles.appName}>AllyTZ Panel</Text>
             <Text style={styles.tagline}>PIPS HUNTING</Text>
           </View>
 

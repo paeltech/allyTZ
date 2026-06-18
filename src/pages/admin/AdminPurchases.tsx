@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -134,7 +134,7 @@ const AdminPurchases: React.FC = () => {
   return (
     <PageTransition>
       <DashboardLayout>
-        <SavannaCard className="mb-6">
+        <PanelCard className="mb-6">
           <CardContent className="p-6">
             <div className="flex items-center gap-3 mb-4">
               <ShoppingCart className="text-gold" size={24} />
@@ -147,7 +147,7 @@ const AdminPurchases: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <SavannaCard>
+              <PanelCard>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
@@ -157,8 +157,8 @@ const AdminPurchases: React.FC = () => {
                     <DollarSign className="text-gold" size={32} />
                   </div>
                 </CardContent>
-              </SavannaCard>
-              <SavannaCard>
+              </PanelCard>
+              <PanelCard>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
@@ -168,8 +168,8 @@ const AdminPurchases: React.FC = () => {
                     <ShoppingCart className="text-gold" size={32} />
                   </div>
                 </CardContent>
-              </SavannaCard>
-              <SavannaCard>
+              </PanelCard>
+              <PanelCard>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
@@ -179,7 +179,7 @@ const AdminPurchases: React.FC = () => {
                     <DollarSign className="text-green-500" size={32} />
                   </div>
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -207,9 +207,9 @@ const AdminPurchases: React.FC = () => {
               </Select>
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
-        <SavannaCard>
+        <PanelCard>
           <CardContent className="p-0">
             {isLoading ? (
               <div className="p-8 text-center text-rainy-grey">Loading...</div>
@@ -286,7 +286,7 @@ const AdminPurchases: React.FC = () => {
               </div>
             )}
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
       </DashboardLayout>
     </PageTransition>
   );

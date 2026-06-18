@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -467,7 +467,7 @@ const AdminEvents: React.FC = () => {
   return (
     <PageTransition>
       <DashboardLayout>
-        <SavannaCard className="mb-6">
+        <PanelCard className="mb-6">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -513,9 +513,9 @@ const AdminEvents: React.FC = () => {
               </Select>
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
-        <SavannaCard>
+        <PanelCard>
           <CardContent className="p-0">
             {isLoading ? (
               <div className="p-8 text-center text-rainy-grey">Loading...</div>
@@ -581,7 +581,7 @@ const AdminEvents: React.FC = () => {
               </div>
             )}
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogContent className="bg-black border-steel-wool text-white max-w-4xl max-h-[90vh] overflow-y-auto">

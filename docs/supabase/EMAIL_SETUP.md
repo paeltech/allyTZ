@@ -1,6 +1,6 @@
 # Supabase Email Configuration Guide
 
-This guide helps you configure email sending in Supabase for SavannaFX signup confirmation emails.
+This guide helps you configure email sending in Supabase for AllyTZ Panel signup confirmation emails.
 
 ## Common Issues
 
@@ -25,9 +25,9 @@ This guide helps you configure email sending in Supabase for SavannaFX signup co
 1. Go to **Authentication** → **URL Configuration**
 2. Add your site URLs to **Redirect URLs**:
    - `http://localhost:5173/**` (for local development)
-   - `https://savannafx.co/**` (for production)
-   - `https://*.savannafx.co/**` (if using subdomains)
-   - **Mobile app (forgot password):** `savannafx://auth/reset-password` (so password reset emails open the app)
+   - `https://allytz.co/**` (for production)
+   - `https://*.allytz.co/**` (if using subdomains)
+   - **Mobile app (forgot password):** `allytz-panel://auth/reset-password` (so password reset emails open the app)
 
 #### C. Check SMTP Configuration
 
@@ -45,7 +45,7 @@ This guide helps you configure email sending in Supabase for SavannaFX signup co
    - **Username:** Your SMTP username
    - **Password:** Your SMTP password
    - **Sender email:** The email address that will send emails
-   - **Sender name:** "SavannaFX" (or your preferred name)
+   - **Sender name:** "AllyTZ Panel" (or your preferred name)
 
 **Popular SMTP Providers:**
 - **SendGrid** (Recommended)
@@ -151,7 +151,7 @@ If you continue to have issues:
 1. Check Supabase status page: https://status.supabase.com
 2. Review Supabase documentation: https://supabase.com/docs/guides/auth/auth-email-templates
 3. Contact Supabase support
-4. Contact SavannaFX support: info@savannafx.co
+4. Contact AllyTZ Panel support: info@allytz.co
 
 ## Code Configuration
 

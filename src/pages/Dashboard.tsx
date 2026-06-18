@@ -17,9 +17,10 @@ import {
   CalendarClock,
   CircleHelp,
   FileText,
+  FolderOpen,
 } from "lucide-react";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { useSupabaseSession } from "@/components/auth/SupabaseSessionProvider";
 
 const Dashboard: React.FC = () => {
@@ -29,7 +30,7 @@ const Dashboard: React.FC = () => {
   return (
     <DashboardLayout>
       {/* Enhanced Welcome Section for Mobile */}
-      <SavannaCard className="mb-4 sm:mb-6 md:mb-8 overflow-hidden relative">
+      <PanelCard className="mb-4 sm:mb-6 md:mb-8 overflow-hidden relative">
         <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-3xl" />
         <CardContent className="p-4 sm:p-6 md:p-8 relative">
           <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3">
@@ -39,7 +40,7 @@ const Dashboard: React.FC = () => {
             Your complete trading hub. Tap any card below to get started.
           </p>
         </CardContent>
-      </SavannaCard>
+      </PanelCard>
 
       {/* Featured/Priority Section - Mobile Optimized */}
       <div className="mb-4 sm:mb-6">
@@ -48,8 +49,8 @@ const Dashboard: React.FC = () => {
         </h3>
         <div className="grid gap-3 sm:gap-4 md:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <DashboardTile
-            to="/dashboard/trade-with-savanna"
-            title="Trade With Savanna"
+            to="/dashboard/trade-with-allytz"
+            title="Trade With AllyTZ"
             description="Broker partnership program"
             Icon={Handshake}
             iconBg="bg-gold"
@@ -141,6 +142,13 @@ const Dashboard: React.FC = () => {
             description="In-person training"
             Icon={School}
             iconBg="bg-emerald-600"
+          />
+          <DashboardTile
+            to="/dashboard/documents"
+            title="Documents"
+            description="Guides and resources"
+            Icon={FolderOpen}
+            iconBg="bg-slate-600"
           />
           <DashboardTile
             to="/dashboard/booking"

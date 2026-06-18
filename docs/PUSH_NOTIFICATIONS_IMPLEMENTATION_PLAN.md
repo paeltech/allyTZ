@@ -53,7 +53,7 @@ The push trigger (and the WhatsApp trigger) call Edge Functions via **pg_net**. 
 
 ## Overview
 
-This plan adds **native push notifications** to the SavannaFX mobile app (Expo/React Native) for **Android** and **iOS**, so users receive on-device alerts for signals, events, and analyses even when the app is closed or in the background. It builds on the existing in-app notification system and `expo-notifications` (already installed).
+This plan adds **native push notifications** to the AllyTZ Panel mobile app (Expo/React Native) for **Android** and **iOS**, so users receive on-device alerts for signals, events, and analyses even when the app is closed or in the background. It builds on the existing in-app notification system and `expo-notifications` (already installed).
 
 ---
 
@@ -207,12 +207,12 @@ Push on Android requires FCM V1 credentials in Expo and `google-services.json` i
 1. **Firebase**: [Firebase Console](https://console.firebase.google.com) → create a project (or use an existing one).
 2. **Service account key**: In the project → **Project settings** (gear) → **Service accounts** → **Generate new private key** → confirm. Save the JSON file securely and add it to `.gitignore` (do not commit).
 3. **Upload to EAS** (choose one):
-   - **EAS Dashboard**: [expo.dev](https://expo.dev) → your project → **Credentials** → **Android** → your application identifier (e.g. `com.savannafx.mobile`) → under **Service Credentials** → **FCM V1 service account key** → **Add a service account key** → upload the JSON → **Save**.
+   - **EAS Dashboard**: [expo.dev](https://expo.dev) → your project → **Credentials** → **Android** → your application identifier (e.g. `com.allytz.panel`) → under **Service Credentials** → **FCM V1 service account key** → **Add a service account key** → upload the JSON → **Save**.
    - **CLI**: Run `eas credentials` → **Android** → **production** (or **development** if you only use dev builds) → **Google Service Account** → **Manage your Google Service Account Key for Push Notifications (FCM V1)** → **Upload a new service account key** → select the JSON file.
 
 ### 3.2 Add google-services.json to the mobile app
 
-1. **Download**: Firebase Console → Project settings → **General** → under "Your apps" add an Android app if needed (package: `com.savannafx.mobile`) → download **google-services.json**.
+1. **Download**: Firebase Console → Project settings → **General** → under "Your apps" add an Android app if needed (package: `com.allytz.panel`) → download **google-services.json**.
 2. **Place file**: Put `google-services.json` in the **mobile/** directory (same level as `app.json`).
 3. **Wire in app.json**: The mobile `app.json` should have `"android": { ..., "googleServicesFile": "./google-services.json" }`. This is required for the Android app to register with FCM.
 
@@ -286,14 +286,14 @@ If `push_tokens` stays empty after logging in on Android (or iOS), the token is 
 2. **Watch the app logs**  
    In dev, the app now logs push steps. With the app running (e.g. via `npx expo start` and “Open on Android” from the dev build), check Metro/terminal for:
    - `[Push] Not a physical device` → you’re in Expo Go or an emulator; use a dev build on a real device.
-   - `[Push] Permission denied` → enable “Notifications” for the app in Android system settings (Settings → Apps → SavannaFX → Notifications).
+   - `[Push] Permission denied` → enable “Notifications” for the app in Android system settings (Settings → Apps → AllyTZ Panel → Notifications).
    - `[Push] No EAS projectId` → `app.json` should have `extra.eas.projectId`; dev/production builds include it; Expo Go may not.
    - `[Push] getExpoPushTokenAsync failed` → often Expo Go or missing FCM credentials; use a dev build and add FCM V1 credentials in EAS.
    - `[Push] Failed to save token to push_tokens: ...` → RLS or upsert error; check the message and that the `push_tokens` migration is applied.
    - `[Push] Token saved to push_tokens` → token was saved; if the table is still empty, check you’re looking at the same Supabase project and that RLS isn’t hiding the row (e.g. query with service role or as that user).
 
 3. **Android notification permission (Android 13+)**  
-   The app requests permission at runtime. If you previously denied, go to **Settings → Apps → SavannaFX → Notifications** and turn them on, then restart the app and log in again.
+   The app requests permission at runtime. If you previously denied, go to **Settings → Apps → AllyTZ Panel → Notifications** and turn them on, then restart the app and log in again.
 
 4. **FCM credentials (Android)**  
    For a dev/production build to get a token, EAS must have FCM V1 credentials. In [Expo dashboard](https://expo.dev) → your project → Credentials → Android → add the FCM V1 service account key. Without it, `getExpoPushTokenAsync` can fail.
@@ -318,7 +318,7 @@ If you only uploaded the **service account key** to EAS Credentials, that’s co
 
 EAS only uploads files **tracked by git**. File-type environment variables (e.g. `GOOGLE_SERVICES_JSON`) set as **Secret** are **not** available when `app.config.js` runs, so the path is never set and the build still fails. The reliable fix is to commit the file.
 
-1. **Download** the correct file: [Firebase Console](https://console.firebase.google.com) → your project → **Project settings** (gear) → **General** → under “Your apps” select your **Android** app (package `com.savannafx.mobile`) → **Download google-services.json**. (If you don’t have an Android app, add one with that package name first.)
+1. **Download** the correct file: [Firebase Console](https://console.firebase.google.com) → your project → **Project settings** (gear) → **General** → under “Your apps” select your **Android** app (package `com.allytz.panel`) → **Download google-services.json**. (If you don’t have an Android app, add one with that package name first.)
 2. **Put** the downloaded file in the **`mobile/`** directory and name it exactly **`google-services.json`** (next to `app.json`).
 3. **Commit and push** so EAS can upload it:
    ```bash

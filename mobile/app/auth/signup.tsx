@@ -56,7 +56,7 @@ export default function SignupScreen() {
       if (!reachable) {
         Alert.alert(
           'Connection problem',
-          'SavannaFX could not reach the server. Check Wi‑Fi or cellular data, turn off VPN if you use one, then try again.'
+          'AllyTZ Panel could not reach the server. Check Wi‑Fi or cellular data, turn off VPN if you use one, then try again.'
         );
         return;
       }
@@ -140,7 +140,7 @@ export default function SignupScreen() {
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Create Account</Text>
-            <Text style={styles.headerSubtitle}>Join SavannaFX and start trading</Text>
+            <Text style={styles.headerSubtitle}>Join AllyTZ Panel and start trading</Text>
           </View>
 
           {/* Full Name Input */}

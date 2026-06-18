@@ -8,9 +8,9 @@ import { router } from 'expo-router';
 export default function AboutScreen() {
   const handleContactPress = (type: 'email' | 'phone' | 'website') => {
     const urls = {
-      email: 'mailto:info@savannafx.co',
+      email: 'mailto:info@allytz.co',
       phone: 'tel:+255716885996',
-      website: 'https://www.savannafx.co',
+      website: 'https://www.allytz.co',
     };
     Linking.openURL(urls[type]);
   };
@@ -25,7 +25,7 @@ export default function AboutScreen() {
         >
           <ChevronLeft size={24} color={Colors.gold} strokeWidth={2} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>About SavannaFX</Text>
+        <Text style={styles.headerTitle}>About AllyTZ Panel</Text>
         <View style={styles.headerPlaceholder} />
       </View>
 
@@ -39,7 +39,7 @@ export default function AboutScreen() {
           <View style={styles.logoCircle}>
             <TrendingUp size={64} color={Colors.gold} strokeWidth={2} />
           </View>
-          <Text style={styles.appName}>SavannaFX</Text>
+          <Text style={styles.appName}>AllyTZ Panel</Text>
           <Text style={styles.tagline}>PIPS HUNTING</Text>
         </View>
 
@@ -47,7 +47,7 @@ export default function AboutScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Our Mission</Text>
           <Text style={styles.paragraph}>
-            SavannaFX is dedicated to empowering traders across Africa and beyond with world-class forex education, trading signals, and comprehensive market analysis. We believe that with the right knowledge and tools, anyone can master the art of trading.
+            AllyTZ Panel is dedicated to empowering traders across Africa and beyond with world-class forex education, trading signals, and comprehensive market analysis. We believe that with the right knowledge and tools, anyone can master the art of trading.
           </Text>
         </View>
 
@@ -106,7 +106,7 @@ export default function AboutScreen() {
 
         {/* Why Choose Us */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Why Choose SavannaFX?</Text>
+          <Text style={styles.sectionTitle}>Why Choose AllyTZ Panel?</Text>
           <View style={styles.statCard}>
             <Text style={styles.statNumber}>5+</Text>
             <Text style={styles.statLabel}>Years of Experience</Text>
@@ -134,7 +134,7 @@ export default function AboutScreen() {
             </View>
             <View style={styles.contactContent}>
               <Text style={styles.contactLabel}>Email</Text>
-              <Text style={styles.contactValue}>info@savannafx.co</Text>
+              <Text style={styles.contactValue}>info@allytz.co</Text>
             </View>
           </TouchableOpacity>
 
@@ -170,7 +170,7 @@ export default function AboutScreen() {
             </View>
             <View style={styles.contactContent}>
               <Text style={styles.contactLabel}>Website</Text>
-              <Text style={styles.contactValue}>www.savannafx.co</Text>
+              <Text style={styles.contactValue}>www.allytz.co</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -178,7 +178,7 @@ export default function AboutScreen() {
         {/* Footer */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            © 2026 SavannaFX. All rights reserved.
+            © 2026 AllyTZ Panel. All rights reserved.
           </Text>
           <Text style={styles.versionText}>Version 1.0.0</Text>
         </View>

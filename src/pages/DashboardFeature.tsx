@@ -4,7 +4,7 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { PageTransition, ScrollReveal, fadeInUp, HoverScale } from "@/lib/animations";
 import { motion } from "framer-motion";
@@ -24,7 +24,7 @@ const DashboardFeature: React.FC = () => {
       <DashboardLayout>
         <ScrollReveal>
           <HoverScale>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6 space-y-3">
                 <motion.h2
                   initial="hidden"
@@ -56,7 +56,7 @@ const DashboardFeature: React.FC = () => {
                   <Button className="bg-gradient-to-r from-gold-dark to-gold text-cursed-black hover:shadow-lg hover:shadow-gold/20 font-semibold">Open Tool</Button>
                 </motion.div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </HoverScale>
         </ScrollReveal>
       </DashboardLayout>

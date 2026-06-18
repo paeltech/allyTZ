@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -786,7 +786,7 @@ const AdminSignals: React.FC = () => {
     <PageTransition>
       <DashboardLayout>
         {/* Header with Stats */}
-        <SavannaCard className="mb-6">
+        <PanelCard className="mb-6">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
@@ -839,7 +839,7 @@ const AdminSignals: React.FC = () => {
               </div>
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -881,7 +881,7 @@ const AdminSignals: React.FC = () => {
             </div>
             {/* Signals Table */}
             <ScrollReveal>
-              <SavannaCard className="mb-6">
+              <PanelCard className="mb-6">
                 <CardContent className="p-6">
                   <h2 className="text-slate-200 font-medium mb-4">All Signals</h2>
                   {signalsLoading ? (
@@ -978,7 +978,7 @@ const AdminSignals: React.FC = () => {
                     </div>
                   )}
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </ScrollReveal>
 
           </TabsContent>
@@ -987,7 +987,7 @@ const AdminSignals: React.FC = () => {
           <TabsContent value="subscriptions" className="space-y-6" forceMount hidden={activeTab !== "subscriptions"}>
 
             {/* Pricing Configuration */}
-            <SavannaCard className="mb-6">
+            <PanelCard className="mb-6">
               <CardContent className="p-6">
                 <h2 className="text-xl font-semibold text-white mb-4">Pricing Configuration</h2>
                 {pricingLoading ? (
@@ -1040,10 +1040,10 @@ const AdminSignals: React.FC = () => {
                   </div>
                 )}
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
 
             {/* Subscriptions Table */}
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <h2 className="text-xl font-semibold text-white mb-4">Recent Subscriptions</h2>
                 {subscriptionsLoading ? (
@@ -1119,7 +1119,7 @@ const AdminSignals: React.FC = () => {
                   </div>
                 )}
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
 
             {/* Edit Pricing Dialog */}
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -1756,7 +1756,7 @@ const AdminSignals: React.FC = () => {
           {/* WhatsApp Groups Tab */}
           <TabsContent value="groups" className="space-y-6">
             <ScrollReveal>
-              <SavannaCard className="mb-6">
+              <PanelCard className="mb-6">
                 <CardContent className="p-6">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-slate-200 font-medium">WhatsApp Groups Management</h2>
@@ -1860,7 +1860,7 @@ const AdminSignals: React.FC = () => {
                     </div>
                   )}
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </ScrollReveal>
           </TabsContent>
         </Tabs>          </DashboardLayout>

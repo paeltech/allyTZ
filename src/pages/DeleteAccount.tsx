@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -144,7 +144,7 @@ const DeleteAccount: React.FC = () => {
   return (
     <PageTransition>
       <DashboardLayout>
-        <SavannaCard className="mb-6">
+        <PanelCard className="mb-6">
           <CardContent className="p-6">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 bg-red-500/10 rounded-lg">
@@ -292,14 +292,14 @@ const DeleteAccount: React.FC = () => {
                 it will be cancelled. If you have any outstanding payments or credits, please contact
                 support before deleting your account. For questions or concerns, please contact us
                 at{" "}
-                <a href="mailto:info@savannafx.co" className="text-gold hover:underline">
-                  info@savannafx.co
+                <a href="mailto:info@allytz.co" className="text-gold hover:underline">
+                  info@allytz.co
                 </a>
                 .
               </p>
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
       </DashboardLayout>
     </PageTransition>
   );

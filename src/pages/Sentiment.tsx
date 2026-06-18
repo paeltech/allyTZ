@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
@@ -213,7 +213,7 @@ const Sentiment: React.FC = () => {
       <DashboardLayout>
         {/* Header */}
         <ScrollReveal>
-          <SavannaCard className="mb-6">
+          <PanelCard className="mb-6">
             <CardContent className="p-6">
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div>
@@ -237,13 +237,13 @@ const Sentiment: React.FC = () => {
                 </Button>
               </div>
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         </ScrollReveal>
 
         {/* Table Error Message */}
         {tableError && (
           <ScrollReveal>
-            <SavannaCard className="mb-6 border-yellow-600/50 bg-yellow-900/20">
+            <PanelCard className="mb-6 border-yellow-600/50 bg-yellow-900/20">
               <CardContent className="p-6">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-lg bg-yellow-600/20 flex items-center justify-center shrink-0">
@@ -274,7 +274,7 @@ const Sentiment: React.FC = () => {
                   </div>
                 </div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
         )}
 
@@ -284,7 +284,7 @@ const Sentiment: React.FC = () => {
             <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <motion.div variants={fadeInUp}>
                 <HoverScale>
-                  <SavannaCard>
+                  <PanelCard>
                     <CardContent className="p-6">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center">
@@ -296,12 +296,12 @@ const Sentiment: React.FC = () => {
                         </div>
                       </div>
                     </CardContent>
-                  </SavannaCard>
+                  </PanelCard>
                 </HoverScale>
               </motion.div>
               <motion.div variants={fadeInUp}>
                 <HoverScale>
-                  <SavannaCard>
+                  <PanelCard>
                     <CardContent className="p-6">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg bg-teal-600/20 flex items-center justify-center">
@@ -313,12 +313,12 @@ const Sentiment: React.FC = () => {
                         </div>
                       </div>
                     </CardContent>
-                  </SavannaCard>
+                  </PanelCard>
                 </HoverScale>
               </motion.div>
               <motion.div variants={fadeInUp}>
                 <HoverScale>
-                  <SavannaCard>
+                  <PanelCard>
                     <CardContent className="p-6">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center">
@@ -330,7 +330,7 @@ const Sentiment: React.FC = () => {
                         </div>
                       </div>
                     </CardContent>
-                  </SavannaCard>
+                  </PanelCard>
                 </HoverScale>
               </motion.div>
             </StaggerChildren>
@@ -340,7 +340,7 @@ const Sentiment: React.FC = () => {
         {/* Search and Filters */}
         {!tableError && (
           <ScrollReveal>
-            <SavannaCard className="mb-6">
+            <PanelCard className="mb-6">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4 flex-wrap">
                   <div className="relative flex-1 min-w-[200px]">
@@ -367,7 +367,7 @@ const Sentiment: React.FC = () => {
                   </Select>
                 </div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
         )}
 
@@ -384,7 +384,7 @@ const Sentiment: React.FC = () => {
               return (
                 <motion.div key={stats.pair} variants={fadeInUp}>
                   <HoverScale>
-                    <SavannaCard className="h-full flex flex-col">
+                    <PanelCard className="h-full flex flex-col">
                       <CardHeader className="pb-3">
                         <div className="flex items-center justify-between">
                           <CardTitle className="text-white text-lg">{stats.pair}</CardTitle>
@@ -536,7 +536,7 @@ const Sentiment: React.FC = () => {
                           )}
                         </div>
                       </CardContent>
-                    </SavannaCard>
+                    </PanelCard>
                   </HoverScale>
                 </motion.div>
               );
@@ -546,12 +546,12 @@ const Sentiment: React.FC = () => {
 
         {!tableError && filteredPairs.length === 0 && (
           <ScrollReveal>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-12 text-center">
                 <BarChart3 className="w-12 h-12 mx-auto mb-3 text-slate-500 opacity-50" />
                 <p className="text-slate-400">No polls match your search criteria.</p>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
         )}
       </DashboardLayout>

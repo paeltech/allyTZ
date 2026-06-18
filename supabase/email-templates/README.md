@@ -1,6 +1,6 @@
-# SavannaFX Email Templates
+# AllyTZ Panel Email Templates
 
-This directory contains email templates for SavannaFX authentication and transactional emails.
+This directory contains email templates for AllyTZ Panel authentication and transactional emails.
 
 ## Templates
 
@@ -10,11 +10,11 @@ This directory contains email templates for SavannaFX authentication and transac
 - `signup-confirmation.html` - HTML version with full styling
 - `signup-confirmation.txt` - Plain text fallback version
 
-**Purpose:** Sent to users when they sign up for a SavannaFX account to verify their email address.
+**Purpose:** Sent to users when they sign up for a AllyTZ Panel account to verify their email address.
 
 ## Design Features
 
-The email templates use the SavannaFX brand color scheme:
+The email templates use the AllyTZ Panel brand color scheme:
 
 - **Primary Gold:** `#F4C464` - Used for accents, buttons, and highlights
 - **Gold Light:** `#F5D085` - Used in gradients
@@ -102,7 +102,7 @@ To update colors, search and replace in the HTML file:
 
 Replace the logo URL in the header section:
 ```html
-<img src="{{ .SiteURL }}/assets/logo.png" alt="SavannaFX Logo" ... />
+<img src="{{ .SiteURL }}/assets/logo.png" alt="AllyTZ Panel Logo" ... />
 ```
 
 ### Modifying Content
@@ -124,5 +124,5 @@ Replace the logo URL in the header section:
 ## Support
 
 For issues or questions about email templates:
-- Contact: info@savannafx.co
+- Contact: info@allytz.co
 - Check Supabase documentation: https://supabase.com/docs/guides/auth/auth-email-templates

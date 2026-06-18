@@ -1,4 +1,4 @@
-# Testing the SavannaFX Mobile App
+# Testing the AllyTZ Panel Mobile App
 
 ## Quick Start
 
@@ -29,7 +29,7 @@ The home screen should display:
 - ✅ Header with profile icon and "Welcome back, Paul"
 - ✅ Notification bell with red badge
 - ✅ Trading Signal Card (XAUUSD with SELL button)
-- ✅ "Trade with Savanna" section with Signals and Analysis cards
+- ✅ "Trade with AllyTZ" section with Signals and Analysis cards
 - ✅ "LEARN THE CRAFT" section with three icons
 - ✅ "Tools of the game" section with four tool icons
 

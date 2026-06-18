@@ -4,7 +4,7 @@ import React from "react";
 import { useSupabaseSession } from "@/components/auth/SupabaseSessionProvider";
 import supabase from "@/integrations/supabase/client";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 
 const DebugAdmin: React.FC = () => {
@@ -69,18 +69,18 @@ const DebugAdmin: React.FC = () => {
   if (loading) {
     return (
       <DashboardLayout>
-        <SavannaCard>
+        <PanelCard>
           <CardContent className="p-6">
             <div className="text-center text-rainy-grey">Loading debug info...</div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
       </DashboardLayout>
     );
   }
 
   return (
     <DashboardLayout>
-      <SavannaCard>
+      <PanelCard>
         <CardContent className="p-6">
           <h1 className="text-2xl font-semibold text-white mb-4">Admin Debug Information</h1>
           <div className="space-y-4">
@@ -147,7 +147,7 @@ const DebugAdmin: React.FC = () => {
             </div>
           </div>
         </CardContent>
-      </SavannaCard>
+      </PanelCard>
     </DashboardLayout>
   );
 };

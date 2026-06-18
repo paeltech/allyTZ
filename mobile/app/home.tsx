@@ -281,9 +281,9 @@ export default function HomeScreen() {
           </View>
         )}
 
-        {/* Trade with Savanna Section */}
+        {/* Trade with AllyTZ Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Trade with Savanna</Text>
+          <Text style={styles.sectionTitle}>Trade with AllyTZ</Text>
           <Text style={styles.sectionSubtitle}>PIPS HUNTING</Text>
           <View style={styles.cardRow}>
             <TouchableOpacity 
@@ -318,6 +318,19 @@ export default function HomeScreen() {
             <View style={{ flex: 1, marginLeft: 4 }}>
               <Text style={[styles.featureTitle, { textAlign: 'left' }]}>Tips & Quotes</Text>
               <Text style={[styles.featureDescription, { textAlign: 'left' }]}>Daily trading wisdom and inspiration</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tipsWideCard, { marginTop: 10 }]}
+            onPress={() => router.push('/documents')}
+            activeOpacity={0.85}
+          >
+            <View style={[styles.featureIcon, styles.tipsWideIcon]}>
+              <FolderOpen size={16} color={Colors.gold} strokeWidth={2.5} />
+            </View>
+            <View style={{ flex: 1, marginLeft: 4 }}>
+              <Text style={[styles.featureTitle, { textAlign: 'left' }]}>Documents</Text>
+              <Text style={[styles.featureDescription, { textAlign: 'left' }]}>Guides and resources (view only)</Text>
             </View>
           </TouchableOpacity>
         </View>

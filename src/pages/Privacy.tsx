@@ -60,7 +60,7 @@ const Privacy: React.FC = () => {
             >
               <div className="bg-nero/50 rounded-lg p-6 sm:p-8 mb-8 border border-steel-wool/30">
                 <p className="text-rainy-grey leading-relaxed text-base sm:text-lg">
-                  At SavannaFX, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website, mobile application, and services. By using our services, you consent to the data practices described in this policy.
+                  At AllyTZ Panel, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website, mobile application, and services. By using our services, you consent to the data practices described in this policy.
                 </p>
               </div>
 
@@ -238,8 +238,8 @@ const Privacy: React.FC = () => {
                   </li>
                   <li>
                     <strong className="text-white">Contact Us:</strong> Email us at{" "}
-                    <a href="mailto:info@savannafx.co" className="text-gold hover:underline">
-                      info@savannafx.co
+                    <a href="mailto:info@allytz.co" className="text-gold hover:underline">
+                      info@allytz.co
                     </a>{" "}
                     for other data requests
                   </li>
@@ -302,7 +302,7 @@ const Privacy: React.FC = () => {
               <section className="mb-8">
                 <h2 className="text-2xl font-bold text-gold mb-4">11. Financial Services Disclaimer</h2>
                 <p className="text-rainy-grey leading-relaxed mb-4">
-                  SavannaFX provides educational information and trading signals for informational purposes only. We are not a financial advisor, and the information provided should not be considered as financial advice. Trading in financial markets involves substantial risk of loss and is not suitable for all investors. Always conduct your own research and consult with a qualified financial advisor before making any trading decisions.
+                  AllyTZ Panel provides educational information and trading signals for informational purposes only. We are not a financial advisor, and the information provided should not be considered as financial advice. Trading in financial markets involves substantial risk of loss and is not suitable for all investors. Always conduct your own research and consult with a qualified financial advisor before making any trading decisions.
                 </p>
               </section>
 
@@ -330,9 +330,9 @@ const Privacy: React.FC = () => {
                   If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
                 </p>
                 <div className="bg-nero/50 rounded-lg p-6 border border-steel-wool/30">
-                  <p className="text-white font-semibold mb-2">SavannaFX</p>
+                  <p className="text-white font-semibold mb-2">AllyTZ Panel</p>
                   <p className="text-rainy-grey mb-1">
-                    <strong className="text-white">Email:</strong> <a href="mailto:info@savannafx.co" className="text-gold hover:underline">info@savannafx.co</a>
+                    <strong className="text-white">Email:</strong> <a href="mailto:info@allytz.co" className="text-gold hover:underline">info@allytz.co</a>
                   </p>
                   <p className="text-rainy-grey mb-1">
                     <strong className="text-white">Phone:</strong> <a href="tel:+255716885996" className="text-gold hover:underline">+255716885996</a>
@@ -341,7 +341,7 @@ const Privacy: React.FC = () => {
                     <strong className="text-white">Location:</strong> Dar es salaam, Tanzania
                   </p>
                   <p className="text-rainy-grey">
-                    <strong className="text-white">Website:</strong> <a href="https://www.savannafx.co" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">www.savannafx.co</a>
+                    <strong className="text-white">Website:</strong> <a href="https://www.allytz.co" target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">www.allytz.co</a>
                   </p>
                 </div>
               </section>
@@ -349,7 +349,7 @@ const Privacy: React.FC = () => {
               {/* Consent Statement */}
               <div className="bg-nero/50 rounded-lg p-6 border border-steel-wool/30 mt-8">
                 <p className="text-rainy-grey leading-relaxed text-sm">
-                  By using SavannaFX's website, mobile application, and services, you consent to the collection and use of your information as described in this Privacy Policy. If you do not agree with this policy, please do not use our services.
+                  By using AllyTZ Panel's website, mobile application, and services, you consent to the collection and use of your information as described in this Privacy Policy. If you do not agree with this policy, please do not use our services.
                 </p>
               </div>
             </motion.div>

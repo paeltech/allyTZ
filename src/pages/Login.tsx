@@ -113,14 +113,14 @@ const Login: React.FC = () => {
         <div className="mb-8 text-center">
           <img 
             src="/assets/logo.png" 
-            alt="SavannaFX logo" 
+            alt="AllyTZ Panel logo" 
             className="w-32 mx-auto rounded-lg mb-6" 
           />
           <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 font-heading">
             Sign in
           </h1>
           <p className="text-sm sm:text-base text-rainy-grey">
-            Sign in to your SavannaFX account
+            Sign in to your AllyTZ Panel account
           </p>
         </div>
 

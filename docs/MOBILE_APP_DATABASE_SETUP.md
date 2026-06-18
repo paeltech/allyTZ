@@ -128,4 +128,4 @@ If you encounter any issues:
 ---
 
 **Last Updated**: January 15, 2026
-**Created By**: SavannaFX Development Team
+**Created By**: AllyTZ Panel Development Team

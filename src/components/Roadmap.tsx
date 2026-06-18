@@ -11,7 +11,7 @@ const steps = [
   { number: 1, title: "Sign Up Free", subtitle: "STEP 1" },
   { number: 2, title: "Learn Predator Mindset", subtitle: "STEP 2" },
   { number: 3, title: "Choose Your Pathway", subtitle: "STEP 3" },
-  { number: 4, title: "Join the Savanna Tribe", subtitle: "STEP 4" },
+  { number: 4, title: "Join the AllyTZ Community", subtitle: "STEP 4" },
   { number: 5, title: "Trade with Patience", subtitle: "STEP 5" },
 ];
 
@@ -140,7 +140,7 @@ const Roadmap: React.FC<RoadmapProps> = ({ onOpenSignup }) => {
                 whileTap={{ scale: 0.96 }}
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  Join the savannaFX tribe
+                  Join the AllyTZ Panel community
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
                 </span>
                 <motion.div

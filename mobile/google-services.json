@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "560845470415",
-    "project_id": "savannafx-8287f",
-    "storage_bucket": "savannafx-8287f.firebasestorage.app"
+    "project_id": "allytz-panel-8287f",
+    "storage_bucket": "allytz-panel-8287f.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:560845470415:android:1191102750654e944215ba",
         "android_client_info": {
-          "package_name": "com.savannafx.mobile"
+          "package_name": "com.allytz.panel"
         }
       },
       "oauth_client": [],

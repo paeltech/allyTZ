@@ -64,7 +64,7 @@ function getCurrentMonthYear(): string {
 // Create a new WhatsApp group via WaSender API
 async function createGroup(
     supabaseClient: any,
-    groupName: string = "SavannaFX - Monthly Subscribers",
+    groupName: string = "AllyTZ Panel - Monthly Subscribers",
     monthYear: string,
     groupNumber: number = 1
 ): Promise<any> {
@@ -462,7 +462,7 @@ async function getOrCreateActiveGroup(
     // Create new group
     const result = await createGroup(
         supabaseClient,
-        "SavannaFX - Monthly Subscribers",
+        "AllyTZ Panel - Monthly Subscribers",
         currentMonthYear,
         nextGroupNumber
     );
@@ -518,7 +518,7 @@ serve(async (req) => {
                 }
                 result = await createGroup(
                     supabaseClient,
-                    groupName || "SavannaFX - Monthly Subscribers",
+                    groupName || "AllyTZ Panel - Monthly Subscribers",
                     monthYear,
                     1
                 );

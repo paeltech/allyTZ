@@ -1,6 +1,6 @@
 npm run dev# Facebook WhatsApp Business API Setup Guide
 
-This guide will help you set up the Facebook WhatsApp Business API (Graph API) for sending WhatsApp notifications in SavannaFX.
+This guide will help you set up the Facebook WhatsApp Business API (Graph API) for sending WhatsApp notifications in AllyTZ Panel.
 
 ## Prerequisites
 
@@ -114,7 +114,7 @@ curl 'https://graph.facebook.com/v24.0/<PHONE_NUMBER_ID>/messages' \
     "type": "text",
     "text": {
       "preview_url": false,
-      "body": "Hello from SavannaFX!"
+      "body": "Hello from AllyTZ Panel!"
     }
   }'
 ```
@@ -160,7 +160,7 @@ supabase secrets set WHATSAPP_WEBHOOK_VERIFY_TOKEN=your_secure_random_token_here
 supabase secrets set WHATSAPP_WEBHOOK_APP_SECRET=your_app_secret_here
 ```
 
-**Example verify token**: `SavannaFX_Webhook_2024_Secret_Key_12345`
+**Example verify token**: `AllyTZPanel_Webhook_2024_Secret_Key_12345`
 
 **Note**: The App Secret is optional but recommended for production. It's used to verify webhook signatures.
 

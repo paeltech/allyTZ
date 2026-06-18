@@ -1,6 +1,6 @@
-🎯 SavannaFX Mobile v1.0.0 - Internal Testing Release
+🎯 AllyTZ Panel Mobile v1.0.0 - Internal Testing Release
 
-Welcome to the first internal testing release of SavannaFX Mobile!
+Welcome to the first internal testing release of AllyTZ Panel Mobile!
 
 ✨ KEY FEATURES:
 • Real-time trading signals with entry, stop loss, and take profit levels
@@ -23,7 +23,7 @@ Welcome to the first internal testing release of SavannaFX Mobile!
 • iOS version coming soon
 
 📝 FEEDBACK:
-Report issues to: info@savannafx.co
+Report issues to: info@allytz.co
 Include device model, Android version, and steps to reproduce.
 
 Thank you for testing! Your feedback helps us improve.

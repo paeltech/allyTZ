@@ -24,7 +24,7 @@ const services: Service[] = [
     icon: <Sparkles className="w-5 h-5" />,
   },
   {
-    title: "SavannaFX Academy",
+    title: "AllyTZ Panel Academy",
     price: "From $55",
     bullets: ["Hands-on training", "Live market sessions", "All skill levels"],
     cta: "Apply Now",

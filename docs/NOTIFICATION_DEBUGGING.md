@@ -11,7 +11,7 @@ Let's debug this step by step:
 ### Option A: Supabase Dashboard (Easiest)
 
 1. **Go to**: https://supabase.com/dashboard
-2. **Open**: Your SavannaFX project
+2. **Open**: Your AllyTZ Panel project
 3. **Navigate**: Table Editor → Look for `notifications` table
 4. **If table exists** ✅ - Migration applied
 5. **If table missing** ❌ - Need to apply migration
@@ -22,7 +22,7 @@ If table doesn't exist, apply the migration:
 
 ```bash
 # Using Supabase CLI
-cd /Users/paulmandele/Desktop/Dev.nosync/SavannaFX
+cd /Users/paulmandele/Desktop/Dev.nosync/allyTZ_panel
 
 # Check migration status
 supabase migration list

@@ -35,7 +35,7 @@ Chrome on Android requires **ALL** of these conditions to show the install promp
 1. Go to Chrome menu (⋮) → Settings → Site settings → All sites
 2. Find your site
 3. Check if "Installed app" shows
-4. Or go to Android Settings → Apps → Look for "SavannaFX"
+4. Or go to Android Settings → Apps → Look for "AllyTZ Panel"
 
 **Solution**: Uninstall the app first, then try again
 
@@ -76,7 +76,7 @@ Even if the auto-prompt doesn't appear, users can ALWAYS install manually:
 2. **Look for one of these options**:
    - "Add to Home screen" ⬅️ Most common
    - "Install app"
-   - "Install SavannaFX"
+   - "Install AllyTZ Panel"
 3. **Tap it** → Confirm → Done! ✅
 
 The app will appear on home screen like a native app.
@@ -184,8 +184,8 @@ Open Chrome DevTools on your Android device:
 Once installed successfully:
 
 ### Android Home Screen
-- ✅ SavannaFX icon (your gold logo)
-- ✅ App name: "SavannaFX"
+- ✅ AllyTZ Panel icon (your gold logo)
+- ✅ App name: "AllyTZ Panel"
 - ✅ Looks like native app
 
 ### When Opening App
@@ -221,7 +221,7 @@ netlify deploy --prod --dir=dist
 6. Chrome menu (⋮) → "Add to Home screen"
 
 ### Step 3: Verify Installation
-1. Check home screen → SavannaFX icon should appear
+1. Check home screen → AllyTZ Panel icon should appear
 2. Tap icon → App opens full-screen
 3. Test offline: Turn off wifi → App should still load
 4. Test shortcuts: Long-press icon → See Signals/Dashboard

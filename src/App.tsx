@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import DashboardOrRedirectAdmin from "@/components/auth/DashboardOrRedirectAdmin";
 import DashboardFeature from "./pages/DashboardFeature";
-import TradeWithSavanna from "./pages/TradeWithSavanna";
+import TradeWithAllyTZ from "./pages/TradeWithAllyTZ";
 import Signals from "./pages/Signals";
 import CoursePage from "./pages/Course";
 import OneOnOne from "./pages/OneOnOne";
@@ -38,6 +38,8 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import AdminEvents from "./pages/admin/AdminEvents";
 import AdminSignals from "./pages/admin/AdminSignals";
 import AdminTips from "./pages/admin/AdminTips";
+import AdminDocuments from "./pages/admin/AdminDocuments";
+import Documents from "./pages/Documents";
 import DebugAdmin from "./pages/DebugAdmin";
 
 const queryClient = new QueryClient();
@@ -57,7 +59,7 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="/dashboard" element={<RequireAuth><DashboardOrRedirectAdmin /></RequireAuth>} />
-            <Route path="/dashboard/trade-with-savanna" element={<RequireAuth><TradeWithSavanna /></RequireAuth>} />
+            <Route path="/dashboard/trade-with-allytz" element={<RequireAuth><TradeWithAllyTZ /></RequireAuth>} />
             <Route path="/dashboard/signals" element={<RequireAuth><Signals /></RequireAuth>} />
             <Route path="/dashboard/course" element={<RequireAuth><CoursePage /></RequireAuth>} />
             <Route path="/dashboard/one-on-one" element={<RequireAuth><OneOnOne /></RequireAuth>} />
@@ -68,6 +70,8 @@ const App = () => (
             <Route path="/dashboard/lot-size" element={<RequireAuth><LotSize /></RequireAuth>} />
             <Route path="/dashboard/collaborations" element={<RequireAuth><Collaborations /></RequireAuth>} />
             <Route path="/dashboard/trade-analysis" element={<RequireAuth><TradeAnalysis /></RequireAuth>} />
+            <Route path="/dashboard/documents" element={<RequireAuth><Documents /></RequireAuth>} />
+            <Route path="/dashboard/resources" element={<RequireAuth><Documents /></RequireAuth>} />
             <Route path="/dashboard/notifications" element={<RequireAuth><Notifications /></RequireAuth>} />
             <Route path="/dashboard/notification-preferences" element={<RequireAuth><NotificationPreferences /></RequireAuth>} />
             <Route path="/dashboard/delete-account" element={<RequireAuth><DeleteAccount /></RequireAuth>} />
@@ -83,6 +87,7 @@ const App = () => (
             <Route path="/admin/events" element={<RequireAdmin><AdminEvents /></RequireAdmin>} />
             <Route path="/admin/signals" element={<RequireAdmin><AdminSignals /></RequireAdmin>} />
             <Route path="/admin/tips" element={<RequireAdmin><AdminTips /></RequireAdmin>} />
+            <Route path="/admin/documents" element={<RequireAdmin><AdminDocuments /></RequireAdmin>} />
             <Route path="/debug-admin" element={<RequireAuth><DebugAdmin /></RequireAuth>} />
             <Route path="*" element={<NotFound />} />
           </Routes>

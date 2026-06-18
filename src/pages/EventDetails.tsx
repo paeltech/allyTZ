@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -170,12 +170,12 @@ const EventDetails: React.FC = () => {
     return (
       <PageTransition>
         <DashboardLayout>
-          <SavannaCard>
+          <PanelCard>
             <CardContent className="p-8 text-center">
               <Loader2 className="h-8 w-8 animate-spin text-gold mx-auto mb-4" />
               <p className="text-rainy-grey">Loading event details...</p>
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         </DashboardLayout>
       </PageTransition>
     );
@@ -185,7 +185,7 @@ const EventDetails: React.FC = () => {
     return (
       <PageTransition>
         <DashboardLayout>
-          <SavannaCard>
+          <PanelCard>
             <CardContent className="p-8 text-center">
               <XCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
               <h2 className="text-xl font-semibold text-white mb-2">Event Not Found</h2>
@@ -198,7 +198,7 @@ const EventDetails: React.FC = () => {
                 Back to Events
               </Button>
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         </DashboardLayout>
       </PageTransition>
     );
@@ -244,7 +244,7 @@ const EventDetails: React.FC = () => {
 
         {/* Event Header */}
         <ScrollReveal>
-          <SavannaCard className="mb-6">
+          <PanelCard className="mb-6">
             <CardContent className="p-6">
               <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                 <div className="flex-1">
@@ -263,7 +263,7 @@ const EventDetails: React.FC = () => {
                 </div>
               </div>
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -271,19 +271,19 @@ const EventDetails: React.FC = () => {
           <div className="lg:col-span-2 space-y-6">
             {/* Description */}
             <ScrollReveal>
-              <SavannaCard>
+              <PanelCard>
                 <CardContent className="p-6">
                   <h2 className="text-xl font-semibold text-white mb-4">About This Event</h2>
                   <p className="text-rainy-grey whitespace-pre-line leading-relaxed">
                     {event.description}
                   </p>
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </ScrollReveal>
 
             {/* Event Details */}
             <ScrollReveal>
-              <SavannaCard>
+              <PanelCard>
                 <CardContent className="p-6">
                   <h2 className="text-xl font-semibold text-white mb-4">Event Details</h2>
                   <div className="space-y-4">
@@ -329,7 +329,7 @@ const EventDetails: React.FC = () => {
                     )}
                   </div>
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </ScrollReveal>
           </div>
 
@@ -337,7 +337,7 @@ const EventDetails: React.FC = () => {
           <div className="space-y-6">
             {/* Registration Card */}
             <ScrollReveal>
-              <SavannaCard>
+              <PanelCard>
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div>
@@ -412,12 +412,12 @@ const EventDetails: React.FC = () => {
                     )}
                   </div>
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </ScrollReveal>
 
             {/* Quick Info */}
             <ScrollReveal>
-              <SavannaCard>
+              <PanelCard>
                 <CardContent className="p-6">
                   <h3 className="text-lg font-semibold text-white mb-4">Quick Info</h3>
                   <div className="space-y-3 text-sm">
@@ -441,7 +441,7 @@ const EventDetails: React.FC = () => {
                     </div>
                   </div>
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </ScrollReveal>
           </div>
         </div>

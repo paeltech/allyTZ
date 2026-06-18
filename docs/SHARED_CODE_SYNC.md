@@ -2,12 +2,12 @@
 
 ## Overview
 
-The SavannaFX project now uses a **monorepo structure** with shared code between the web and mobile applications. This ensures consistency and reduces duplication.
+The AllyTZ Panel project now uses a **monorepo structure** with shared code between the web and mobile applications. This ensures consistency and reduces duplication.
 
 ## Project Structure
 
 ```
-SavannaFX/
+allyTZ_panel/
 ├── src/                    # Web app (React + Vite)
 ├── mobile/                 # Mobile app (Expo + React Native)
 ├── shared/                 # Shared code used by both apps

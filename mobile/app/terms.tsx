@@ -33,12 +33,12 @@ export default function TermsScreen() {
 
         <Text style={styles.sectionTitle}>1. Acceptance of Terms</Text>
         <Text style={styles.paragraph}>
-          By accessing and using SavannaFX ("the Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these Terms & Conditions, please do not use the Service.
+          By accessing and using AllyTZ Panel ("the Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these Terms & Conditions, please do not use the Service.
         </Text>
 
         <Text style={styles.sectionTitle}>2. Description of Service</Text>
         <Text style={styles.paragraph}>
-          SavannaFX provides forex trading education, signals, analysis, and related content. We are an educational platform and do not provide financial advice. All content is for informational and educational purposes only.
+          AllyTZ Panel provides forex trading education, signals, analysis, and related content. We are an educational platform and do not provide financial advice. All content is for informational and educational purposes only.
         </Text>
 
         <Text style={styles.sectionTitle}>3. User Responsibilities</Text>
@@ -66,12 +66,12 @@ export default function TermsScreen() {
 
         <Text style={styles.sectionTitle}>6. Intellectual Property</Text>
         <Text style={styles.paragraph}>
-          All content, including but not limited to text, graphics, logos, images, and software, is the property of SavannaFX or its content suppliers and protected by international copyright laws.
+          All content, including but not limited to text, graphics, logos, images, and software, is the property of AllyTZ Panel or its content suppliers and protected by international copyright laws.
         </Text>
 
         <Text style={styles.sectionTitle}>7. Limitation of Liability</Text>
         <Text style={styles.paragraph}>
-          SavannaFX shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use the Service, including but not limited to trading losses.
+          AllyTZ Panel shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use the Service, including but not limited to trading losses.
         </Text>
 
         <Text style={styles.sectionTitle}>8. Account Termination</Text>
@@ -86,21 +86,21 @@ export default function TermsScreen() {
 
         <Text style={styles.sectionTitle}>10. Governing Law</Text>
         <Text style={styles.paragraph}>
-          These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which SavannaFX operates, without regard to its conflict of law provisions.
+          These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which AllyTZ Panel operates, without regard to its conflict of law provisions.
         </Text>
 
         <Text style={styles.sectionTitle}>11. Contact Information</Text>
         <Text style={styles.paragraph}>
           If you have any questions about these Terms, please contact us at:
         </Text>
-        <Text style={styles.contactInfo}>Email: info@savannafx.co</Text>
+        <Text style={styles.contactInfo}>Email: info@allytz.co</Text>
         <Text style={styles.contactInfo}>Phone: +255716885996</Text>
         <Text style={styles.contactInfo}>Location: Dar es salaam, Tanzania</Text>
-        <Text style={styles.contactInfo}>Website: www.savannafx.co</Text>
+        <Text style={styles.contactInfo}>Website: www.allytz.co</Text>
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            By using SavannaFX, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions.
+            By using AllyTZ Panel, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions.
           </Text>
         </View>
       </ScrollView>

@@ -1,7 +1,7 @@
 # Mobile Dashboard UI Improvements
 
 ## Overview
-Comprehensive mobile-first improvements to the SavannaFX dashboard, focusing on enhanced user experience, better touch interactions, and modern mobile UI patterns.
+Comprehensive mobile-first improvements to the AllyTZ Panel dashboard, focusing on enhanced user experience, better touch interactions, and modern mobile UI patterns.
 
 ## Implementation Date
 January 13, 2026
@@ -51,7 +51,7 @@ January 13, 2026
   - Transition effects on title hover
   - Enhanced card elevation on interaction
 
-#### SavannaCard Component:
+#### PanelCard Component:
 - **Improvements**:
   - Semi-transparent background with backdrop blur
   - Gold accent border on hover
@@ -148,7 +148,7 @@ button, a {
    - Added hover and active states
    - Better responsive typography
 
-3. **`src/components/dashboard/SavannaCard.tsx`**
+3. **`src/components/dashboard/PanelCard.tsx`**
    - Updated background with transparency and blur
    - Enhanced hover effects with gold accents
    - Improved shadow transitions

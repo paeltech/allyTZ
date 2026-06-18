@@ -3,7 +3,7 @@
 import React from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import {
   Handshake,
@@ -55,7 +55,7 @@ const BenefitItem = ({
   </motion.div>
 );
 
-const TradeWithSavanna: React.FC = () => {
+const TradeWithAllyTZ: React.FC = () => {
   const handleRegister = () => {
     showSuccess("Redirecting to broker registration…");
     // In a real app, replace with your broker referral link
@@ -69,7 +69,7 @@ const TradeWithSavanna: React.FC = () => {
       <DashboardLayout>
         {/* Header banner */}
         <ScrollReveal>
-          <SavannaCard className="mb-6">
+          <PanelCard className="mb-6">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
                 <motion.div
@@ -80,32 +80,32 @@ const TradeWithSavanna: React.FC = () => {
                   <Handshake className="text-white" size={18} />
                 </motion.div>
                 <h1 className="text-xl md:text-2xl font-semibold text-white">
-                  Trade With Savanna
+                  Trade With AllyTZ
                 </h1>
               </div>
               <p className="text-rainy-grey mt-2">
-                Open a real broker account with SavannaFX's referral link and get lifetime access to free signals.
+                Open a real broker account with AllyTZ Panel's referral link and get lifetime access to free signals.
               </p>
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         </ScrollReveal>
 
         {/* Main content: 2-column layout */}
         <div className="grid lg:grid-cols-[1fr_360px] gap-6">
         {/* Left: Info and benefits */}
-        <SavannaCard>
+        <PanelCard>
           <CardContent className="p-6">
             <div className="rounded-lg border border-steel-wool bg-nero/50 p-5">
               <div className="flex items-center gap-2 mb-3">
                 <Gift className="text-gold" size={18} />
                 <h2 className="text-white text-lg font-semibold">
-                  Trade with Savanna — Free (Lifetime Access)
+                  Trade with AllyTZ — Free (Lifetime Access)
                 </h2>
               </div>
               <div className="bg-nero rounded-md p-4">
                 <h3 className="text-white font-medium mb-1">Who this is for:</h3>
                 <p className="text-rainy-grey">
-                  Traders who want to join the SavannaFX ecosystem without paying upfront, and still get access to the full signal
+                  Traders who want to join the AllyTZ Panel ecosystem without paying upfront, and still get access to the full signal
                   experience — simply by funding their own live trading account.
                 </p>
               </div>
@@ -131,7 +131,7 @@ const TradeWithSavanna: React.FC = () => {
                   <BenefitItem
                     icon={Wrench}
                     title="Early Access to Tools"
-                    desc="Future bots, EAs, and strategy tools by SavannaFX."
+                    desc="Future bots, EAs, and strategy tools by AllyTZ Panel."
                   />
                   <BenefitItem
                     icon={Phone}
@@ -147,12 +147,12 @@ const TradeWithSavanna: React.FC = () => {
               </div>
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
         {/* Right: Signup panel */}
         <ScrollReveal>
           <HoverScale>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <div className="text-center">
                   <motion.div
@@ -199,17 +199,17 @@ const TradeWithSavanna: React.FC = () => {
                   </li>
                   <li className="flex items-start gap-2 text-rainy-grey">
                     <Wallet className="text-gold mt-0.5" size={16} />
-                    <span>Stay 100% Liquid — premium access while staying risk-free from SavannaFX's side</span>
+                    <span>Stay 100% Liquid — premium access while staying risk-free from AllyTZ Panel's side</span>
                   </li>
                   <li className="flex items-start gap-2 text-rainy-grey">
                     <Gift className="text-gold mt-0.5" size={16} />
-                    <span>Premium Experience — full SavannaFX ecosystem access without subscription fees</span>
+                    <span>Premium Experience — full AllyTZ Panel ecosystem access without subscription fees</span>
                   </li>
                 </ul>
               </div>
             </div>
           </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </HoverScale>
         </ScrollReveal>
       </div>
@@ -228,4 +228,4 @@ const TradeWithSavanna: React.FC = () => {
   );
 };
 
-export default TradeWithSavanna;
+export default TradeWithAllyTZ;

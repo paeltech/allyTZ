@@ -60,7 +60,7 @@ END $$;
 
 -- Verify email uniqueness constraint
 -- This query will show if there are any duplicate emails (should return 0 rows)
-SELECT email, COUNT(*) as count
+SELECT LOWER(email) AS email, COUNT(*) AS count
 FROM auth.users
 GROUP BY LOWER(email)
 HAVING COUNT(*) > 1;

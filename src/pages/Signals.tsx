@@ -3,7 +3,7 @@
 import React from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import {
   TrendingUp,
   SignalHigh,
@@ -130,7 +130,7 @@ const Signals: React.FC = () => {
       <DashboardLayout>
         <ScrollReveal>
           {/* Header Card */}
-          <SavannaCard className="mb-6">
+          <PanelCard className="mb-6">
             <CardContent className="p-6">
               <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
                 <div className="flex items-center gap-3">
@@ -330,7 +330,7 @@ const Signals: React.FC = () => {
                   </div>
                 )}
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
         </DashboardLayout>
       </PageTransition>

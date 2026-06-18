@@ -10,12 +10,12 @@ import { ArrowRight, HelpCircle } from "lucide-react";
 
 const FAQ: React.FC = () => {
   const items = [
-    { q: "WHO IS SavannaFX?", a: "A training tribe focused on discipline, patience, and survival in the markets." },
+    { q: "WHO IS AllyTZ Panel?", a: "A training tribe focused on discipline, patience, and survival in the markets." },
     { q: "What is forex trading?", a: "Trading currency pairs with strategies that reward skill, timing, and awareness." },
     { q: "Who is online forex trading for?", a: "Anyone willing to learn and apply a disciplined approach—predators, not gamblers." },
-    { q: "How does SavannaFX help your journey?", a: "We teach mindset and mechanics, provide community, signals, and mentorship." },
+    { q: "How does AllyTZ Panel help your journey?", a: "We teach mindset and mechanics, provide community, signals, and mentorship." },
     { q: "Where do I start?", a: "Begin training, choose your pathway, join the tribe, and practice patient execution." },
-    { q: "What does it take to join SavannaFX?", a: "Register, choose a plan, and commit to disciplined, adaptive learning." },
+    { q: "What does it take to join AllyTZ Panel?", a: "Register, choose a plan, and commit to disciplined, adaptive learning." },
   ];
 
   return (

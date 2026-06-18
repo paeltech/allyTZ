@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
@@ -259,7 +259,7 @@ const TradeAnalysis: React.FC = () => {
       <DashboardLayout>
         {/* Header */}
         <ScrollReveal>
-          <SavannaCard className="mb-6">
+          <PanelCard className="mb-6">
             <CardContent className="p-6">
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-3">
@@ -282,7 +282,7 @@ const TradeAnalysis: React.FC = () => {
                 </Badge>
               </div>
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         </ScrollReveal>
 
         {/* Tabs */}
@@ -308,7 +308,7 @@ const TradeAnalysis: React.FC = () => {
           <>
             {/* Selection Form */}
             <ScrollReveal>
-              <SavannaCard className="mb-6">
+              <PanelCard className="mb-6">
                 <CardContent className="p-6">
                   <h2 className="text-white font-semibold mb-4">Select Trading Pair & Date</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -356,13 +356,13 @@ const TradeAnalysis: React.FC = () => {
                     </div>
                   </div>
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </ScrollReveal>
 
             {/* Available Analyses */}
             {selectedPair && selectedDate && (
               <ScrollReveal>
-                <SavannaCard>
+                <PanelCard>
                   <CardContent className="p-6">
                     <h2 className="text-white font-semibold mb-4">
                       Available Analysis for {TRADING_PAIRS.find((p) => p.value === selectedPair)?.label} - {format(selectedDate, "MMM dd, yyyy")}
@@ -380,7 +380,7 @@ const TradeAnalysis: React.FC = () => {
                         {availableAnalyses.map((analysis) => (
                           <motion.div key={analysis.id} variants={fadeInUp}>
                             <HoverScale>
-                              <SavannaCard className="border-slate-800">
+                              <PanelCard className="border-slate-800">
                                 <CardContent className="p-6">
                                   <div className="flex items-start justify-between gap-4">
                                     <div className="flex-1">
@@ -421,14 +421,14 @@ const TradeAnalysis: React.FC = () => {
                                     </Button>
                                   </div>
                                 </CardContent>
-                              </SavannaCard>
+                              </PanelCard>
                             </HoverScale>
                           </motion.div>
                         ))}
                       </div>
                     )}
                   </CardContent>
-                </SavannaCard>
+                </PanelCard>
               </ScrollReveal>
             )}
           </>
@@ -437,7 +437,7 @@ const TradeAnalysis: React.FC = () => {
         {/* My Analyses Tab */}
         {activeTab === "my-analyses" && (
           <ScrollReveal>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <h2 className="text-white font-semibold mb-4">Your Purchased Analyses</h2>
                 {isLoading ? (
@@ -455,7 +455,7 @@ const TradeAnalysis: React.FC = () => {
                       return (
                         <motion.div key={purchase.id} variants={fadeInUp}>
                           <HoverScale>
-                            <SavannaCard className="border-slate-800">
+                            <PanelCard className="border-slate-800">
                               <CardContent className="p-6">
                                 <div className="flex items-start justify-between gap-4 mb-4">
                                   <div className="flex-1">
@@ -556,7 +556,7 @@ const TradeAnalysis: React.FC = () => {
                                   </div>
                                 )}
                               </CardContent>
-                            </SavannaCard>
+                            </PanelCard>
                           </HoverScale>
                         </motion.div>
                       );
@@ -564,7 +564,7 @@ const TradeAnalysis: React.FC = () => {
                   </div>
                 )}
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
         )}
       </DashboardLayout>

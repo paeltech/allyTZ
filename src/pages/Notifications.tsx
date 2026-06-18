@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bell, Check, Trash2, Filter, Inbox } from "lucide-react";
@@ -47,7 +47,7 @@ const Notifications: React.FC = () => {
     <PageTransition>
       <DashboardLayout>
         {/* Header */}
-        <SavannaCard className="mb-6">
+        <PanelCard className="mb-6">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -74,10 +74,10 @@ const Notifications: React.FC = () => {
               )}
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
         {/* Filters */}
-        <SavannaCard className="mb-6">
+        <PanelCard className="mb-6">
           <CardContent className="p-4">
             <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as typeof activeTab)}>
               <TabsList className="bg-nero border border-steel-wool w-full justify-start overflow-x-auto">
@@ -105,10 +105,10 @@ const Notifications: React.FC = () => {
               </TabsList>
             </Tabs>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
         {/* Notifications List */}
-        <SavannaCard>
+        <PanelCard>
           <CardContent className="p-6">
             {isLoading ? (
               <div className="flex items-center justify-center h-64">
@@ -151,7 +151,7 @@ const Notifications: React.FC = () => {
               </div>
             )}
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
       </DashboardLayout>
     </PageTransition>
   );

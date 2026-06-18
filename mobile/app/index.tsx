@@ -42,7 +42,7 @@ export default function IndexScreen() {
         <View style={styles.logoCircle}>
           <Text style={styles.logoText}>S</Text>
         </View>
-        <Text style={styles.appName}>SavannaFX</Text>
+        <Text style={styles.appName}>AllyTZ Panel</Text>
         <Text style={styles.tagline}>PIPS HUNTING</Text>
         <ActivityIndicator size="large" color={Colors.gold} style={{ marginTop: 24 }} />
           </View>

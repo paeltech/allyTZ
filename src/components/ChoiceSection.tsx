@@ -67,8 +67,8 @@ const ChoiceSection: React.FC<ChoiceSectionProps> = ({ onOpenSignup }) => {
                 }`}
                 onClick={() => setSelected("forex")}
               >
-                <span className="hidden sm:inline">The SavannaFX Path</span>
-                <span className="sm:hidden">SavannaFX</span>
+                <span className="hidden sm:inline">The AllyTZ Panel Path</span>
+                <span className="sm:hidden">AllyTZ Panel</span>
               </button>
             </div>
           </div>
@@ -147,7 +147,7 @@ const ChoiceSection: React.FC<ChoiceSectionProps> = ({ onOpenSignup }) => {
                   >
                     <Rocket className="text-gold flex-shrink-0" size={18} />
                   </motion.div>
-                  <span>The SavannaFX Path</span>
+                  <span>The AllyTZ Panel Path</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2 sm:space-y-3 relative z-10">
@@ -163,7 +163,7 @@ const ChoiceSection: React.FC<ChoiceSectionProps> = ({ onOpenSignup }) => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.35 }}
                 >
-                  "Survive and thrive in the savanna—the market."
+                  "Survive and thrive in the markets with AllyTZ Panel."
                 </motion.p>
               </CardContent>
             </Card>

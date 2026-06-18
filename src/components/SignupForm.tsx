@@ -372,7 +372,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
         ) {
           // Email sending specific error
           showError(
-            "Unable to send confirmation email. Please check your email address and try again. If the problem persists, contact info@savannafx.co"
+            "Unable to send confirmation email. Please check your email address and try again. If the problem persists, contact info@allytz.co"
           );
           console.error("Email sending error:", error);
         } else {
@@ -493,7 +493,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
               Get Started
             </DialogTitle>
             <DialogDescription className="text-xs sm:text-sm text-rainy-grey">
-              Create your SavannaFX account
+              Create your AllyTZ Panel account
             </DialogDescription>
           </DialogHeader>
 

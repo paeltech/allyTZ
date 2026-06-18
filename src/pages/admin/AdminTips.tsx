@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -177,7 +177,7 @@ const AdminTips: React.FC = () => {
   return (
     <PageTransition>
       <DashboardLayout>
-        <SavannaCard className="mb-6">
+        <PanelCard className="mb-6">
           <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-lg bg-nero flex items-center justify-center border border-steel-wool">
@@ -198,9 +198,9 @@ const AdminTips: React.FC = () => {
               Add tip / quote
             </Button>
           </CardHeader>
-        </SavannaCard>
+        </PanelCard>
 
-        <SavannaCard>
+        <PanelCard>
           <CardContent className="p-4 sm:p-6">
             <div className="flex flex-col lg:flex-row gap-4 mb-6">
               <div className="relative flex-1">
@@ -319,7 +319,7 @@ const AdminTips: React.FC = () => {
               </div>
             )}
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogContent className="bg-nero border-steel-wool text-white max-w-lg max-h-[90vh] overflow-y-auto">

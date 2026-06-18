@@ -20,7 +20,7 @@ const courses: Course[] = [
   {
     id: 'beginner-masterclass',
     title: 'Comprehensive Beginner',
-    author: 'SavannaFX',
+    author: 'AllyTZ Panel',
     description: 'This is a comprehensive beginner course about everything you need to become a Trader.',
     level: 'Beginner',
     lessonsCount: 11,
@@ -29,7 +29,7 @@ const courses: Course[] = [
   {
     id: 'goat-strategy',
     title: 'The GOAT Strategy',
-    author: 'SavannaFX',
+    author: 'AllyTZ Panel',
     description: 'The GOAT Strategy is a high-level, confluence-driven trading approach designed for traders who prioritize accuracy over noise.',
     level: 'Advanced',
     lessonsCount: 20,

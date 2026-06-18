@@ -324,7 +324,7 @@ serve(async (req) => {
             // Create empty group for the month anyway
             const emptyGroup = await createGroup(
                 supabaseClient,
-                "SavannaFX - Monthly Subscribers",
+                "AllyTZ Panel - Monthly Subscribers",
                 currentMonthYear,
                 1
             );
@@ -366,7 +366,7 @@ serve(async (req) => {
             if (shouldCreateNewGroup) {
                 const emptyGroup = await createGroup(
                     supabaseClient,
-                    "SavannaFX - Monthly Subscribers",
+                    "AllyTZ Panel - Monthly Subscribers",
                     currentMonthYear,
                     1
                 );
@@ -431,7 +431,7 @@ serve(async (req) => {
             // Create first group
             currentGroup = await createGroup(
                 supabaseClient,
-                "SavannaFX - Monthly Subscribers",
+                "AllyTZ Panel - Monthly Subscribers",
                 currentMonthYear,
                 1
             );
@@ -498,7 +498,7 @@ serve(async (req) => {
                 } else {
                     currentGroup = await createGroup(
                         supabaseClient,
-                        "SavannaFX - Monthly Subscribers",
+                        "AllyTZ Panel - Monthly Subscribers",
                         currentMonthYear,
                         currentGroupNumber
                     );

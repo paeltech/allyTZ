@@ -22,7 +22,7 @@ Paste into “Reply to App Review” when you resubmit (edit version + build)
 --------------------------------------------------------------------------
 Guideline 2.1 — Information Needed (expired subscription demo)
 
-SavannaFX (this version) does not include in-app purchases or Apple subscription products. The binary does not implement StoreKit subscription flows. We do not require a subscription to use the app. Please use the demo account in App Review Information to sign in; no purchase or subscription restoration is needed. [If applicable: We have removed unused subscription products from App Store Connect.]
+AllyTZ Panel (this version) does not include in-app purchases or Apple subscription products. The binary does not implement StoreKit subscription flows. We do not require a subscription to use the app. Please use the demo account in App Review Information to sign in; no purchase or subscription restoration is needed. [If applicable: We have removed unused subscription products from App Store Connect.]
 
 Guideline 2.1(a) — Premium without purchase
 
@@ -41,4 +41,4 @@ Deploy Edge Function before testing production deletion:
 App Review Information → Notes: include screen recording showing signup/login → Profile → Delete Account → full deletion through confirmation.
 
 Example reply:
-SavannaFX supports permanent account deletion in the app under Profile → Delete Account. Users confirm by typing DELETE and receive a final confirmation dialog. Deletion removes the auth account and associated user data from our backend; it is not deactivation. A screen recording is attached in App Review Information.
+AllyTZ Panel supports permanent account deletion in the app under Profile → Delete Account. Users confirm by typing DELETE and receive a final confirmation dialog. Deletion removes the auth account and associated user data from our backend; it is not deactivation. A screen recording is attached in App Review Information.

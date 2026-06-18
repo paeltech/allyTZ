@@ -24,7 +24,7 @@ If you're getting a 404 error when trying to create WhatsApp groups, this could 
 
 1. **Create groups manually in WhatsApp:**
    - Open WhatsApp
-   - Create a new group named "SavannaFX - Monthly Subscribers"
+   - Create a new group named "AllyTZ Panel - Monthly Subscribers"
    - Add yourself as admin
    - Note the group JID (you can get this from WaSender dashboard or by sending a message to the group)
 
@@ -38,7 +38,7 @@ If you're getting a 404 error when trying to create WhatsApp groups, this could 
      member_count,
      is_active
    ) VALUES (
-     'SavannaFX - Monthly Subscribers',
+     'AllyTZ Panel - Monthly Subscribers',
      'YOUR_GROUP_JID_HERE',
      1,
      '2026-01',  -- Current month in YYYY-MM format

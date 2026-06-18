@@ -3,7 +3,7 @@
 import React from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import DashboardTile from "../components/dashboard/DashboardTile.tsx";
 import { useSupabaseSession } from "@/components/auth/SupabaseSessionProvider";
 import supabase from "@/integrations/supabase/client";
@@ -154,7 +154,7 @@ const AdminDashboard: React.FC = () => {
   return (
     <PageTransition>
       <DashboardLayout>
-        <SavannaCard className="mb-6 sm:mb-8">
+        <PanelCard className="mb-6 sm:mb-8">
           <CardContent className="p-4 sm:p-6 md:p-8">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
               Admin Dashboard 👨‍💼
@@ -163,25 +163,25 @@ const AdminDashboard: React.FC = () => {
               Welcome back, {firstName}. Manage all platform activities from here.
             </p>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
         {/* Statistics Cards */}
         {isLoading ? (
           <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-6">
             {[...Array(4)].map((_, i) => (
-              <SavannaCard key={i}>
+              <PanelCard key={i}>
                 <CardContent className="p-4">
                   <div className="animate-pulse">
                     <div className="h-4 bg-nero rounded w-3/4 mb-2"></div>
                     <div className="h-8 bg-nero rounded w-1/2"></div>
                   </div>
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             ))}
           </div>
         ) : (
           <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mb-6">
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -194,9 +194,9 @@ const AdminDashboard: React.FC = () => {
                   <MessageSquare className="text-gold" size={32} />
                 </div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
 
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -211,9 +211,9 @@ const AdminDashboard: React.FC = () => {
                   <Handshake className="text-gold" size={32} />
                 </div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
 
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -228,9 +228,9 @@ const AdminDashboard: React.FC = () => {
                   <FileText className="text-gold" size={32} />
                 </div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
 
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -243,7 +243,7 @@ const AdminDashboard: React.FC = () => {
                   <ShoppingCart className="text-gold" size={32} />
                 </div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </div>
         )}
 
@@ -311,6 +311,13 @@ const AdminDashboard: React.FC = () => {
             description="Daily tips for mobile and push rotation"
             Icon={Lightbulb}
             iconBg="bg-amber-700"
+          />
+          <DashboardTile
+            to="/admin/documents"
+            title="Documents"
+            description="Upload and manage view-only resources"
+            Icon={FileText}
+            iconBg="bg-slate-700"
           />
         </div>
       </DashboardLayout>

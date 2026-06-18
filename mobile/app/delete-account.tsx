@@ -71,7 +71,7 @@ export default function DeleteAccountScreen() {
       );
     } catch (e) {
       console.error('Account deletion error:', e);
-      Alert.alert('Error', 'Something went wrong. Please try again or email info@savannafx.co.');
+      Alert.alert('Error', 'Something went wrong. Please try again or email info@allytz.co.');
     } finally {
       setIsDeleting(false);
     }
@@ -124,7 +124,7 @@ export default function DeleteAccountScreen() {
           <View style={styles.titleCol}>
             <Text style={styles.title}>Permanent account deletion</Text>
             <Text style={styles.subtitle}>
-              This removes your SavannaFX account and data from our systems. It is not a temporary deactivation.
+              This removes your AllyTZ Panel account and data from our systems. It is not a temporary deactivation.
             </Text>
           </View>
         </View>
@@ -143,7 +143,7 @@ export default function DeleteAccountScreen() {
         <View style={styles.infoCard}>
           <Shield size={20} color={Colors.gold} strokeWidth={2} />
           <Text style={styles.infoText}>
-            Deletion is completed in this app. You do not need to email support to finish. Optional feedback below is only used to improve SavannaFX.
+            Deletion is completed in this app. You do not need to email support to finish. Optional feedback below is only used to improve AllyTZ Panel.
           </Text>
         </View>
 
@@ -210,7 +210,7 @@ export default function DeleteAccountScreen() {
         </TouchableOpacity>
 
         <Text style={styles.footerNote}>
-          Questions? Contact info@savannafx.co before deleting if you need help.
+          Questions? Contact info@allytz.co before deleting if you need help.
         </Text>
       </ScrollView>
     </SafeAreaView>

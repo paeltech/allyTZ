@@ -17,7 +17,7 @@ import { Colors } from '../../../shared/constants/colors';
 import { Mail } from 'lucide-react-native';
 
 // Redirect URL for password reset email. Add this exact URL to Supabase Auth > URL Configuration > Redirect URLs.
-const PASSWORD_RESET_REDIRECT_URL = 'savannafx://auth/reset-password';
+const PASSWORD_RESET_REDIRECT_URL = 'allytz-panel://auth/reset-password';
 
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');

@@ -74,7 +74,7 @@ function formatSignalMessage(signal: SignalData): string {
 
     // Footer with link
     message += `\n_Login to the dashboard to view the full signal details with SL and bonus TPs_\n`;
-    message += `\n🔗 https://savannaFX.co/dashboard/signals\n`;
+    message += `\n🔗 https://allytz.co/dashboard/signals\n`;
     message += `\n_Trade responsibly. Manage your risk._`;
 
     return message;

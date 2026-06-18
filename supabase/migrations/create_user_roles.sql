@@ -122,8 +122,12 @@ SELECT create_admin_policies();
 DROP FUNCTION IF EXISTS create_admin_policies();
 
 
-   INSERT INTO user_roles (user_id, role) 
-   VALUES ('b7a990b7-4a53-487c-8627-dd6069741bae', 'admin');
-
-   INSERT INTO user_roles (user_id, role) 
-   VALUES ('9c9c64d9-63c9-4257-bf40-43b75543f715', 'admin');
+-- Seed admin roles only when those auth users exist (safe for fresh projects)
+INSERT INTO user_roles (user_id, role)
+SELECT u.id, 'admin'
+FROM auth.users u
+WHERE u.id IN (
+  'b7a990b7-4a53-487c-8627-dd6069741bae'::uuid,
+  '9c9c64d9-63c9-4257-bf40-43b75543f715'::uuid
+)
+ON CONFLICT (user_id) DO UPDATE SET role = EXCLUDED.role;

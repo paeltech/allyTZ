@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { BarChart3, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import supabase from "@/integrations/supabase/client";
@@ -109,7 +109,7 @@ const AdminSentiment: React.FC = () => {
   return (
     <PageTransition>
       <DashboardLayout>
-        <SavannaCard className="mb-6">
+        <PanelCard className="mb-6">
           <CardContent className="p-6">
             <div className="flex items-center gap-3 mb-4">
               <BarChart3 className="text-gold" size={24} />
@@ -122,7 +122,7 @@ const AdminSentiment: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <SavannaCard>
+              <PanelCard>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
@@ -132,8 +132,8 @@ const AdminSentiment: React.FC = () => {
                     <BarChart3 className="text-gold" size={32} />
                   </div>
                 </CardContent>
-              </SavannaCard>
-              <SavannaCard>
+              </PanelCard>
+              <PanelCard>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
@@ -143,8 +143,8 @@ const AdminSentiment: React.FC = () => {
                     <TrendingUp className="text-green-500" size={32} />
                   </div>
                 </CardContent>
-              </SavannaCard>
-              <SavannaCard>
+              </PanelCard>
+              <PanelCard>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
@@ -154,8 +154,8 @@ const AdminSentiment: React.FC = () => {
                     <TrendingDown className="text-red-500" size={32} />
                   </div>
                 </CardContent>
-              </SavannaCard>
-              <SavannaCard>
+              </PanelCard>
+              <PanelCard>
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
@@ -165,13 +165,13 @@ const AdminSentiment: React.FC = () => {
                     <Minus className="text-gray-500" size={32} />
                   </div>
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             </div>
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <SavannaCard>
+          <PanelCard>
             <CardContent className="p-6">
               <h2 className="text-white font-semibold mb-4">Sentiment by Currency Pair</h2>
               {isLoading ? (
@@ -199,9 +199,9 @@ const AdminSentiment: React.FC = () => {
                 </ResponsiveContainer>
               )}
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
 
-          <SavannaCard>
+          <PanelCard>
             <CardContent className="p-6">
               <h2 className="text-white font-semibold mb-4">Overall Sentiment Distribution</h2>
               {isLoading ? (
@@ -236,10 +236,10 @@ const AdminSentiment: React.FC = () => {
                 </ResponsiveContainer>
               )}
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         </div>
 
-        <SavannaCard>
+        <PanelCard>
           <CardContent className="p-6">
             <h2 className="text-white font-semibold mb-4">Detailed Sentiment Breakdown</h2>
             {isLoading ? (
@@ -304,7 +304,7 @@ const AdminSentiment: React.FC = () => {
               </div>
             )}
           </CardContent>
-        </SavannaCard>
+        </PanelCard>
       </DashboardLayout>
     </PageTransition>
   );

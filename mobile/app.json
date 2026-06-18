@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "SavannaFX",
-    "slug": "savannafx",
+    "name": "AllyTZ Panel",
+    "slug": "allytz-panel",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": false,
-    "scheme": "savannafx",
+    "scheme": "allytz-panel",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -15,7 +15,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.savannafx.mobile",
+      "bundleIdentifier": "com.allytz.panel",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -27,7 +27,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.savannafx.mobile",
+      "package": "com.allytz.panel",
       "permissions": [
         "INTERNET",
         "ACCESS_NETWORK_STATE",
@@ -51,14 +51,14 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "6ccfee19-94ca-464c-9980-db2ef7024c27"
+        "projectId": "bcb886b6-7a39-4bd0-b2b0-fb0a9c160cb4"
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/6ccfee19-94ca-464c-9980-db2ef7024c27"
+      "url": "https://u.expo.dev/bcb886b6-7a39-4bd0-b2b0-fb0a9c160cb4"
     }
   }
 }

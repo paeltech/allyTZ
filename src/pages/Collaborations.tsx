@@ -3,7 +3,7 @@
 import React from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -102,7 +102,7 @@ const Collaborations: React.FC = () => {
         <div className="space-y-6">
           {/* Header */}
           <ScrollReveal>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <motion.div
                   initial="hidden"
@@ -116,17 +116,17 @@ const Collaborations: React.FC = () => {
                   <div>
                     <h1 className="text-2xl md:text-3xl font-semibold text-white">Collaborations</h1>
                     <p className="text-rainy-grey mt-1">
-                      Partner with SavannaFX. Let's explore opportunities to grow together and create value.
+                      Partner with AllyTZ Panel. Let's explore opportunities to grow together and create value.
                     </p>
                   </div>
                 </motion.div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
 
           {/* Collaboration Types Info */}
           <div className="grid md:grid-cols-3 gap-4">
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-nero flex items-center justify-center">
@@ -138,8 +138,8 @@ const Collaborations: React.FC = () => {
                   </div>
                 </div>
               </CardContent>
-            </SavannaCard>
-            <SavannaCard>
+            </PanelCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-nero flex items-center justify-center">
@@ -151,8 +151,8 @@ const Collaborations: React.FC = () => {
                   </div>
                 </div>
               </CardContent>
-            </SavannaCard>
-            <SavannaCard>
+            </PanelCard>
+            <PanelCard>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-nero flex items-center justify-center">
@@ -164,12 +164,12 @@ const Collaborations: React.FC = () => {
                   </div>
                 </div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </div>
 
           {/* Collaboration Form */}
           <ScrollReveal>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -354,12 +354,12 @@ const Collaborations: React.FC = () => {
                   </form>
                 </Form>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
 
           {/* Info Section */}
           <ScrollReveal>
-            <SavannaCard>
+            <PanelCard>
               <CardContent className="p-6">
                 <motion.div
                   initial="hidden"
@@ -367,7 +367,7 @@ const Collaborations: React.FC = () => {
                   variants={fadeInUp}
                   className="space-y-4"
                 >
-                  <h3 className="text-lg font-semibold text-white">Why Collaborate with SavannaFX?</h3>
+                  <h3 className="text-lg font-semibold text-white">Why Collaborate with AllyTZ Panel?</h3>
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <div className="flex items-start gap-3">
@@ -416,7 +416,7 @@ const Collaborations: React.FC = () => {
                   </div>
                 </motion.div>
               </CardContent>
-            </SavannaCard>
+            </PanelCard>
           </ScrollReveal>
         </div>
       </DashboardLayout>

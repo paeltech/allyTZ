@@ -4,7 +4,7 @@ import React from "react";
 import DashboardLayout from "../components/dashboard/DashboardLayout.tsx";
 import EventCard, { EventItem } from "@/components/events/EventCard";
 import { CardContent } from "@/components/ui/card";
-import SavannaCard from "@/components/dashboard/SavannaCard";
+import PanelCard from "@/components/dashboard/PanelCard";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { showSuccess } from "@/utils/toast";
@@ -117,7 +117,7 @@ const EventsPage: React.FC = () => {
       <DashboardLayout>
         {/* Header */}
         <ScrollReveal>
-          <SavannaCard className="mb-6">
+          <PanelCard className="mb-6">
             <CardContent className="p-6">
               <div className="flex items-center justify-between flex-wrap gap-3">
                 <div>
@@ -128,7 +128,7 @@ const EventsPage: React.FC = () => {
                 </div>
               </div>
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         </ScrollReveal>
 
         {/* Filters */}
@@ -190,25 +190,25 @@ const EventsPage: React.FC = () => {
 
         {/* Event list */}
         {isLoading ? (
-          <SavannaCard>
+          <PanelCard>
             <CardContent className="p-6 text-center text-slate-400">
               <div className="w-12 h-12 border-4 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               Loading events...
             </CardContent>
-          </SavannaCard>
+          </PanelCard>
         ) : (
           <StaggerChildren className="grid grid-cols-1 gap-6">
             {filtered.map((ev) => (
               <EventCard key={ev.id} event={convertToEventItem(ev)} onView={handleView} onViewSessions={handleViewSessions} />
             ))}
             {filtered.length === 0 && (
-              <SavannaCard>
+              <PanelCard>
                 <CardContent className="p-6 text-center text-slate-400">
                   {events && events.length === 0
                     ? "No events available at the moment. Check back soon!"
                     : "No events match your filters."}
                 </CardContent>
-              </SavannaCard>
+              </PanelCard>
             )}
           </StaggerChildren>
         )}
