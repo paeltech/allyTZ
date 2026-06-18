@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { checkIsAdmin } from '../lib/admin';
 
 export function useIsAdmin() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -8,7 +9,7 @@ export function useIsAdmin() {
   useEffect(() => {
     let cancelled = false;
 
-    async function check() {
+    async function run() {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (!session?.user) {
@@ -16,16 +17,8 @@ export function useIsAdmin() {
           return;
         }
 
-        const { data, error } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', session.user.id)
-          .eq('role', 'admin')
-          .maybeSingle();
-
-        if (!cancelled) {
-          setIsAdmin(!error && !!data);
-        }
+        const admin = await checkIsAdmin(session.user.id);
+        if (!cancelled) setIsAdmin(admin);
       } catch {
         if (!cancelled) setIsAdmin(false);
       } finally {
@@ -33,9 +26,15 @@ export function useIsAdmin() {
       }
     }
 
-    void check();
+    void run();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+      void run();
+    });
+
     return () => {
       cancelled = true;
+      subscription.unsubscribe();
     };
   }, []);
 

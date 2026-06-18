@@ -65,9 +65,19 @@ export function usePushNotifications(userId: string | undefined) {
       // Optional: refresh in-app notification list or badge
     });
 
-    const response = Notifications.addNotificationResponseReceivedListener((response) => {
+    const response = Notifications.addNotificationResponseReceivedListener(async (response) => {
       const data = response.notification.request.content.data as Record<string, unknown> | null;
-      const route = getRouteFromPushData(data);
+      const { data: { session } } = await supabase.auth.getSession();
+      let isAdmin = false;
+      if (session?.user) {
+        const { data: roleRow } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+        isAdmin = roleRow?.role === 'admin';
+      }
+      const route = getRouteFromPushData(data, { isAdmin });
       if (route) router.push(route as never);
       const notificationId = data?.notification_id as string | undefined;
       if (notificationId) {
@@ -102,7 +112,17 @@ export async function handleInitialNotificationResponse(): Promise<void> {
   if (!response) return;
 
   const data = response.notification.request.content.data as Record<string, unknown> | null;
-  const route = getRouteFromPushData(data);
+  const { data: { session } } = await supabase.auth.getSession();
+  let isAdmin = false;
+  if (session?.user) {
+    const { data: roleRow } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', session.user.id)
+      .maybeSingle();
+    isAdmin = roleRow?.role === 'admin';
+  }
+  const route = getRouteFromPushData(data, { isAdmin });
   if (route) router.push(route as never);
   const notificationId = data?.notification_id as string | undefined;
   if (notificationId) {

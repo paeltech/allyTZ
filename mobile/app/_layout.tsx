@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { PushNotificationProvider } from '../components/PushNotificationProvider';
 import { UserEngagementProvider } from '../components/UserEngagementProvider';
+import { UserRouteGuard } from '../components/UserRouteGuard';
 import { recoverFromInvalidRefreshToken } from '../lib/supabase';
 
 // Keep splash screen visible while loading fonts
@@ -83,9 +84,11 @@ export default function RootLayout() {
         <QueryClientProvider client={queryClient}>
           <PushNotificationProvider>
           <UserEngagementProvider>
+          <UserRouteGuard>
           <View style={{ flex: 1, backgroundColor: '#000000' }}>
             <Stack screenOptions={screenOptions}>
               <Stack.Screen name="index" />
+              <Stack.Screen name="admin" />
               <Stack.Screen name="auth/login" options={{ animation: 'slide_from_right' }} />
               <Stack.Screen name="auth/signup" options={{ animation: 'slide_from_right' }} />
               <Stack.Screen name="auth/forgot-password" options={{ animation: 'slide_from_right' }} />
@@ -109,8 +112,10 @@ export default function RootLayout() {
               <Stack.Screen name="about" />
               <Stack.Screen name="faq" />
               <Stack.Screen name="tips" />
+              <Stack.Screen name="messages" options={{ animation: 'slide_from_right' }} />
             </Stack>
           </View>
+          </UserRouteGuard>
           </UserEngagementProvider>
           </PushNotificationProvider>
         </QueryClientProvider>

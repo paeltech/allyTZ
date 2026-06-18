@@ -2,9 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator, RefreshControl, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../shared/constants/colors';
-import { ChevronLeft, Bell, CheckCircle2, AlertCircle, Info, TrendingUp, Calendar, Lightbulb } from 'lucide-react-native';
+import { ChevronLeft, Bell, CheckCircle2, AlertCircle, Info, TrendingUp, Calendar, Lightbulb, MessageSquare } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { supabase } from '../lib/supabase';
+import { getMobileNotificationRoute } from '../../shared/utils/notification-routes';
 
 interface Notification {
   id: string;
@@ -13,7 +14,8 @@ interface Notification {
   notification_type: string;
   read: boolean;
   created_at: string;
-  metadata?: any;
+  action_url?: string | null;
+  metadata?: Record<string, unknown> | null;
 }
 
 export default function NotificationsScreen() {
@@ -101,30 +103,14 @@ export default function NotificationsScreen() {
     }
   };
 
-  const getActionRoute = (notification: Notification): string | null => {
-    const meta = notification.metadata ?? {};
-    switch (notification.notification_type) {
-      case 'signal':
-        if (meta.signal_id) return `/signals/${meta.signal_id}`;
-        return '/signals';
-      case 'event':
-        if (meta.event_id) return `/events/${meta.event_id}`;
-        return '/events';
-      case 'announcement':
-        if (meta.analysis_id) return `/analysis/${meta.analysis_id}`;
-        return '/analysis';
-      case 'tip':
-        return '/tips';
-      default:
-        return null;
-    }
-  };
+  const getActionRoute = (notification: Notification): string | null =>
+    getMobileNotificationRoute(notification, { isAdmin: false });
 
   const handleNotificationPress = (notification: Notification) => {
-    markAsRead(notification.id);
+    void markAsRead(notification.id);
     const route = getActionRoute(notification);
     if (route) {
-      router.push(route);
+      router.push(route as never);
     }
   };
 
@@ -136,6 +122,8 @@ export default function NotificationsScreen() {
         return <Calendar size={20} color={Colors.gold} strokeWidth={2} />;
       case 'tip':
         return <Lightbulb size={20} color={Colors.gold} strokeWidth={2} />;
+      case 'system':
+        return <MessageSquare size={20} color={Colors.gold} strokeWidth={2} />;
       case 'success':
         return <CheckCircle2 size={20} color="#22C55E" strokeWidth={2} />;
       case 'warning':

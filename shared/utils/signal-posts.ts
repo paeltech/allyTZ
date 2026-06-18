@@ -25,13 +25,26 @@ export const SIGNAL_POST_AUDIENCE_OPTIONS: { value: SignalPostAudience; label: s
     label: "Admin only",
     description: "Only admins and you can see this post",
   },
+  {
+    value: "specific_user",
+    label: "Specific user",
+    description: "Only the selected user, admins, and you can see this post",
+  },
 ];
+
+export const ADMIN_SIGNAL_POST_AUDIENCE_OPTIONS = SIGNAL_POST_AUDIENCE_OPTIONS;
 
 export function getSignalPostTypeLabel(type: SignalPostType): string {
   return SIGNAL_POST_TYPE_OPTIONS.find((o) => o.value === type)?.label ?? type;
 }
 
-export function getSignalPostAudienceLabel(audience: SignalPostAudience): string {
+export function getSignalPostAudienceLabel(
+  audience: SignalPostAudience,
+  recipientName?: string | null
+): string {
+  if (audience === "specific_user" && recipientName) {
+    return `User: ${recipientName}`;
+  }
   return SIGNAL_POST_AUDIENCE_OPTIONS.find((o) => o.value === audience)?.label ?? audience;
 }
 

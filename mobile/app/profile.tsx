@@ -18,6 +18,7 @@ import {
   Settings,
   Lightbulb,
   ClipboardCheck,
+  MessageSquare,
 } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { supabase } from '../lib/supabase';
@@ -162,6 +163,12 @@ export default function ProfileScreen() {
       title: 'Notifications',
       subtitle: 'Manage your notification settings',
       route: '/notifications',
+    },
+    {
+      icon: MessageSquare,
+      title: 'Messages',
+      subtitle: 'Chat with the AllyTZ team',
+      route: '/messages',
     },
     {
       icon: Settings,

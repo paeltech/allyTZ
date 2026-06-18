@@ -6,15 +6,23 @@ import {
   getSignalPostAudienceLabel,
   getSignalPostTypeLabel,
 } from '../../shared/utils/signal-posts';
-import { MessageSquare, Lock, Users } from 'lucide-react-native';
+import { formatActivityTimestamp } from '../../shared/utils/admin-timestamp';
+import { MessageSquare, Lock, Users, User, Reply } from 'lucide-react-native';
 import { SignalPostAttachment } from './SignalPostAttachment';
 
 interface SignalPostsListProps {
   posts: SignalPost[];
   currentUserId: string | null;
+  parentPostsById?: Record<string, SignalPost>;
+  recipientNames?: Record<string, string>;
 }
 
-export function SignalPostsList({ posts, currentUserId }: SignalPostsListProps) {
+export function SignalPostsList({
+  posts,
+  currentUserId,
+  parentPostsById = {},
+  recipientNames = {},
+}: SignalPostsListProps) {
   if (posts.length === 0) {
     return (
       <Text style={styles.emptyText}>
@@ -23,22 +31,18 @@ export function SignalPostsList({ posts, currentUserId }: SignalPostsListProps) 
     );
   }
 
-  const formatTime = (dateString: string) => {
-    const d = new Date(dateString);
-    return d.toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-    });
-  };
+  const formatTime = (dateString: string) => formatActivityTimestamp(dateString);
 
   return (
     <View style={styles.list}>
       {posts.map((post) => {
         const isOwn = currentUserId === post.author_id;
         const isPrivate = post.audience === 'admin_only';
+        const isTargeted = post.audience === 'specific_user';
+        const parent = post.parent_post_id ? parentPostsById[post.parent_post_id] : null;
+        const recipientName = post.recipient_user_id
+          ? recipientNames[post.recipient_user_id]
+          : null;
 
         return (
           <View key={post.id} style={styles.card}>
@@ -53,18 +57,29 @@ export function SignalPostsList({ posts, currentUserId }: SignalPostsListProps) 
               <Text style={styles.time}>{formatTime(post.created_at)}</Text>
             </View>
 
+            {parent ? (
+              <View style={styles.replyContext}>
+                <Reply size={12} color={Colors.rainyGrey} />
+                <Text style={styles.replyContextText} numberOfLines={2}>
+                  Reply to {parent.author_display_name || 'user'}: {parent.summary}
+                </Text>
+              </View>
+            ) : null}
+
             <View style={styles.badges}>
               <View style={styles.typeBadge}>
                 <Text style={styles.typeBadgeText}>{getSignalPostTypeLabel(post.post_type)}</Text>
               </View>
-              <View style={[styles.audienceBadge, isPrivate && styles.audienceBadgePrivate]}>
+              <View style={[styles.audienceBadge, isPrivate && styles.audienceBadgePrivate, isTargeted && styles.audienceBadgeTargeted]}>
                 {isPrivate ? (
                   <Lock size={10} color="#F59E0B" strokeWidth={2} />
+                ) : isTargeted ? (
+                  <User size={10} color="#A78BFA" strokeWidth={2} />
                 ) : (
                   <Users size={10} color="#60A5FA" strokeWidth={2} />
                 )}
-                <Text style={[styles.audienceBadgeText, isPrivate && styles.audiencePrivateText]}>
-                  {getSignalPostAudienceLabel(post.audience)}
+                <Text style={[styles.audienceBadgeText, isPrivate && styles.audiencePrivateText, isTargeted && styles.audienceTargetedText]}>
+                  {getSignalPostAudienceLabel(post.audience, recipientName)}
                 </Text>
               </View>
             </View>
@@ -125,9 +140,27 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   time: {
-    color: '#6A6A6A',
+    color: Colors.gold,
+    fontFamily: 'Axiforma-Medium',
+    fontSize: 11,
+    textAlign: 'right',
+    maxWidth: 130,
+  },
+  replyContext: {
+    flexDirection: 'row',
+    gap: 6,
+    alignItems: 'flex-start',
+    backgroundColor: '#2A2A2A',
+    borderRadius: 8,
+    padding: 8,
+    marginBottom: 8,
+  },
+  replyContextText: {
+    flex: 1,
+    color: Colors.rainyGrey,
     fontFamily: 'Axiforma-Regular',
     fontSize: 11,
+    lineHeight: 15,
   },
   badges: {
     flexDirection: 'row',
@@ -160,6 +193,9 @@ const styles = StyleSheet.create({
   audienceBadgePrivate: {
     backgroundColor: 'rgba(245,158,11,0.12)',
   },
+  audienceBadgeTargeted: {
+    backgroundColor: 'rgba(167,139,250,0.12)',
+  },
   audienceBadgeText: {
     color: '#60A5FA',
     fontFamily: 'Axiforma-Regular',
@@ -167,6 +203,9 @@ const styles = StyleSheet.create({
   },
   audiencePrivateText: {
     color: '#F59E0B',
+  },
+  audienceTargetedText: {
+    color: '#A78BFA',
   },
   summary: {
     color: '#E5E5E5',

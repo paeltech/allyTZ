@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -22,7 +22,7 @@ import {
 import { useUnreadNotificationsCount } from '../../hooks/use-unread-notifications';
 import { useIsAdmin } from '../../hooks/use-is-admin';
 import { SignalPostForm } from '../../components/SignalPostForm';
-import { SignalPostsList } from '../../components/SignalPostsList';
+import { ThreadedSignalPostsList } from '../../components/ThreadedSignalPostsList';
 
 const FIELD_LABELS: Record<string, string> = {
   ...SIGNAL_FIELD_LABELS,
@@ -58,7 +58,7 @@ export default function SignalDetailScreen() {
           .from('signal_posts')
           .select('*')
           .eq('signal_id', id)
-          .order('created_at', { ascending: false }),
+          .order('created_at', { ascending: true }),
       ]);
       if (signalRes.error) {
         console.error('Error fetching signal:', signalRes.error);
@@ -111,6 +111,16 @@ export default function SignalDetailScreen() {
     await fetchSignalAndUpdates(true);
     setRefreshing(false);
   };
+
+  const recipientNames = useMemo(() => {
+    const map: Record<string, string> = {};
+    posts.forEach((p) => {
+      if (p.author_id && p.author_display_name) {
+        map[p.author_id] = p.author_display_name;
+      }
+    });
+    return map;
+  }, [posts]);
 
   const initialSnapshot = updates.find((u) => u.revision_type === 'initial');
   const updateRevisions = updates.filter((u) => u.revision_type === 'update');
@@ -409,7 +419,11 @@ export default function SignalDetailScreen() {
             isAdmin={isAdmin}
             onPosted={() => fetchSignalAndUpdates(true)}
           />
-          <SignalPostsList posts={posts} currentUserId={currentUserId} />
+          <ThreadedSignalPostsList
+            posts={posts}
+            currentUserId={currentUserId}
+            recipientNames={recipientNames}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -8,11 +8,16 @@ import type { DailyCheckIn } from '../../shared/types/check-in';
 import { getLastCheckInPrompt, setLastCheckInPrompt } from '../lib/engagement-storage';
 import { DailyCheckInModal } from './DailyCheckInModal';
 import { PhoneContactSetupModal } from './PhoneContactSetupModal';
+import { checkIsAdmin } from '../lib/admin';
 
 type Props = { children: React.ReactNode };
 
 function isAuthRoute(segments: string[]): boolean {
   return segments[0] === 'auth' || segments.length === 0;
+}
+
+function isAdminRoute(segments: string[]): boolean {
+  return segments[0] === 'admin';
 }
 
 export function UserEngagementProvider({ children }: Props) {
@@ -62,10 +67,12 @@ export function UserEngagementProvider({ children }: Props) {
   }, []);
 
   const evaluatePrompts = useCallback(async () => {
-    if (!session?.user || isAuthRoute(segments as string[]) || evaluatingRef.current) return;
+    if (!session?.user || isAuthRoute(segments as string[]) || isAdminRoute(segments as string[]) || evaluatingRef.current) return;
 
     evaluatingRef.current = true;
     try {
+      const isAdmin = await checkIsAdmin(session.user.id);
+      if (isAdmin) return;
       const { checkIn, profile } = await loadEngagementState(session.user.id);
       const eatDate = getEatDateString();
       const block = getEatFourHourBlock();

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 import { supabase, isInvalidRefreshTokenError } from '../lib/supabase';
+import { getPostAuthRoute } from '../lib/admin';
 import { Colors } from '../../shared/constants/colors';
 import { AppLogo } from '../components/AppLogo';
 
@@ -24,7 +25,8 @@ export default function IndexScreen() {
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       if (session) {
-        router.replace('/home');
+        const route = await getPostAuthRoute();
+        router.replace(route);
       } else {
         router.replace('/auth/login');
       }

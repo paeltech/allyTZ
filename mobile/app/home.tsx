@@ -15,6 +15,7 @@ import {
 } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { supabase } from '../lib/supabase';
+import { checkIsAdmin } from '../lib/admin';
 import type { Signal } from '../../shared/types/signal';
 import { useUnreadNotificationsCount } from '../hooks/use-unread-notifications';
 import { SignalListCard } from '../components/SignalListCard';
@@ -41,6 +42,11 @@ export default function HomeScreen() {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       router.replace('/auth/login');
+      return;
+    }
+
+    if (await checkIsAdmin(session.user.id)) {
+      router.replace('/admin');
       return;
     }
 

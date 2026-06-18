@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { formatAuthErrorMessage } from '../../lib/auth-errors';
 import { supabase, canReachSupabase } from '../../lib/supabase';
+import { getPostAuthRoute } from '../../lib/admin';
 import { Colors } from '../../../shared/constants/colors';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react-native';
 import { AppLogo } from '../../components/AppLogo';
@@ -43,7 +44,8 @@ export default function LoginScreen() {
       }
 
       if (data.session) {
-        router.replace('/home');
+        const route = await getPostAuthRoute();
+        router.replace(route);
       }
     } catch (error: unknown) {
       Alert.alert('Error', formatAuthErrorMessage(error));

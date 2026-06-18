@@ -49,7 +49,7 @@ export interface SignalUpdate {
 }
 
 export type SignalPostType = "feedback" | "update" | "question" | "query";
-export type SignalPostAudience = "all_users" | "admin_only";
+export type SignalPostAudience = "all_users" | "admin_only" | "specific_user";
 
 /** User or admin post on a signal thread */
 export interface SignalPost {
@@ -61,6 +61,8 @@ export interface SignalPost {
   summary: string;
   attachment_path: string | null;
   author_display_name: string | null;
+  parent_post_id: string | null;
+  recipient_user_id: string | null;
   created_at: string;
   author?: {
     full_name: string | null;
